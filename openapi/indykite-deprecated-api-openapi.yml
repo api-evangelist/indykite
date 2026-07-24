@@ -1,0 +1,339 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials Deprecated API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- name: Deprecated
+paths:
+  /access/v1/what-authorized:
+    post:
+      summary: WhatAuthorized endpoint
+      description: Search for the resources the subject is allowed to do the actions on.
+      tags:
+      - Deprecated
+      operationId: createAccessV1WhatAuthorized
+      security:
+      - APIKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.WhatAuthorizedRequest'
+        description: WhatAuthorized request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.WhatAuthorizedResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - properties:
+                    errors:
+                      items:
+                        type: string
+                      type: array
+                    message:
+                      type: string
+                  type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      deprecated: true
+  /access/v1/who-authorized:
+    post:
+      summary: WhoAuthorized endpoint
+      description: Search for the subjects allowed to do the actions on the resources.
+      tags:
+      - Deprecated
+      operationId: createAccessV1WhoAuthorized
+      security:
+      - APIKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.WhoAuthorizedRequest'
+        description: WhoAuthorized request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.WhoAuthorizedResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - properties:
+                    errors:
+                      items:
+                        type: string
+                      type: array
+                    message:
+                      type: string
+                  type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      deprecated: true
+components:
+  schemas:
+    restapi.Node:
+      type: object
+      required:
+      - id
+      - type
+      properties:
+        id:
+          type: string
+          description: ID is a node external_id.
+          examples:
+          - IdSpecifyingTheNode
+        type:
+          type: string
+          description: Type is a node label.
+          examples:
+          - NodeType
+      examples:
+      - id: IdSpecifyingTheNode
+        type: NodeType
+    restapi.Context:
+      type: object
+      properties:
+        input_params:
+          type: object
+          additionalProperties: {}
+          description: 'InputParams map specifies the values of input parameters used within the policies.
+
+            If a policy uses input parameters and is used for making the decision,
+
+            they must be sent with the request, otherwise an error is returned.'
+          examples:
+          - additionalProp1: {}
+            additionalProp2: {}
+        policy_tags:
+          type: array
+          description: PolicyTags array limits the policies used to only the policies with the specified tags.
+          items:
+            type: string
+          uniqueItems: true
+          examples:
+          - - tag1
+            - tag2
+      examples:
+      - input_params:
+          additionalProp1: {}
+          additionalProp2: {}
+        policy_tags:
+        - Tag1
+        - Tag2
+    restapi.WhoAuthorizedResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhoAuthorizedEvaluationResponse'
+      examples:
+      - evaluations:
+        - resource:
+            type: Asset
+            id: asset_id
+          action:
+            name: SUBSCRIBES_TO
+          subjects:
+          - type: subject_type
+            id: subject_id
+          - type: subject_type
+            id: subject_id2
+    restapi.WhatAuthorizedResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhatAuthorizedEvaluationResponse'
+      examples:
+      - evaluations:
+        - resource:
+            type: Asset
+            id: asset_id
+          action:
+            name: SUBSCRIBES_TO
+        - resource:
+            type: Asset
+            id: asset_id2
+          action:
+            name: SUBSCRIBES_TO
+    restapi.WhatAuthorizedEvaluation:
+      type: object
+      required:
+      - action
+      - resource
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.NodeType'
+    restapi.NodeType:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          examples:
+          - NodeType
+    restapi.WhoAuthorizedEvaluationResponse:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Node'
+    restapi.DetailedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Errors are optional and may contain additional details.
+          items:
+            type: string
+          examples:
+          - - missing bearer token
+        message:
+          type: string
+          description: Message describes the error.
+          examples:
+          - unauthorized request
+    restapi.WhoAuthorizedRequest:
+      type: object
+      required:
+      - evaluations
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhoAuthorizedEvaluation'
+      examples:
+      - evaluations:
+        - action:
+            name: SUBSCRIBES_TO
+          resource:
+            id: resource_id
+            type: resource_type
+    restapi.ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          examples:
+          - Internal Server Error
+    restapi.WhatAuthorizedRequest:
+      type: object
+      required:
+      - evaluations
+      - subject
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhatAuthorizedEvaluation'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+      examples:
+      - evaluations:
+        - action:
+            name: SUBSCRIBES_TO
+          resource:
+            type: Asset
+        subject:
+          id: subject_id
+          type: subject_type
+    restapi.WhoAuthorizedEvaluation:
+      type: object
+      required:
+      - action
+      - resource
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.Action:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name specifies the action.
+          examples:
+          - CAN_READ
+      examples:
+      - name: CAN_READ
+    restapi.WhatAuthorizedEvaluationResponse:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'

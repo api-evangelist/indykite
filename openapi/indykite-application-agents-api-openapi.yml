@@ -1,0 +1,567 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials Application Agents API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- name: Application Agents
+  description: Application Agent CRUD operations
+  x-displayName: Application Agents
+paths:
+  /application-agents:
+    get:
+      tags:
+      - Application Agents
+      operationId: listApplicationAgents
+      summary: List Application Agents
+      description: List Application Agents in provided Project with optional filtering.
+      parameters:
+      - description: Project ID where to search for Application Agents.
+        in: query
+        name: project_id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - description: List only objects, that contains given search query in name, display name or description
+        in: query
+        name: search
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.listConfigResponse-httpproxy_readAppAgentResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    post:
+      tags:
+      - Application Agents
+      operationId: createApplicationAgent
+      summary: Create Application Agent
+      description: Create Application Agent for provider Application.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.createAppAgentRequest'
+        description: Create Application Agent request
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.createConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+  /application-agents/{id}:
+    delete:
+      tags:
+      - Application Agents
+      operationId: deleteApplicationAgent
+      summary: Delete Application Agent
+      description: Delete Application Agent by provided ID. You can optionally can specify etag in If-Match header.
+      parameters:
+      - description: Application Agent ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.deleteConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    get:
+      tags:
+      - Application Agents
+      operationId: getApplicationAgent
+      summary: Read Application Agent
+      description: Read Application Agent identified by provided ID.
+      parameters:
+      - description: Application Agent ID or name
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Version of configuration to read. If not provided, latest version is returned.
+        in: query
+        name: version
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - description: Parent project ID. Required when querying by name
+        in: query
+        name: location
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.readAppAgentResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    put:
+      tags:
+      - Application Agents
+      operationId: updateApplicationAgent
+      summary: Update Application Agent
+      description: Update Application Agent identified by provided ID and optionally etag in If-Match header.
+      parameters:
+      - description: Application Agent ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag.
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.updateAppAgentRequest'
+        description: Update Application Agent request.
+        required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.updateConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+components:
+  schemas:
+    httpproxy.updateAppAgentRequest:
+      properties:
+        api_permissions:
+          description: 'APIPermissions is a list of API permissions for the agent.
+
+            The agent will only be able to access the APIs specified in this list.'
+          items:
+            type: string
+          minItems: 1
+          type: array
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readAppAgentResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readAppAgentResponse'
+          type: array
+      type: object
+    httpproxy.readAppAgentResponse:
+      properties:
+        api_permissions:
+          description: 'APIPermissions is a list of API permissions for the agent.
+
+            The agent will only be able to access the APIs specified in this list.'
+          items:
+            type: string
+          type: array
+        application_id:
+          description: ApplicationID is identifier of Application, for which agent was created.
+          type: string
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.createAppAgentRequest:
+      properties:
+        api_permissions:
+          description: 'APIPermissions is a list of API permissions for the agent.
+
+            The agent will only be able to access the APIs specified in this list.'
+          items:
+            type: string
+          minItems: 1
+          type: array
+        application_id:
+          description: ApplicationID is identifier of Application, for which agent should be created. Must be in GID format.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          maxLength: 65000
+          minLength: 2
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration.
+          maxLength: 254
+          minLength: 2
+          type: string
+        name:
+          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
+
+            Also is immutable and cannot be changed later.'
+          type: string
+      required:
+      - api_permissions
+      - application_id
+      - name
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'

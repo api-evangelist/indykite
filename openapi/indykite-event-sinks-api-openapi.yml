@@ -1,0 +1,757 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials Event Sinks API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- name: Event Sinks
+  description: Event Sink configuration
+  x-displayName: Event Sinks
+paths:
+  /event-sinks:
+    get:
+      tags:
+      - Event Sinks
+      operationId: listEventSinks
+      summary: List Event Sinks
+      description: List Event Sinks in provided Project with optional filtering.
+      parameters:
+      - description: Project ID where to search for Event Sinks.
+        in: query
+        name: project_id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - description: Full fetch of all data. If not provided, only metadata is returned.
+        in: query
+        name: full_fetch
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - description: List only objects, that contains given search query in name, display name or description
+        in: query
+        name: search
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.listConfigResponse-httpproxy_readEventSinkResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    post:
+      tags:
+      - Event Sinks
+      operationId: createEventSink
+      summary: Create Event Sink
+      description: Create Event Sink in provided Project.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.createEventSinkRequest'
+        description: Create Event Sink request
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.createConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+  /event-sinks/{id}:
+    delete:
+      tags:
+      - Event Sinks
+      operationId: deleteEventSink
+      summary: Delete EventSink
+      description: Delete EventSink by provided ID. You can optionally can specify etag in If-Match header.
+      parameters:
+      - description: EventSink ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.deleteConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    get:
+      tags:
+      - Event Sinks
+      operationId: getEventSink
+      summary: Read EventSink
+      description: Read EventSink identified by provided ID.
+      parameters:
+      - description: EventSink ID or name
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Version of configuration to read. If not provided, latest version is returned.
+        in: query
+        name: version
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - description: Parent project ID. Required when querying by name
+        in: query
+        name: location
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.readEventSinkResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    put:
+      tags:
+      - Event Sinks
+      operationId: updateEventSink
+      summary: Update EventSink
+      description: Update EventSink identified by provided ID and optionally etag in If-Match header.
+      parameters:
+      - description: EventSink ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag.
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.updateEventSinkRequest'
+        description: Update EventSink request.
+        required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.updateConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+components:
+  schemas:
+    httpproxy.pubSubSinkConfig:
+      properties:
+        credentials_json:
+          examples:
+          - '{"type":"service_account",...}'
+          maxLength: 10240
+          minLength: 1
+          type: string
+        display_name:
+          type: string
+        last_error:
+          type: string
+        project_id:
+          examples:
+          - my-gcp-project
+          maxLength: 30
+          minLength: 6
+          type: string
+        topic_name:
+          examples:
+          - my-pubsub-topic
+          maxLength: 255
+          minLength: 3
+          type: string
+      required:
+      - credentials_json
+      - project_id
+      - topic_name
+      type: object
+    httpproxy.azureEventGridSinkConfig:
+      properties:
+        access_key:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          examples:
+          - key123
+        display_name:
+          type: string
+        last_error:
+          type: string
+        topic_endpoint:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          examples:
+          - https://example.azure.com
+      required:
+      - access_key
+      - topic_endpoint
+      type: object
+    httpproxy.createEventSinkRequest:
+      properties:
+        description:
+          description: Description is optional description of configuration.
+          maxLength: 65000
+          minLength: 2
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration.
+          maxLength: 254
+          minLength: 2
+          type: string
+        include_cdc_events:
+          description: IncludeCDCEvents when true, CDC events will be emitted to this event sink.
+          type: boolean
+        name:
+          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
+
+            Also is immutable and cannot be changed later.'
+          type: string
+        project_id:
+          description: 'ProjectID is identifier of Project, formerly known as Application space,
+
+            where to place this new configuration object. Must be in GID format.'
+          type: string
+        providers:
+          additionalProperties:
+            $ref: '#/components/schemas/httpproxy.eventSinkProvider'
+          description: Providers contains the list of supported providers, that are referenced by the Routes.
+          type: object
+        routes:
+          description: Routes contains the list of routes to properly route the events to the providers by sequential evaluation model.
+          items:
+            $ref: '#/components/schemas/httpproxy.eventSinkRoute'
+          minItems: 1
+          type: array
+      required:
+      - name
+      - project_id
+      - providers
+      - routes
+      type: object
+    httpproxy.eventSinkProvider:
+      properties:
+        azure_event_grid:
+          $ref: '#/components/schemas/httpproxy.azureEventGridSinkConfig'
+        azure_service_bus:
+          $ref: '#/components/schemas/httpproxy.azureServiceBusSinkConfig'
+        kafka:
+          $ref: '#/components/schemas/httpproxy.kafkaSinkConfig'
+        pubsub:
+          $ref: '#/components/schemas/httpproxy.pubSubSinkConfig'
+      type: object
+    httpproxy.kafkaSinkConfig:
+      properties:
+        brokers:
+          items:
+            type: string
+          minItems: 1
+          type: array
+        disable_tls:
+          description: 'Brokers specify Kafka destinations to connect to.
+
+            DisableTLS can force using non-secure connection.'
+          type: boolean
+        display_name:
+          type: string
+        last_error:
+          type: string
+        password:
+          type: string
+          examples:
+          - password123
+        tls_skip_verify:
+          description: TLSSkipVerify defines whenever not to verify TLS certificate. Ignored if TLS is disabled.
+          type: boolean
+        topic:
+          example: my-topic
+          maxLength: 249
+          minLength: 1
+          type: string
+          examples:
+          - my-topic
+        username:
+          examples:
+          - user1
+          type: string
+      required:
+      - brokers
+      - topic
+      type: object
+    httpproxy.updateEventSinkRequest:
+      properties:
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+        include_cdc_events:
+          description: IncludeCDCEvents when true, CDC events will be emitted to this event sink.
+          type: boolean
+        providers:
+          additionalProperties:
+            $ref: '#/components/schemas/httpproxy.eventSinkProvider'
+          description: Providers contains the list of supported providers, that are referenced by the Routes.
+          type: object
+        routes:
+          description: Routes contains the list of routes to properly route the events to the providers by sequential evaluation model.
+          items:
+            $ref: '#/components/schemas/httpproxy.eventSinkRoute'
+          minItems: 1
+          type: array
+      required:
+      - providers
+      - routes
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readEventSinkResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readEventSinkResponse'
+          type: array
+      type: object
+    httpproxy.eventSinkRouteEventKeyValuesFilter:
+      properties:
+        context_key_value:
+          items:
+            $ref: '#/components/schemas/httpproxy.eventSinkFilterKeyValue'
+          type: array
+        event_type:
+          examples:
+          - indykite.audit.config.create
+          minLength: 1
+          type: string
+      required:
+      - event_type
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
+    httpproxy.eventSinkRoute:
+      properties:
+        display_name:
+          type: string
+        event_type_key_values_filter:
+          $ref: '#/components/schemas/httpproxy.eventSinkRouteEventKeyValuesFilter'
+        provider_id:
+          type: string
+        stop_processing:
+          type: boolean
+      required:
+      - event_type_key_values_filter
+      - provider_id
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.readEventSinkResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        include_cdc_events:
+          type: boolean
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        providers:
+          additionalProperties:
+            $ref: '#/components/schemas/httpproxy.eventSinkProvider'
+          type: object
+        routes:
+          items:
+            $ref: '#/components/schemas/httpproxy.eventSinkRoute'
+          type: array
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.azureServiceBusSinkConfig:
+      properties:
+        connection_string:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          examples:
+          - sb://my-test-service-bus.service
+        display_name:
+          type: string
+        last_error:
+          type: string
+        queue_or_topic_name:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          examples:
+          - my-test-service-bus-queue
+      required:
+      - connection_string
+      - queue_or_topic_name
+      type: object
+    httpproxy.eventSinkFilterKeyValue:
+      properties:
+        key:
+          minLength: 1
+          type: string
+          examples:
+          - key1
+        value:
+          minLength: 1
+          type: string
+          examples:
+          - value1
+      required:
+      - key
+      - value
+      type: object
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'

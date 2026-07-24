@@ -1,0 +1,203 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials DataSchema API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- description: DataSchema enables customers to define their own data models within the Identity Knowledge Graph (IKG)
+  name: DataSchema
+  x-displayName: DataSchema
+paths:
+  /data-schema/v1:
+    get:
+      tags:
+      - DataSchema
+      operationId: listDataSchemaV1
+      summary: Read Data Schema
+      description: Read the IKG data schema for the specified Project in JGFv2 format.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataschema.JGFGraph'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '404':
+          description: Data schema not found for the specified Project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.ErrorResponse'
+                - type: object
+                  properties:
+                    message:
+                      type: string
+components:
+  schemas:
+    dataschema.JGFNodeProperty:
+      type: object
+      properties:
+        count:
+          type: integer
+        metadata:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFPropertyMeta'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFGraphMetadata:
+      type: object
+      properties:
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    dataschema.JGFGraphContent:
+      type: object
+      properties:
+        directed:
+          type: boolean
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFEdge'
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFGraphMetadata'
+        nodes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFNode'
+    dataschema.JGFEdge:
+      type: object
+      properties:
+        directed:
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFEdgeMetadata'
+        relation:
+          type: string
+        source:
+          type: string
+        target:
+          type: string
+    dataschema.JGFNode:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFNodeMetadata'
+    dataschema.JGFNodeMetadata:
+      type: object
+      properties:
+        node_count:
+          type: integer
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFNodeProperty'
+        system_labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFLabel'
+        user_defined_labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFLabel'
+    restapi.DetailedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Errors are optional and may contain additional details.
+          items:
+            type: string
+          examples:
+          - - missing bearer token
+        message:
+          type: string
+          description: Message describes the error.
+          examples:
+          - unauthorized request
+    dataschema.JGFLabel:
+      type: object
+      properties:
+        count:
+          type: integer
+        name:
+          type: string
+    dataschema.JGFPropertyMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFEdgeMetadata:
+      type: object
+      properties:
+        count:
+          type: integer
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFEdgeProperty'
+    dataschema.JGFEdgeProperty:
+      type: object
+      properties:
+        count:
+          type: integer
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFGraph:
+      type: object
+      properties:
+        graph:
+          $ref: '#/components/schemas/dataschema.JGFGraphContent'
+    restapi.ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          examples:
+          - Internal Server Error
+    dataschema.JGFPropertyType:
+      type: object
+      properties:
+        count:
+          type: integer
+        type:
+          type: string
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'

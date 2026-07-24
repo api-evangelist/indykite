@@ -1,0 +1,667 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials External Data Resolver API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- name: External Data Resolver
+  description: External Data Resolver configuration
+  x-displayName: External Data Resolver
+paths:
+  /external-data-resolvers:
+    get:
+      tags:
+      - External Data Resolver
+      operationId: listExternalDataResolvers
+      summary: List External Data Resolvers
+      description: List External Data Resolvers in provided Project with optional filtering.
+      parameters:
+      - description: Project ID where to search for External Data Resolvers.
+        in: query
+        name: project_id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - description: Full fetch of all data. If not provided, only metadata is returned.
+        in: query
+        name: full_fetch
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - description: List only objects, that contains given search query in name, display name or description
+        in: query
+        name: search
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.listConfigResponse-httpproxy_readExternalDataResolverResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    post:
+      tags:
+      - External Data Resolver
+      operationId: createExternalDataResolver
+      summary: Create External Data Resolver
+      description: Create External Data Resolver in provided Project.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.createExternalDataResolverRequest'
+        description: Create External Data Resolver request
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.createConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+  /external-data-resolvers/{id}:
+    delete:
+      tags:
+      - External Data Resolver
+      operationId: deleteExternalDataResolver
+      summary: Delete External Data Resolver
+      description: Delete External Data Resolver by provided ID. You can optionally can specify etag in If-Match header.
+      parameters:
+      - description: External Data Resolver ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.deleteConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    get:
+      tags:
+      - External Data Resolver
+      operationId: getExternalDataResolver
+      summary: Read External Data Resolver
+      description: Read External Data Resolver identified by provided ID.
+      parameters:
+      - description: External Data Resolver ID or name
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Version of configuration to read. If not provided, latest version is returned.
+        in: query
+        name: version
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - description: Parent project ID. Required when querying by name
+        in: query
+        name: location
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.readExternalDataResolverResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    put:
+      tags:
+      - External Data Resolver
+      operationId: updateExternalDataResolver
+      summary: Update External Data Resolver
+      description: Update External Data Resolver identified by provided ID and optionally etag in If-Match header.
+      parameters:
+      - description: External Data Resolver ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag.
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.updateExternalDataResolverRequest'
+        description: Update External Data Resolver request.
+        required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.updateConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+components:
+  schemas:
+    httpproxy.readExternalDataResolverResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        headers:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        method:
+          type: string
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        request_content_type:
+          type: string
+        request_payload:
+          type: string
+        response_content_type:
+          type: string
+        response_selector:
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+        url:
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readExternalDataResolverResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readExternalDataResolverResponse'
+          type: array
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.updateExternalDataResolverRequest:
+      properties:
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+        headers:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: 'Headers to be sent with the request, including authorization if needed.
+
+            Be aware that Content-Type is overridden based on request_content_type and Accept by response_content_type.'
+          type: object
+        method:
+          description: Method specify HTTP method to be used for the request.
+          enum:
+          - GET
+          - POST
+          - PUT
+          - PATCH
+          type: string
+        request_content_type:
+          description: 'RequestContentType specify format of request body payload and how to set Content-Type header.
+
+            If content-type header is set by Headers, that header will be overridden.'
+          enum:
+          - JSON
+          type: string
+        request_payload:
+          description: 'RequestPayload to be sent to the endpoint. It should be in proper format based on request type.
+
+            It is going through the template builder to be properly formatted and filled with data.'
+          type: string
+        response_content_type:
+          description: 'ResponseContentType specify expected Content-Type header of response. If mismatch with real response, it will fail.
+
+            This also sets Accept header in request. If Accept header is set by Headers, that header will be overridden.'
+          enum:
+          - JSON
+          type: string
+        response_selector:
+          description: 'ResponseSelector specify selector to extract data from response.
+
+            Should be in requested format based on Response Type.'
+          maxLength: 255
+          minLength: 1
+          type: string
+        url:
+          description: URL specify full path to endpoint that will be called.
+          type: string
+      required:
+      - method
+      - request_content_type
+      - response_content_type
+      - response_selector
+      - url
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.createExternalDataResolverRequest:
+      properties:
+        description:
+          description: Description is optional description of configuration.
+          maxLength: 65000
+          minLength: 2
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration.
+          maxLength: 254
+          minLength: 2
+          type: string
+        headers:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: 'Headers to be sent with the request, including authorization if needed.
+
+            Be aware that Content-Type is overridden based on request_content_type and Accept by response_content_type.'
+          type: object
+        method:
+          description: Method specify HTTP method to be used for the request.
+          enum:
+          - GET
+          - POST
+          - PUT
+          - PATCH
+          type: string
+        name:
+          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
+
+            Also is immutable and cannot be changed later.'
+          type: string
+        project_id:
+          description: 'ProjectID is identifier of Project, formerly known as Application space,
+
+            where to place this new configuration object. Must be in GID format.'
+          type: string
+        request_content_type:
+          description: 'RequestContentType specify format of request body payload and how to set Content-Type header.
+
+            If content-type header is set by Headers, that header will be overridden.'
+          enum:
+          - JSON
+          type: string
+        request_payload:
+          description: 'RequestPayload to be sent to the endpoint. It should be in proper format based on request type.
+
+            It is going through the template builder to be properly formatted and filled with data.'
+          type: string
+        response_content_type:
+          description: 'ResponseContentType specify expected Content-Type header of response. If mismatch with real response, it will fail.
+
+            This also sets Accept header in request. If Accept header is set by Headers, that header will be overridden.'
+          enum:
+          - JSON
+          type: string
+        response_selector:
+          description: ResponseSelector specify selector to extract data from response. Should be in requested format based on Response Type.
+          maxLength: 255
+          minLength: 1
+          type: string
+        url:
+          description: URL specify full path to endpoint that will be called.
+          type: string
+      required:
+      - method
+      - name
+      - project_id
+      - request_content_type
+      - response_content_type
+      - response_selector
+      - url
+      type: object
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'

@@ -1,0 +1,625 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials Projects API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- name: Projects
+  description: Project CRUD operations
+  x-displayName: Projects
+paths:
+  /projects:
+    get:
+      tags:
+      - Projects
+      operationId: listProjects
+      summary: List Projects
+      description: List Projects in provided Organization with optional filtering.
+      parameters:
+      - description: Project ID where to search for Projects.
+        in: query
+        name: organization_id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - description: List only objects, that contains given search query in name, display name or description
+        in: query
+        name: search
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.listConfigResponse-httpproxy_readProjectResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    post:
+      tags:
+      - Projects
+      operationId: createProject
+      summary: Create Project
+      description: Create Project, formerly known as Application space, in provided Organization.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.createProjectRequest'
+        description: Create Project request
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.createConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+  /projects/{id}:
+    delete:
+      tags:
+      - Projects
+      operationId: deleteProject
+      summary: Delete Project
+      description: Delete Project, formerly known as Application space, by provided ID. You can optionally can specify etag in If-Match header.
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.deleteConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    get:
+      tags:
+      - Projects
+      operationId: getProject
+      summary: Read Project
+      description: Read Project, formerly known as Application space, identified by provided ID.
+      parameters:
+      - description: Project ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Version of configuration to read. If not provided, latest version is returned.
+        in: query
+        name: version
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.readProjectResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    put:
+      tags:
+      - Projects
+      operationId: updateProject
+      summary: Update Project
+      description: Update Project, formerly known as Application space, identified by provided ID and optionally etag in If-Match header.
+      parameters:
+      - description: Project ID or name
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag.
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.updateProjectRequest'
+        description: Update Project request.
+        required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.updateConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+components:
+  schemas:
+    httpproxy.dbConnection:
+      properties:
+        name:
+          description: Optional name of the database.
+          type: string
+        password:
+          description: Password for database authentication - write only.
+          type: string
+        url:
+          description: Connection URL for the database.
+          type: string
+        username:
+          description: Username for database authentication.
+          type: string
+        alias_mapping:
+          description: Optional alias mapping for the database.
+          type: string
+        composite_db_name:
+          description: Optional composite database name.
+          type: string
+      required:
+      - password
+      - url
+      - username
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.updateProjectRequest:
+      properties:
+        db_connection:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.dbConnection'
+          description: Database connection information for self hosted database.
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readProjectResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readProjectResponse'
+          type: array
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.readProjectResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        db_connection:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.dbConnection'
+          description: 'Database connection information for self hosted database.
+
+            Password is never returned back during read operation.'
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        ikg_size:
+          description: 'IKG Size that is allocated, with corresponding amount of CPU nodes.
+
+            2GB (1 CPU), 4GB (1 CPU), 8GB (2 CPUs), 16GB (3 CPUs), 32GB (6 CPUs), 64GB (12 CPUs),
+
+            128GB (24 CPUs), 192GB (36 CPUs), 256GB (48 CPUs), 384GB (82 CPUs), and 512GB (96 CPUs).'
+          type: string
+        ikg_status:
+          description: IkgStatus is status of the IKG DB instance behind the project.
+          type: string
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        region:
+          description: Region specify where the IKG and other data are stored.
+          type: string
+        replica_region:
+          description: Replica region specify where the second IKG with synchronization is created, if any.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.createProjectRequest:
+      properties:
+        db_connection:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.dbConnection'
+          description: Database connection information for self hosted database.
+        description:
+          description: Description is optional description of configuration.
+          maxLength: 65000
+          minLength: 2
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration.
+          maxLength: 254
+          minLength: 2
+          type: string
+        ikg_size:
+          description: 'IKG size that will be allocated, which correspond also to amount of CPU nodes. Default value is 2GB.
+
+            2GB (1 CPU), 4GB (1 CPU), 8GB (2 CPUs), 16GB (3 CPUs), 32GB (6 CPUs), 64GB (12 CPUs),
+
+            128GB (24 CPUs), 192GB (36 CPUs), 256GB (48 CPUs), 384GB (82 CPUs), and 512GB (96 CPUs)'
+          enum:
+          - 2GB
+          - 4GB
+          - 8GB
+          - 16GB
+          - 32GB
+          - 64GB
+          - 128GB
+          - 192GB
+          - 256GB
+          - 384GB
+          - 512GB
+          type: string
+        name:
+          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
+
+            Also is immutable and cannot be changed later.'
+          type: string
+        organization_id:
+          description: 'OrganizationID is identifier of Organization, formerly known as Customer,
+
+            where to place this new configuration object. Must be in GID format.'
+          type: string
+        region:
+          enum:
+          - europe-west1
+          - us-east1
+          type: string
+        replica_region:
+          description: 'Replica region specify where the second IKG is created.
+
+            This will turn on multi region with synchronization from master into that replica.
+
+            Replica must be different region than the master, but also in the same geographical continent.'
+          enum:
+          - europe-west1
+          - us-east1
+          - us-west1
+          type: string
+      required:
+      - name
+      - organization_id
+      - region
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'

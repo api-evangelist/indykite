@@ -1,0 +1,765 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials Token Introspect API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- name: Token Introspect
+  description: Token introspection configuration
+  x-displayName: Token Introspect
+paths:
+  /token-introspects:
+    get:
+      tags:
+      - Token Introspect
+      operationId: listTokenIntrospects
+      summary: List Token Introspections
+      description: List Token Introspections in provided Project with optional filtering.
+      parameters:
+      - description: Project ID where to search for Token Introspections.
+        in: query
+        name: project_id
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - description: Full fetch of all data. If not provided, only metadata is returned.
+        in: query
+        name: full_fetch
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - description: List only objects, that contains given search query in name, display name or description
+        in: query
+        name: search
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.listConfigResponse-httpproxy_readTokenIntrospectResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    post:
+      tags:
+      - Token Introspect
+      operationId: createTokenIntrospect
+      summary: Create Token Introspection
+      description: Create Token Introspection in provided Project.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.createTokenIntrospectRequest'
+        description: Create Token Introspection request
+        required: true
+      responses:
+        '201':
+          description: Created
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.createConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+  /token-introspects/{id}:
+    delete:
+      tags:
+      - Token Introspect
+      operationId: deleteTokenIntrospect
+      summary: Delete Token Introspection
+      description: Delete Token Introspection by provided ID. You can optionally can specify etag in If-Match header.
+      parameters:
+      - description: Token Introspection ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.deleteConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    get:
+      tags:
+      - Token Introspect
+      operationId: getTokenIntrospect
+      summary: Read Token Introspection
+      description: Read Token Introspection identified by provided ID.
+      parameters:
+      - description: Token Introspection ID or name
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Version of configuration to read. If not provided, latest version is returned.
+        in: query
+        name: version
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+      - description: Parent project ID. Required when querying by name
+        in: query
+        name: location
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.readTokenIntrospectResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+    put:
+      tags:
+      - Token Introspect
+      operationId: updateTokenIntrospect
+      summary: Update Token Introspection
+      description: Update Token Introspection identified by provided ID and optionally etag in If-Match header.
+      parameters:
+      - description: Token Introspection ID
+        in: path
+        name: id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - description: Multiversion concurrency control version - etag.
+        in: header
+        name: If-Match
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/httpproxy.updateTokenIntrospectRequest'
+        description: Update Token Introspection request.
+        required: true
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.updateConfigResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      security:
+      - BearerToken: []
+components:
+  schemas:
+    httpproxy.createTokenIntrospectRequest:
+      properties:
+        claims_mapping:
+          additionalProperties:
+            $ref: '#/components/schemas/httpproxy.claim'
+          description: 'ClaimsMapping specifies which claims from the token should be mapped to new names and name of property in IKG.
+
+            Be aware, that this can override any existing claims, which might not be accessible anymore by internal services.
+
+            And with the highest priority, there is mapping of sub claim to ''external_id''.
+
+            So you shouldn''t ever use ''external_id'' as a key.
+
+            Key specifies the new name and also the name of the property in IKG.
+
+            Value specifies which claim to map and how.'
+          type: object
+        description:
+          description: Description is optional description of configuration.
+          maxLength: 65000
+          minLength: 2
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration.
+          maxLength: 254
+          minLength: 2
+          type: string
+        ikg_node_type:
+          description: IkgNodeType is node type in IKG to which we will try to match sub claim with DT external_id.
+          type: string
+        jwt_matcher:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.jwtMatcher'
+          description: 'JwtMatcher specifies all attributes to match with received JWT token.
+
+            Only one of JwtMatcher or OpaqueMatcher can be specified.'
+        name:
+          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
+
+            Also is immutable and cannot be changed later.'
+          type: string
+        offline_validation:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.offlineValidation'
+          description: 'OfflineValidation defines how to validate token signature locally, without reaching out to external services.
+
+            OfflineValidation can be used only with JwtMatcher.'
+        online_validation:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.onlineValidation'
+          description: 'OnlineValidation works with both JWT and Opaque tokens.
+
+            It will call userinfo endpoint to validate token and fetch user claims.'
+        opaque_matcher:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.opaqueMatcher'
+          description: 'OpaqueMatcher specifies the configuration which is used for opaque tokens.
+
+            Only one of JwtMatcher or OpaqueMatcher can be specified.'
+        perform_upsert:
+          description: 'PerformUpsert specifies if we should create and/or update DigitalTwin in IKG if it doesn''t exist.
+
+            In future this will perform upsert also on properties that are derived from token.'
+          type: boolean
+        project_id:
+          description: 'ProjectID is identifier of Project, formerly known as Application space,
+
+            where to place this new configuration object. Must be in GID format.'
+          type: string
+        sub_claim:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.claim'
+          description: 'SubClaim is used to match DigitalTwin with external_id. If not specified, standard ''sub'' claim will be used.
+
+            Either ''sub'' or specified claim will then also be mapped to ''external_id'' claim.'
+      required:
+      - claims_mapping
+      - ikg_node_type
+      - name
+      - project_id
+      type: object
+    httpproxy.readTokenIntrospectResponse:
+      properties:
+        claims_mapping:
+          additionalProperties:
+            $ref: '#/components/schemas/httpproxy.claim'
+          type: object
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        ikg_node_type:
+          type: string
+        jwt_matcher:
+          $ref: '#/components/schemas/httpproxy.jwtMatcher'
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        offline_validation:
+          $ref: '#/components/schemas/httpproxy.offlineValidation'
+        online_validation:
+          $ref: '#/components/schemas/httpproxy.onlineValidation'
+        opaque_matcher:
+          $ref: '#/components/schemas/httpproxy.opaqueMatcher'
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        perform_upsert:
+          type: boolean
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        sub_claim:
+          $ref: '#/components/schemas/httpproxy.claim'
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readTokenIntrospectResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readTokenIntrospectResponse'
+          type: array
+      type: object
+    httpproxy.jwtMatcher:
+      properties:
+        audience:
+          description: Audience is used to exact match based on `aud` claim in JWT.
+          maxLength: 150
+          minLength: 1
+          type: string
+        issuer:
+          description: Issuer is used to exact match based on `iss` claim in JWT.
+          type: string
+      required:
+      - audience
+      - issuer
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.updateTokenIntrospectRequest:
+      properties:
+        claims_mapping:
+          additionalProperties:
+            $ref: '#/components/schemas/httpproxy.claim'
+          description: 'ClaimsMapping specifies which claims from the token should be mapped to new names and name of property in IKG.
+
+            Be aware, that this can override any existing claims, which might not be accessible anymore by internal services.
+
+            And with the highest priority, there is mapping of sub claim to ''external_id''.
+
+            So you shouldn''t ever use ''external_id'' as a key.
+
+            Key specifies the new name and also the name of the property in IKG.
+
+            Value specifies which claim to map and how.'
+          type: object
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+        ikg_node_type:
+          description: IkgNodeType is node type in IKG to which we will try to match sub claim with DT external_id.
+          type: string
+        jwt_matcher:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.jwtMatcher'
+          description: 'JwtMatcher specifies all attributes to match with received JWT token.
+
+            Only one of JwtMatcher or OpaqueMatcher can be specified.'
+        offline_validation:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.offlineValidation'
+          description: 'OfflineValidation defines how to validate token signature locally, without reaching out to external services.
+
+            OfflineValidation can be used only with JwtMatcher.'
+        online_validation:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.onlineValidation'
+          description: 'OnlineValidation works with both JWT and Opaque tokens.
+
+            It will call userinfo endpoint to validate token and fetch user claims.'
+        opaque_matcher:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.opaqueMatcher'
+          description: 'OpaqueMatcher specifies the configuration which is used for opaque tokens.
+
+            Only one of JwtMatcher or OpaqueMatcher can be specified.'
+        perform_upsert:
+          description: 'PerformUpsert specifies if we should create and/or update DigitalTwin in IKG if it doesn''t exist.
+
+            In future this will perform upsert also on properties that are derived from token.'
+          type: boolean
+        sub_claim:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.claim'
+          description: 'SubClaim is used to match DigitalTwin with external_id. If not specified, standard ''sub'' claim will be used.
+
+            Either ''sub'' or specified claim will then also be mapped to ''external_id'' claim.'
+      required:
+      - claims_mapping
+      - ikg_node_type
+      type: object
+    httpproxy.offlineValidation:
+      properties:
+        public_jwks:
+          description: 'PublicJWKs are public JWK to validate signature of JWT.
+
+            If there are no public keys specified, they will be fetched and cached from
+
+            jwks_uri at https://jwt-issuer.tld/.well-known/openid-configuration'
+          items:
+            type: string
+          maxItems: 10
+          type: array
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.opaqueMatcher:
+      properties:
+        hint:
+          description: 'Hint is case sensitive plain text, that is expected to be provided in token introspect request,
+
+            if there are multiple opaque tokens configurations.
+
+            To differentiate between multiple opaque tokens configurations, hint must be provided.'
+          maxLength: 50
+          minLength: 1
+          type: string
+      required:
+      - hint
+      type: object
+    httpproxy.claim:
+      properties:
+        selector:
+          description: 'Selector is JSON selector of property in token claims. Currently just name in top-level object is supported.
+
+            By default we support all standard claims from OpenID specification
+
+            https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims,
+
+            and mapping will fail if claim and data type will not match the standard.
+
+            For non-standard claims the type will be derived from the JSON.'
+          maxLength: 200
+          minLength: 1
+          type: string
+      required:
+      - selector
+      type: object
+      description: 'SubClaim is used to match DigitalTwin with external_id. If not specified, standard ''sub'' claim will be used.
+
+        Either ''sub'' or specified claim will then also be mapped to ''external_id'' claim.'
+    httpproxy.onlineValidation:
+      properties:
+        cache_ttl:
+          description: 'CacheTTL of token validity can be used to minimize calls to userinfo endpoint. Value is in seconds.
+
+            The final cache TTL will be set to lower limit of this value and exp claim of JWT token.
+
+            If not set, token will not be cached and call to userinfo endpoint will be made on every request.
+
+            However, token validity will be checked first if possible (JWT tokens).
+
+            If token is expired, userinfo endpoint will not be called, nor cache checked.'
+          maximum: 3600
+          type: integer
+        userinfo_endpoint:
+          description: 'UserinfoEndpoint is URI of userinfo endpoint which will be used to validate access token.
+
+            And also fetch user claims when opaque token is received.
+
+            It can remain empty, if JWT token matcher is used.
+
+            Then the URI under "userinfo_endpoint" in .well-known/openid-configuration endpoint is used.'
+          type: string
+      type: object
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'

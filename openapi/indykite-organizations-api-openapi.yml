@@ -1,0 +1,123 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials Organizations API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- name: Organizations
+  description: Organization operations
+  x-displayName: Organizations
+paths:
+  /organizations/current:
+    get:
+      tags:
+      - Organizations
+      operationId: listOrganizationsCurrent
+      summary: Read current Organization
+      description: Read current Organization, formerly known as Customer, by current service account.
+      responses:
+        '200':
+          description: OK
+          headers:
+            etag:
+              description: Multiversion concurrency control version - etag
+              style: simple
+              explode: false
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/httpproxy.readOrganizationResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '401':
+          description: Invalid ServiceAccount JWT in Authorization header
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      security:
+      - BearerToken: []
+components:
+  schemas:
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.readOrganizationResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when organization was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created organization.
+          type: string
+        description:
+          description: Description is optional description of organization.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of organization. Is equal to Name if not set.
+          type: string
+        id:
+          description: ID is globally unique identifier of organization.
+          type: string
+        name:
+          description: Name is URL friendly identifier of organization.
+          type: string
+        update_time:
+          description: UpdateTime specify when organization was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated organization.
+          type: string
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'

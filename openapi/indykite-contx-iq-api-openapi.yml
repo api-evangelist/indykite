@@ -1,0 +1,168 @@
+openapi: 3.2.0
+info:
+  contact: {}
+  description: Config API supports CRUD operations on config objects.
+  title: Config REST Application Agent Credentials ContX IQ API
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: '1'
+servers:
+- url: https://eu.api.indykite.com/configs/v1
+- url: https://us.api.indykite.com/configs/v1
+security:
+- BearerToken: []
+tags:
+- name: ContX IQ
+  x-displayName: ContX IQ
+  description: ContX IQ API supports CRUD operations on IKG which cooperates with authorization engine.
+paths:
+  /contx-iq/v1/execute:
+    post:
+      tags:
+      - ContX IQ
+      operationId: createContxIqV1Execute
+      summary: ContX IQ specified query execution endpoint.
+      security:
+      - APIKey: []
+      description: Execute the ContX IQ query and return the results that requestor is authorized to access.
+      requestBody:
+        description: execute request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.ExecuteRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ExecuteResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - properties:
+                    errors:
+                      items:
+                        type: string
+                      type: array
+                    message:
+                      type: string
+                  type: object
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.ErrorResponse'
+                - properties:
+                    message:
+                      type: string
+                  type: object
+      x-codegen-request-body-name: request
+components:
+  schemas:
+    restapi.DetailedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Errors are optional and may contain additional details.
+          items:
+            type: string
+          examples:
+          - - missing bearer token
+        message:
+          type: string
+          description: Message describes the error.
+          examples:
+          - unauthorized request
+    restapi.ExecuteRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ContX IQ query ID or query name.
+          examples:
+          - gid:AAAAI3CpKUguokArp0rY8oQW9eo
+        input_params:
+          type: object
+          additionalProperties: {}
+          description: 'InputParams map specifies the values of input parameters used within the query execution.
+
+            If a query uses input parameters and is used for making the decision,
+
+            they must be sent with the request, otherwise an error is returned.
+
+            The length of string values must be between 1 and 256 characters.'
+        page_size:
+          type: integer
+          description: The size of the result set. The default size is 100.
+        page_token:
+          type: integer
+          description: The page token for the query result. Any value under 1 returns the first page.
+        preprocess_params:
+          additionalProperties:
+            type: string
+          description: 'PreprocessParams map specifies the values of preprocess parameters used within the query execution.
+
+            This value is optional and only used for CIQ v2.0.'
+          type: object
+    restapi.ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          examples:
+          - Internal Server Error
+    restapi.ExecuteResponseRecord:
+      type: object
+      properties:
+        aggregate_values:
+          type: object
+          additionalProperties: {}
+          description: List of aggregate values as the result.
+        nodes:
+          type: object
+          additionalProperties: {}
+          description: List of nodes and their properties as the result.
+        relationships:
+          type: object
+          additionalProperties: {}
+          description: List of relationships and their properties as the result.
+    restapi.ExecuteResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of results, composed of nodes, relationships, and their properties, from executing the query.
+          items:
+            $ref: '#/components/schemas/restapi.ExecuteResponseRecord'
+  securitySchemes:
+    BearerToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Bearer token generated from Service Account credentials.
+x-original-swagger-version: '2.0'
