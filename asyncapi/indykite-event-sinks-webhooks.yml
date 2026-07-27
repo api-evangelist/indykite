@@ -1,0 +1,19 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/indykite-config-openapi.yml
+spec_type: Webhooks
+note: >-
+  IndyKite exposes an event-delivery surface via Event Sinks: a project configures one or
+  more sinks through the Config API, and the platform delivers events to them. This is the
+  provider's outbound/event surface. No standalone AsyncAPI document is published; this
+  captures the configurable webhook/event-sink mechanism derived from the Config API.
+event_surface:
+  name: Event Sinks
+  management_operations:
+    - listEventSinks
+    - createEventSink
+    - getEventSink
+    - updateEventSink
+    - deleteEventSink
+  config_path: /configs/v1/event-sinks
+  delivery: outbound event delivery to customer-configured sinks

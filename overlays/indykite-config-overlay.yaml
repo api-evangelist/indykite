@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for IndyKite Config REST API
+  version: 1.0.0
+extends: openapi/indykite-config-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: indykite
+      x-apievangelist-domain: config-plane
+      x-apievangelist-hierarchy: Organization > Project > Application > ApplicationAgent
+      x-apievangelist-concurrency: ETag / If-Match (412 Precondition Failed)
+      x-apievangelist-standards: [openapi-3, etag-if-match]

@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/indykite
+packages:
+  - language: go
+    registry: pkg.go.dev
+    name: github.com/indykite/indykite-sdk-go
+    url: https://pkg.go.dev/github.com/indykite/indykite-sdk-go
+    repository: https://github.com/indykite/indykite-sdk-go
+    install: go get github.com/indykite/indykite-sdk-go
+    official: true
+    description: IndyKite Platform SDK for Go (gRPC/REST client for Capture, ContX IQ, AuthZEN/KBAC and Config APIs).
+  - language: hcl
+    registry: terraform-registry
+    name: indykite/indykite
+    url: https://registry.terraform.io/providers/indykite/indykite/latest
+    repository: https://github.com/indykite/terraform-provider-indykite
+    install: 'terraform { required_providers { indykite = { source = "indykite/indykite" } } }'
+    official: true
+    description: Official Terraform provider for managing IndyKite projects, applications, app agents, authorization policies and config objects as code.

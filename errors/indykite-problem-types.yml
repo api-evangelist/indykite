@@ -1,0 +1,49 @@
+generated: '2026-07-19'
+method: derived
+source:
+- openapi/indykite-rest-openapi.yml
+- openapi/indykite-config-openapi.yml
+format: custom
+envelope:
+  media_type: application/json
+  schemas:
+  - restapi.ErrorResponse
+  - restapi.DetailedError
+  fields:
+    message: human-readable error message (both schemas)
+    errors: array of field-level detail objects (restapi.DetailedError, validation errors)
+note: Errors are returned as application/json with a {message} or {message, errors[]} envelope; not RFC
+  9457 problem+json.
+problems:
+- status: 400
+  title: Bad Request
+  description: Bad request
+  example_operation: openapi/indykite-rest-openapi.yml#createCaptureV1Node
+- status: 401
+  title: Unauthorized
+  description: Unauthorized request
+  example_operation: openapi/indykite-rest-openapi.yml#createContxIqV1Execute
+- status: 403
+  title: Forbidden
+  description: Forbidden
+  example_operation: openapi/indykite-config-openapi.yml#listApplicationAgentCredentials
+- status: 404
+  title: Not Found
+  description: Data schema not found for the specified Project
+  example_operation: openapi/indykite-rest-openapi.yml#listDataSchemaV1
+- status: 409
+  title: Conflict
+  description: Conflict
+  example_operation: openapi/indykite-rest-openapi.yml#getPipelinesPropertyMapping
+- status: 412
+  title: Precondition Failed
+  description: Precondition Failed
+  example_operation: openapi/indykite-config-openapi.yml#deleteMCPServer
+- status: 422
+  title: Unprocessable Entity
+  description: Unprocessable Entity
+  example_operation: openapi/indykite-rest-openapi.yml#createCaptureV1Node
+- status: 500
+  title: Internal Server Error
+  description: Internal Server Error
+  example_operation: openapi/indykite-rest-openapi.yml#createCaptureV1Node

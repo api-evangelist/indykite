@@ -1,0 +1,60 @@
+arazzo: 1.0.1
+info:
+  title: Provision an IndyKite project and AppAgent credential
+  version: 1.0.0
+  summary: Create a project, an application and an application agent, then mint an AppAgent credential for data-plane calls.
+sourceDescriptions:
+  - name: config
+    url: ../openapi/indykite-config-openapi.yml
+    type: openapi
+workflows:
+  - workflowId: provisionProjectAndAppAgent
+    summary: Stand up a new project with an application, app agent, and credential.
+    inputs:
+      type: object
+      properties:
+        projectName:
+          type: string
+        applicationName:
+          type: string
+        appAgentName:
+          type: string
+    steps:
+      - stepId: createProject
+        operationId: createProject
+        requestBody:
+          contentType: application/json
+          payload:
+            name: $inputs.projectName
+        outputs:
+          projectId: $response.body#/id
+      - stepId: createApplication
+        operationId: createApplication
+        requestBody:
+          contentType: application/json
+          payload:
+            project_id: $steps.createProject.outputs.projectId
+            name: $inputs.applicationName
+        outputs:
+          applicationId: $response.body#/id
+      - stepId: createApplicationAgent
+        operationId: createApplicationAgent
+        requestBody:
+          contentType: application/json
+          payload:
+            application: $steps.createApplication.outputs.applicationId
+            name: $inputs.appAgentName
+        outputs:
+          appAgentId: $response.body#/id
+      - stepId: createApplicationAgentCredential
+        operationId: createApplicationAgentCredential
+        requestBody:
+          contentType: application/json
+          payload:
+            application_agent_id: $steps.createApplicationAgent.outputs.appAgentId
+        outputs:
+          credentialId: $response.body#/id
+    outputs:
+      projectId: $steps.createProject.outputs.projectId
+      appAgentId: $steps.createApplicationAgent.outputs.appAgentId
+      credentialId: $steps.createApplicationAgentCredential.outputs.credentialId

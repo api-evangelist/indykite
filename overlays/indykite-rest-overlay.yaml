@@ -1,0 +1,13 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for IndyKite REST API
+  version: 1.0.0
+extends: openapi/indykite-rest-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: indykite
+      x-apievangelist-products: [Capture, DataSchema, ContX IQ, AuthZEN, EntityMatching]
+      x-apievangelist-standards: [authzen, oauth2-bearer, model-context-protocol]
+      x-apievangelist-mcp: https://us.mcp.indykite.com
+      x-apievangelist-error-envelope: 'application/json {message} | {message, errors[]}'

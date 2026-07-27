@@ -1,22 +1,379 @@
 aid: indykite
 name: Indykite
-description: Indykite is a company surfaced as a portfolio company of speedinvest and added to the API
-  Evangelist network as a stub for enrichment. This profile is a lead awaiting the enrichment pipeline.
+description: >-
+  IndyKite is the runtime control layer for agentic AI. Its enterprise platform applies trust,
+  context, and runtime control across organizational data so autonomous AI agents can act securely,
+  continuously injecting live signals — identity, provenance, freshness, sensitivity, and compliance
+  status — into AI actions and access decisions at the moment they occur. The platform is built on an
+  Identity Knowledge Graph (IKG) and delivers Knowledge-Based Access Control (KBAC), AuthZEN-based
+  authorization, ContX IQ contextual queries, entity matching, and a hosted regional Model Context
+  Protocol (MCP) server. IndyKite exposes a REST API (Capture, DataSchema, ContX IQ, AuthZEN, Entity
+  Matching) and a Config API for managing organizations, projects, applications, app agents, service
+  accounts, authorization policies, knowledge queries, event sinks, and MCP servers, plus a Go SDK and
+  a Terraform provider. Added to the API Evangelist network via the speedinvest portfolio and enriched
+  from the provider's public OpenAPI and documentation.
 url: https://raw.githubusercontent.com/api-evangelist/indykite/refs/heads/main/apis.yml
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://docs.indykite.com/img/indykite.svg
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - speedinvest
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: profiled
+x-tier-reason: pipeline-enriched
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
 tags:
 - Company
-apis: []
+- Identity
+- Authorization
+- Access Control
+- Knowledge Graph
+- Agentic AI
+- MCP
+- Security
+- AuthZEN
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: indykite:indykite-application-agent-credentials-api
+  name: Indykite Application Agent Credentials API
+  description: Application Agent Credential management
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Application Agent Credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-application-agent-credentials-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-application-agents-api
+  name: Indykite Application Agents API
+  description: Application Agent CRUD operations
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Application Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-application-agents-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-applications-api
+  name: Indykite Applications API
+  description: Application and agent management
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Applications
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-applications-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-authorization-policies-api
+  name: Indykite Authorization Policies API
+  description: KBAC and ContX IQ Policies CRUD operations
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Authorization Policies
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-authorization-policies-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-authzen-api
+  name: Indykite AuthZEN API
+  description: >-
+    Authorization API implemented according to [AuthZEN specification](https://openid.net/wg/authzen/specifications/).
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - AuthZEN
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-authzen-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-capture-api
+  name: Indykite Capture API
+  description: Capture REST API represents the service interface for data capture.
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Capture
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-capture-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-contx-iq-api
+  name: Indykite ContX IQ API
+  description: ContX IQ API supports CRUD operations on IKG which cooperates with authorization engine.
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - ContX IQ
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-contx-iq-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-dataschema-api
+  name: Indykite DataSchema API
+  description: >-
+    DataSchema enables customers to define their own data models within the Identity Knowledge Graph (IKG)
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - DataSchema
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-dataschema-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-deprecated-api
+  name: Indykite Deprecated API
+  description: The Deprecated API from Indykite — 2 operation(s) for deprecated.
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Deprecated
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-deprecated-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-entity-matching-api
+  name: Indykite Entity Matching API
+  description: Entity Matching Pipeline configuration
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Entity Matching
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-entity-matching-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-entitymatching-api
+  name: Indykite EntityMatching API
+  description: The EntityMatching API from Indykite — 3 operation(s) for entitymatching.
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - EntityMatching
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-entitymatching-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-event-sinks-api
+  name: Indykite Event Sinks API
+  description: Event Sink configuration
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Event Sinks
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-event-sinks-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-external-data-resolver-api
+  name: Indykite External Data Resolver API
+  description: External Data Resolver configuration
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - External Data Resolver
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-external-data-resolver-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-knowledge-queries-api
+  name: Indykite Knowledge Queries API
+  description: Knowledge Query management
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Knowledge Queries
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-knowledge-queries-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-mcp-servers-api
+  name: Indykite MCP Servers API
+  description: MCP Servers configuration
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - MCP Servers
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-mcp-servers-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-organizations-api
+  name: Indykite Organizations API
+  description: Organization operations
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Organizations
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-organizations-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-projects-api
+  name: Indykite Projects API
+  description: Project CRUD operations
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-projects-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-service-account-credentials-api
+  name: Indykite Service Account Credentials API
+  description: Service Account Credential management
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Service Account Credentials
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-service-account-credentials-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-service-accounts-api
+  name: Indykite Service Accounts API
+  description: Service Account CRUD operations
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Service Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-service-accounts-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-token-introspect-api
+  name: Indykite Token Introspect API
+  description: Token introspection configuration
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Token Introspect
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-token-introspect-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-trust-score-api
+  name: Indykite Trust Score API
+  description: Trust Score Profile management
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Trust Score
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-trust-score-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+common:
+- type: DomainSecurity
+  url: security/indykite-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/indykite-agentic-access.yml
+- type: Authentication
+  url: authentication/indykite-authentication.yml
+- type: DeveloperPortal
+  url: https://developer.indykite.com/
+- type: Documentation
+  url: https://docs.indykite.com/
+- type: APIReference
+  url: https://openapi.indykite.com
+- type: GettingStarted
+  url: https://docs.indykite.com/docs/get-started
+- type: Support
+  url: https://forum.indykite.com/
+- type: Blog
+  url: https://www.indykite.ai/blog/all
+- type: GitHubOrganization
+  url: https://github.com/indykite
+- type: SignUp
+  url: https://us.hub.indykite.com/
+- type: TermsOfService
+  url: https://www.indykite.ai/subscription-agreement
+- type: PrivacyPolicy
+  url: https://www.indykite.ai/privacy
+- type: Sandbox
+  url: https://us.hub.indykite.com/
+- type: ChangeLog
+  url: changelog/indykite-changelog.yml
+- type: Packages
+  url: packages/indykite-packages.yml
+- type: SDKs
+  url: packages/indykite-packages.yml
+- type: Conventions
+  url: conventions/indykite-conventions.yml
+- type: ErrorCatalog
+  url: errors/indykite-problem-types.yml
+- type: DataModel
+  url: data-model/indykite-data-model.yml
+- type: Conformance
+  url: conformance/indykite-conformance.yml
+- type: Compliance
+  url: https://trust.indykite.com/
+- type: TrustCenter
+  url: security/indykite-trust-center.yml
+- type: VulnerabilityDisclosure
+  url: security/indykite-vulnerability-disclosure.yml
+- type: Security
+  url: https://www.indykite.ai/responsible-disclosure-policy
+- type: Lifecycle
+  url: lifecycle/indykite-lifecycle.yml
+- type: MCPServer
+  url: mcp/indykite-mcp.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: LLMsTxt
+  url: llms/indykite-llms.txt
+- type: Webhooks
+  url: asyncapi/indykite-event-sinks-webhooks.yml
+- type: Arazzo
+  name: Provision an IndyKite project and AppAgent credential
+  url: arazzo/indykite-provision-project-appagent.yml
+- type: Arazzo
+  name: Capture graph data then make an authorization decision
+  url: arazzo/indykite-capture-and-authorize.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

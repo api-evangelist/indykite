@@ -1,0 +1,2204 @@
+---
+openapi: 3.2.0
+info:
+  title: IndyKite REST API
+  description: " OpenAPI specifications to test the IndyKite REST Endpoints "
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0
+  version: ""
+servers:
+  - url: https://eu.api.indykite.com
+  - url: https://us.api.indykite.com
+tags:
+  - description: Capture REST API represents the service interface for data capture.
+    name: Capture
+    x-displayName: Capture API
+  - description: DataSchema enables customers to define their own data models within the Identity Knowledge Graph (IKG)
+    name: DataSchema
+    x-displayName: DataSchema
+  - name: ContX IQ
+    x-displayName: ContX IQ
+    description: ContX IQ API supports CRUD operations on IKG which cooperates with authorization engine.
+  - description: "Authorization API implemented according to [AuthZEN specification](https://openid.net/wg/authzen/specifications/)."
+    name: AuthZEN
+    x-displayName: AuthZEN
+  - description: >-
+      EntityMatchingAPI represents the service interface for the EntityMatching API.
+    name: EntityMatchingAPI
+    x-displayName: EntityMatchingAPI
+security:
+  - bearerAuth: []
+  - APIKey: []
+paths:
+  /capture/v1/nodes:
+    post:
+      tags:
+        - Capture
+      operationId: createCaptureV1Node
+      summary: Batch node upsert endpoint
+      description: Batch upsert nodes
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/capture.UpsertNodesRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/capture.BatchResults'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+      x-codegen-request-body-name: request
+  /capture/v1/nodes/delete:
+    post:
+      tags:
+        - Capture
+      operationId: createCaptureV1NodesDelete
+      summary: Batch node delete endpoint
+      description: Batch delete nodes
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/capture.DeleteNodesRequest'
+        description: Request Body
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/capture.BatchResults'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - properties:
+                      message:
+                        type: string
+                    type: object
+      x-codegen-request-body-name: request
+  /capture/v1/nodes/properties/delete:
+    post:
+      tags:
+        - Capture
+      operationId: createCaptureV1NodesPropertiesDelete
+      summary: Batch node properties delete endpoint
+      description: Batch delete node properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/capture.DeleteNodePropertiesRequest'
+        description: Request Body
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/capture.BatchResults'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - properties:
+                      message:
+                        type: string
+                    type: object
+      x-codegen-request-body-name: request
+  /capture/v1/nodes/properties/metadata/delete:
+    post:
+      tags:
+        - Capture
+      operationId: createCaptureV1NodesPropertiesMetadataDelete
+      summary: Batch node properties metadata delete endpoint
+      description: Batch delete node properties metadata
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/capture.DeleteNodePropertyMetadataRequest'
+        description: Request Body
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/capture.BatchResults'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - properties:
+                      message:
+                        type: string
+                    type: object
+      x-codegen-request-body-name: request
+  /capture/v1/relationships:
+    post:
+      tags:
+        - Capture
+      operationId: createCaptureV1Relationship
+      summary: Batch relationship upsert endpoint
+      description: Batch upsert relationship
+      requestBody:
+        description: Request Body
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/capture.UpsertRelationshipsRequest'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/capture.BatchResults'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+      x-codegen-request-body-name: request
+  /capture/v1/relationships/delete:
+    post:
+      tags:
+        - Capture
+      operationId: createCaptureV1RelationshipsDelete
+      summary: Batch relationship delete endpoint
+      description: Batch delete relationships
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/capture.DeleteRelationshipsRequest'
+        description: Request Body
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/capture.BatchResults'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - properties:
+                      message:
+                        type: string
+                    type: object
+      x-codegen-request-body-name: request
+  /capture/v1/relationships/properties/delete:
+    post:
+      tags:
+        - Capture
+      operationId: createCaptureV1RelationshipsPropertiesDelete
+      summary: Batch relationship properties delete endpoint
+      description: Batch delete relationship properties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/capture.DeleteRelationshipPropertiesRequest'
+        description: Request Body
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/capture.BatchResults'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - properties:
+                      message:
+                        type: string
+                    type: object
+      x-codegen-request-body-name: request
+  /data-schema/v1:
+    get:
+      tags:
+        - DataSchema
+      operationId: listDataSchemaV1
+      summary: Read Data Schema
+      description: Read the IKG data schema for the specified Project in JGFv2 format.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dataschema.JGFGraph'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+        '404':
+          description: Data schema not found for the specified Project
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+  /contx-iq/v1/execute:
+    post:
+      tags:
+        - ContX IQ
+      operationId: createContxIqV1Execute
+      summary: ContX IQ specified query execution endpoint.
+      security:
+        - APIKey: []
+      description: >-
+        Execute the ContX IQ query and return the results that requestor is
+        authorized to access.
+      requestBody:
+        description: execute request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.ExecuteRequest'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ExecuteResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '401':
+          description: Unauthorized request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - properties:
+                      message:
+                        type: string
+                    type: object
+      x-codegen-request-body-name: request
+  /access/v1/evaluation:
+    post:
+      summary: AuthZEN specified Evaluation endpoint
+      description: Evaluate the authorization request and return decision in response.
+      tags:
+        - AuthZEN
+      operationId: createAccessV1Evaluation
+      security:
+        - APIKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.EvaluationRequest'
+        description: Evaluation request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.EvaluationResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - properties:
+                      message:
+                        type: string
+                    type: object
+      x-codegen-request-body-name: request
+  /access/v1/evaluations:
+    post:
+      operationId: createAccessV1Evaluations
+      summary: AuthZEN specified Evaluations endpoint
+      security:
+        - APIKey: []
+      description: >-
+        Evaluate multiple authorization requests at once and return decisions in
+        response.
+      tags:
+        - AuthZEN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.EvaluationsRequest'
+        description: Evaluation request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.EvaluationsResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+  /access/v1/search/action:
+    post:
+      operationId: createAccessV1SearchAction
+      summary: AuthZEN specified Action Search API
+      security:
+        - APIKey: []
+      description: >-
+        Search for actions allowed to be done by the specified subject on the
+        specified resource.
+      tags:
+        - AuthZEN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.SearchActionRequest'
+        description: Action Search request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.SearchActionResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+  /access/v1/search/resource:
+    post:
+      operationId: createAccessV1SearchResource
+      summary: AuthZEN specified Resource Search API
+      security:
+        - APIKey: []
+      description: >-
+        Search for resources that the specified subject is allowed to do the
+        specified action on.
+      tags:
+        - AuthZEN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.SearchResourceRequest'
+        description: Resource Search request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.SearchResourceResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+  /access/v1/search/subject:
+    post:
+      operationId: createAccessV1SearchSubject
+      summary: AuthZEN specified Subject Search API
+      security:
+        - APIKey: []
+      description: >-
+        Search for subjects allowed to do the specified action on the specified
+        resource.
+      tags:
+        - AuthZEN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.SearchSubjectRequest'
+        description: Subject Search request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.SearchSubjectResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+  /access/v1/what-authorized:
+    post:
+      summary: WhatAuthorized endpoint
+      description: Search for the resources the subject is allowed to do the actions on.
+      tags:
+        - Deprecated
+      operationId: createAccessV1WhatAuthorized
+      security:
+        - APIKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.WhatAuthorizedRequest'
+        description: WhatAuthorized request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.WhatAuthorizedResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      deprecated: true
+  /access/v1/who-authorized:
+    post:
+      summary: WhoAuthorized endpoint
+      description: Search for the subjects allowed to do the actions on the resources.
+      tags:
+        - Deprecated
+      operationId: createAccessV1WhoAuthorized
+      security:
+        - APIKey: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/restapi.WhoAuthorizedRequest'
+        description: WhoAuthorized request
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.WhoAuthorizedResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - properties:
+                      errors:
+                        items:
+                          type: string
+                        type: array
+                      message:
+                        type: string
+                    type: object
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.DetailedError'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/restapi.ErrorResponse'
+      x-codegen-request-body-name: request
+      deprecated: true
+  /pipelines/{id}/property-mappings:
+    get:
+      tags:
+        - EntityMatching
+      operationId: getPipelinesPropertyMapping
+      summary: EntityMatching read suggested property mapping endpoint
+      security:
+        - APIKey: []
+      description: >-
+        Retrieves a list of system-suggested property mappings to use when
+        running the pipeline
+      parameters:
+        - name: id
+          in: path
+          description: Entity Matching Pipeline ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ReadSuggestedPropertyMappingResponse'
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedMessageResponse'
+                  - type: object
+                    properties:
+                      details:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+  /pipelines/{id}/runs:
+    post:
+      tags:
+        - EntityMatching
+      operationId: createPipelinesRun
+      summary: EntityMatching run endpoint
+      security:
+        - APIKey: []
+      description: >-
+        Creates a new entity matching pipeline execution and returns
+        confirmation
+      parameters:
+        - name: id
+          in: path
+          description: Entity Matching Pipeline ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: Run Entity Matching Pipeline request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api.RunEntityMatchingRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.RunEntityMatchingPipelineResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+      x-codegen-request-body-name: request
+  /pipelines/{id}/status:
+    get:
+      operationId: getPipelinesByIdStatus
+      tags:
+        - EntityMatching
+      summary: EntityMatching read pipeline status endpoint
+      security:
+        - APIKey: []
+      description: >-
+        Retrieves the entity matching pipeline status
+        (PENDING,IN_PROGRESS,SUCCESS or ERROR)
+      parameters:
+        - name: id
+          in: path
+          description: Entity Matching Pipeline ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ReadSuggestedPropertyMappingResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.DetailedError'
+                  - type: object
+                    properties:
+                      errors:
+                        type: array
+                        items:
+                          type: string
+                      message:
+                        type: string
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/restapi.ErrorResponse'
+                  - type: object
+                    properties:
+                      message:
+                        type: string
+components:
+  schemas:
+    capture.BaseProperty:
+      required:
+        - type
+      type: object
+      properties:
+        external_value:
+          type: string
+        type:
+          maxLength: 128
+          type: string
+        value:
+          $ref: '#/components/schemas/capture.PropertyValue'
+          description: Value can be either string, integer, float, boolean, or an array of any of those types
+    capture.BatchResults:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/capture.Result'
+          type: array
+      type: object
+    capture.DeleteNode:
+      type: object
+      required:
+        - external_id
+        - type
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+    capture.DeleteNodeProperties:
+      required:
+        - external_id
+        - property_types
+        - type
+      type: object
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        property_types:
+          items:
+            type: string
+          maxItems: 250
+          minItems: 1
+          type: array
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+    capture.DeleteNodePropertiesRequest:
+      required:
+        - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteNodeProperties'
+    capture.DeleteNodePropertyMetadata:
+      required:
+        - external_id
+        - metadata_fields
+        - property_type
+        - type
+      type: object
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        metadata_fields:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            type: string
+        property_type:
+          type: string
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+    capture.DeleteNodePropertyMetadataRequest:
+      required:
+        - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteNodePropertyMetadata'
+    capture.DeleteNodesRequest:
+      required:
+        - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteNode'
+    capture.DeleteRelationshipProperties:
+      required:
+        - property_types
+        - source
+        - target
+        - type
+      type: object
+      properties:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.BaseProperty'
+        property_types:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            type: string
+        source:
+          $ref: '#/components/schemas/capture.Node'
+        target:
+          $ref: '#/components/schemas/capture.Node'
+        type:
+          maxLength: 128
+          type: string
+    capture.DeleteRelationshipPropertiesRequest:
+      required:
+        - relationships
+      type: object
+      properties:
+        relationships:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteRelationshipProperties'
+        use_global_db:
+          description: UseGlobalDB routes the relationship property deletes to the Global DB of a composite database deployment.
+          type: boolean
+    capture.DeleteRelationshipsRequest:
+      required:
+        - relationships
+      type: object
+      properties:
+        relationships:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.Relationship'
+        use_global_db:
+          description: UseGlobalDB deletes the relationships from the Global DB of a composite database deployment.
+          type: boolean
+    capture.Metadata:
+      type: object
+      properties:
+        assurance_level:
+          type: integer
+          enum:
+            - 1
+            - 2
+            - 3
+        custom_metadata:
+          type: object
+          additionalProperties:
+            type: object
+        source:
+          type: string
+        verified_time:
+          type: string
+    capture.Node:
+      required:
+        - external_id
+        - type
+      type: object
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+    capture.Property:
+      required:
+        - type
+      type: object
+      properties:
+        external_value:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/capture.Metadata'
+        type:
+          maxLength: 128
+          type: string
+        value:
+          $ref: '#/components/schemas/capture.PropertyValue'
+          description: Value can be either string, integer, float, boolean, or an array of any of those types
+    capture.PropertyValue:
+      oneOf:
+        - type: string
+        - type: integer
+        - type: number
+        - type: boolean
+        - type: array
+          items:
+            oneOf:
+              - type: string
+              - type: integer
+              - type: number
+              - type: boolean
+      description: Value can be either string, integer, float, boolean, or an array of any of those types
+    capture.Relationship:
+      required:
+        - source
+        - target
+        - type
+      type: object
+      properties:
+        properties:
+          items:
+            $ref: '#/components/schemas/capture.BaseProperty'
+          type: array
+        source:
+          $ref: '#/components/schemas/capture.Node'
+        target:
+          $ref: '#/components/schemas/capture.Node'
+        type:
+          maxLength: 128
+          type: string
+    capture.Result:
+      properties:
+        id:
+          type: string
+      type: object
+    capture.UpsertNode:
+      required:
+        - external_id
+        - type
+      type: object
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        is_identity:
+          type: boolean
+        labels:
+          items:
+            type: string
+          type: array
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+        properties:
+          items:
+            $ref: '#/components/schemas/capture.Property'
+          type: array
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+    capture.UpsertNodesRequest:
+      required:
+        - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.UpsertNode'
+    capture.UpsertRelationshipsRequest:
+      required:
+        - relationships
+      type: object
+      properties:
+        relationships:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.Relationship'
+        use_global_db:
+          description: >-
+            UseGlobalDB routes the relationships to the Global DB of a composite
+            database deployment.
+          type: boolean
+    restapi.DetailedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Errors are optional and may contain additional details.
+          items:
+            type: string
+          examples:
+            - - missing bearer token
+        message:
+          type: string
+          description: Message describes the error.
+          examples:
+            - unauthorized request
+    restapi.ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          examples:
+            - Internal Server Error
+    dataschema.JGFEdge:
+      type: object
+      properties:
+        directed:
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFEdgeMetadata'
+        relation:
+          type: string
+        source:
+          type: string
+        target:
+          type: string
+    dataschema.JGFEdgeMetadata:
+      type: object
+      properties:
+        count:
+          type: integer
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFEdgeProperty'
+    dataschema.JGFEdgeProperty:
+      type: object
+      properties:
+        count:
+          type: integer
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFGraph:
+      type: object
+      properties:
+        graph:
+          $ref: '#/components/schemas/dataschema.JGFGraphContent'
+    dataschema.JGFGraphContent:
+      type: object
+      properties:
+        directed:
+          type: boolean
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFEdge'
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFGraphMetadata'
+        nodes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFNode'
+    dataschema.JGFGraphMetadata:
+      type: object
+      properties:
+        created_at:
+          type: string
+        updated_at:
+          type: string
+    dataschema.JGFLabel:
+      type: object
+      properties:
+        count:
+          type: integer
+        name:
+          type: string
+    dataschema.JGFNode:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFNodeMetadata'
+    dataschema.JGFNodeMetadata:
+      type: object
+      properties:
+        node_count:
+          type: integer
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFNodeProperty'
+        system_labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFLabel'
+        user_defined_labels:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFLabel'
+    dataschema.JGFNodeProperty:
+      type: object
+      properties:
+        count:
+          type: integer
+        metadata:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFPropertyMeta'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFPropertyMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFPropertyType:
+      type: object
+      properties:
+        count:
+          type: integer
+        type:
+          type: string
+    restapi.ExecuteRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The ContX IQ query ID or query name.
+          examples:
+            - gid:AAAAI3CpKUguokArp0rY8oQW9eo
+        input_params:
+          type: object
+          additionalProperties: {}
+          description: >-
+            InputParams map specifies the values of input parameters used within
+            the query execution.
+
+            If a query uses input parameters and is used for making the
+            decision,
+
+            they must be sent with the request, otherwise an error is returned.
+
+            The length of string values must be between 1 and 256 characters.
+        page_size:
+          type: integer
+          description: The size of the result set. The default size is 100.
+        page_token:
+          type: integer
+          description: >-
+            The page token for the query result. Any value under 1 returns the
+            first page.
+        preprocess_params:
+          additionalProperties:
+            type: string
+          description: >-
+            PreprocessParams map specifies the values of preprocess parameters
+            used within the query execution.
+
+            This value is optional and only used for CIQ v2.0.
+          type: object
+    restapi.ExecuteResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: >-
+            List of results, composed of nodes, relationships, and their
+            properties, from executing the query.
+          items:
+            $ref: '#/components/schemas/restapi.ExecuteResponseRecord'
+    restapi.ExecuteResponseRecord:
+      type: object
+      properties:
+        aggregate_values:
+          type: object
+          additionalProperties: {}
+          description: List of aggregate values as the result.
+        nodes:
+          type: object
+          additionalProperties: {}
+          description: List of nodes and their properties as the result.
+        relationships:
+          type: object
+          additionalProperties: {}
+          description: List of relationships and their properties as the result.
+    restapi.Action:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name specifies the action.
+          examples:
+            - CAN_READ
+      examples:
+        - name: 'CAN_READ'
+    restapi.Context:
+      type: object
+      properties:
+        input_params:
+          type: object
+          additionalProperties: {}
+          description: >-
+            InputParams map specifies the values of input parameters used within
+            the policies.
+
+            If a policy uses input parameters and is used for making the
+            decision,
+
+            they must be sent with the request, otherwise an error is returned.
+          examples:
+            - additionalProp1: {}
+              additionalProp2: {}
+        policy_tags:
+          type: array
+          description: >-
+            PolicyTags array limits the policies used to only the policies with
+            the specified tags.
+          items:
+            type: string
+          uniqueItems: true
+          examples:
+            - - tag1
+              - tag2
+      examples:
+        - input_params:
+            additionalProp1: {}
+            additionalProp2: {}
+          policy_tags:
+            - Tag1
+            - Tag2
+    restapi.EvaluationRequest:
+      type: object
+      required:
+        - action
+        - resource
+        - subject
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+      examples:
+        - action:
+            name: 'CAN_READ'
+          context:
+            input_params:
+              additionalProp1: {}
+              additionalProp2: {}
+            policy_tags:
+              - Tag1
+              - Tag2
+          resource:
+            id: 'IdSpecifyingTheNode'
+            type: 'NodeType'
+          subject:
+            id: 'IdSpecifyingTheNode'
+            type: 'NodeType'
+    restapi.EvaluationResponse:
+      type: object
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.respContext'
+        decision:
+          type: boolean
+          examples:
+            - true
+      examples:
+        - context:
+            advice:
+              - error: 'insufficient_user_authentication'
+                error_description: 'A different authentication level is required'
+                acr_values: 'whatever'
+          decision: true
+    restapi.EvaluationsRequest:
+      type: object
+      required:
+        - evaluations
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.OptionalFields'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.EvaluationsResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.EvaluationResponse'
+    restapi.Node:
+      type: object
+      required:
+        - id
+        - type
+      properties:
+        id:
+          type: string
+          description: ID is a node external_id.
+          examples:
+            - IdSpecifyingTheNode
+        type:
+          type: string
+          description: Type is a node label.
+          examples:
+            - NodeType
+      examples:
+        - id: 'IdSpecifyingTheNode'
+          type: 'NodeType'
+    restapi.NodeType:
+      type: object
+      required:
+        - type
+      properties:
+        type:
+          type: string
+          examples:
+            - NodeType
+    restapi.OptionalFields:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.SearchActionRequest:
+      type: object
+      required:
+        - resource
+        - subject
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.SearchActionResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Action'
+    restapi.SearchResourceRequest:
+      type: object
+      required:
+        - action
+        - resource
+        - subject
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.NodeType'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.SearchResourceResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Node'
+    restapi.SearchSubjectRequest:
+      type: object
+      required:
+        - action
+        - resource
+        - subject
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.NodeType'
+    restapi.SearchSubjectResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Node'
+    restapi.WhatAuthorizedEvaluation:
+      type: object
+      required:
+        - action
+        - resource
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.NodeType'
+    restapi.WhatAuthorizedEvaluationResponse:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.WhatAuthorizedRequest:
+      type: object
+      required:
+        - evaluations
+        - subject
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhatAuthorizedEvaluation'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+      examples:
+        - evaluations:
+            - action:
+                name: 'SUBSCRIBES_TO'
+              resource:
+                type: 'Asset'
+          subject:
+            id: 'subject_id'
+            type: 'subject_type'
+    restapi.WhatAuthorizedResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhatAuthorizedEvaluationResponse'
+      examples:
+        - evaluations:
+            - resource:
+                type: 'Asset'
+                id: 'asset_id'
+              action:
+                name: 'SUBSCRIBES_TO'
+            - resource:
+                type: 'Asset'
+                id: 'asset_id2'
+              action:
+                name: 'SUBSCRIBES_TO'
+    restapi.WhoAuthorizedEvaluation:
+      type: object
+      required:
+        - action
+        - resource
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.WhoAuthorizedEvaluationResponse:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Node'
+    restapi.WhoAuthorizedRequest:
+      type: object
+      required:
+        - evaluations
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhoAuthorizedEvaluation'
+      examples:
+        - evaluations:
+            - action:
+                name: 'SUBSCRIBES_TO'
+              resource:
+                id: 'resource_id'
+                type: 'resource_type'
+    restapi.WhoAuthorizedResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhoAuthorizedEvaluationResponse'
+      examples:
+        - evaluations:
+            - resource:
+                type: 'Asset'
+                id: 'asset_id'
+              action:
+                name: 'SUBSCRIBES_TO'
+              subjects:
+                - type: 'subject_type'
+                  id: 'subject_id'
+                - type: 'subject_type'
+                  id: 'subject_id2'
+    restapi.respContext:
+      type: object
+      properties:
+        advice:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+        reason:
+          type: string
+      examples:
+        - advice:
+            - error: 'insufficient_user_authentication'
+              error_description: 'A different authentication level is required'
+              acr_values: 'whatever'
+    api.CustomPropertyMapping:
+      required:
+        - source_node_property
+        - target_node_property
+      type: object
+      properties:
+        source_node_property:
+          type: string
+          description: >-
+            SourceNodeProperty is a property of the source node that will be
+            compared to TargetNodeProperty.
+        target_node_property:
+          type: string
+          description: >-
+            TargetNodeProperty is a property of the target node that will be
+            compared to SourceNodeProperty.
+    api.ReadSuggestedPropertyMappingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID is the Entity Matching Pipeline globally unique identifier.
+        suggested_property_mappings:
+          type: array
+          description: >-
+            SuggestedPropertyMappings contains the rules the pipeline will use
+            to match source nodes with target nodes
+
+            These values can be used when running a pipeline (after adjusting
+            the payload).
+          items:
+            $ref: '#/components/schemas/api.SuggestedPropertyMapping'
+    api.RunEntityMatchingPipelineResponse:
+      type: object
+      properties:
+        etag:
+          type: string
+          description: Etag is the multiversion concurrency control version.
+        id:
+          type: string
+          description: ID is the Entity Matching Pipeline globally unique identifier.
+        last_run_time:
+          type: string
+          description: LastRunTime indicates the last time the pipeline was started.
+    api.RunEntityMatchingRequest:
+      required:
+        - similarity_score_cutoff
+      type: object
+      properties:
+        custom_property_mappings:
+          type: array
+          description: >-
+            CustomPropertyMappings contains the rules to match nodes properties.
+
+            If empty, the default rules will be used (stored as part of the
+            pipeline configuration).
+
+            If present, it will overwrite the stored configuration.
+          items:
+            $ref: '#/components/schemas/api.CustomPropertyMapping'
+        similarity_score_cutoff:
+          maximum: 1
+          minimum: 0
+          type: number
+          description: >-
+            SimilarityScoreCutoff defines the required threshold (in range
+            [0,1]),
+
+            above which entities will be automatically matched.
+    api.SuggestedPropertyMapping:
+      type: object
+      properties:
+        similarity_score_cutoff:
+          type: number
+          description: >-
+            SimilarityScoreCutoff defines the percentage (in range [0,1])
+
+            of how similar SourceNodeProperty and TargetNodeProperty are.
+
+            Meaning, any property that has a similarity score above this
+            percentage will be automatically matched.
+
+            Therefore, this value can (and should) be taken into consideration
+            when
+
+            setting a cutoff threshold for running a pipeline.
+        source_node_property:
+          type: string
+          description: >-
+            SourceNodeProperty is a property of the source node that has been
+            compared to TargetNodeProperty.
+        source_node_type:
+          type: string
+          description: >-
+            SourceNodeType is the type of the node that will be compared to
+            nodes of TargetNodeType.
+        target_node_property:
+          type: string
+          description: >-
+            TargetNodeProperty is a property of the target node that  has been
+            compared to SourceNodeProperty.
+        target_node_type:
+          type: string
+          description: >-
+            TargetNodeType is the type of the node that  has been compared to
+            nodes of SourceNodeType.
+    restapi.DetailedMessageResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            type: string
+        message:
+          type: string
+          examples:
+            - Accepted
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        Bearer token - the value of the Authorization header (without Bearer), e.g. "superSecretToken".
+    APIKey:
+      type: apiKey
+      in: header
+      name: X-IK-ClientKey
+      description: >-
+        The value of the App Agent credential header must be passed as is,
+        without any prefix.
+x-tagGroups:
+  - name: Capture REST API
+    tags:
+      - Capture
+  - name: Data Schema REST API
+    tags:
+      - DataSchema
+  - name: ContX IQ REST API
+    tags:
+      - ContX IQ
+  - name: AuthZEN REST API
+    tags:
+      - AuthZEN
+      - Deprecated
+  - name: Entity Matching Pipeline REST API
+    tags:
+      - EntityMatching

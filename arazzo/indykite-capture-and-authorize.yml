@@ -1,0 +1,41 @@
+arazzo: 1.0.1
+info:
+  title: Capture graph data then make an authorization decision
+  version: 1.0.0
+  summary: Upsert nodes and a relationship into the Identity Knowledge Graph, then ask AuthZEN/KBAC whether a subject may act on a resource.
+sourceDescriptions:
+  - name: rest
+    url: ../openapi/indykite-rest-openapi.yml
+    type: openapi
+workflows:
+  - workflowId: captureAndAuthorize
+    summary: Batch-upsert nodes, connect them with a relationship, and evaluate a KBAC decision.
+    inputs:
+      type: object
+      properties:
+        nodes:
+          type: array
+        relationship:
+          type: object
+        decision:
+          type: object
+    steps:
+      - stepId: upsertNodes
+        operationId: createCaptureV1Node
+        requestBody:
+          contentType: application/json
+          payload: $inputs.nodes
+      - stepId: upsertRelationship
+        operationId: createCaptureV1Relationship
+        requestBody:
+          contentType: application/json
+          payload: $inputs.relationship
+      - stepId: evaluateAccess
+        operationId: createAccessV1Evaluation
+        requestBody:
+          contentType: application/json
+          payload: $inputs.decision
+        outputs:
+          decision: $response.body#/decision
+    outputs:
+      decision: $steps.evaluateAccess.outputs.decision

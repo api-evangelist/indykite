@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+probe: true
+url: https://trust.indykite.com/
+source:
+  - https://trust.indykite.com/
+  - https://www.indykite.ai/
+certifications:
+  - SOC 2 Type I
+  - SOC 2 Type II
+  - ISO 27001
+  - HIPAA
+  - GDPR
+  - EU-U.S. Data Privacy Framework
+pages:
+  security_and_privacy: https://www.indykite.ai/security-and-privacy
+  data_processing_agreement: https://www.indykite.ai/data-processing-agreement
+  responsible_disclosure: https://www.indykite.ai/responsible-disclosure-policy
+evidence:
+  - source: https://www.indykite.ai/
+    keywords: [soc 2 type i, soc 2 type ii, iso 27001, hipaa, gdpr, eu-u.s. data privacy framework]
+  - source: https://trust.indykite.com/
+    keywords: [trust center]

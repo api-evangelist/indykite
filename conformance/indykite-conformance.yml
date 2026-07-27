@@ -1,0 +1,38 @@
+generated: '2026-07-19'
+method: derived
+source:
+  - openapi/indykite-rest-openapi.yml
+  - openapi/indykite-config-openapi.yml
+  - https://www.indykite.ai/
+standards:
+  - id: authzen
+    conforms: true
+    evidence: 'Authorization API implemented per the OpenID AuthZEN specification (openid.net/wg/authzen); /access/v1/evaluation(s) + search endpoints.'
+  - id: oauth2-bearer
+    conforms: true
+    evidence: 'HTTP bearer (JWT) security scheme; MCP server advertises /.well-known/oauth-protected-resource on 401.'
+  - id: model-context-protocol
+    conforms: true
+    evidence: 'Hosted regional MCP servers (eu/us.mcp.indykite.com) speaking JSON-RPC over HTTP with the standard MCP session model.'
+  - id: openapi-3
+    conforms: true
+    evidence: 'Two OpenAPI 3.2.0 documents published at openapi.indykite.com (REST + Config).'
+  - id: etag-if-match
+    conforms: true
+    evidence: 'Config API uses ETag / If-Match optimistic concurrency (412 Precondition Failed).'
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: 'Errors returned as application/json {message}/{message,errors}, not application/problem+json.'
+  - id: soc2
+    conforms: true
+    evidence: 'SOC 2 Type I & II stated on indykite.ai and Trust Center (trust.indykite.com).'
+  - id: iso-27001
+    conforms: true
+    evidence: 'ISO 27001 stated on indykite.ai / Trust Center.'
+  - id: hipaa
+    conforms: true
+    evidence: 'HIPAA compliance stated on indykite.ai / Trust Center.'
+  - id: gdpr
+    conforms: true
+    evidence: 'GDPR + EU-U.S. Data Privacy Framework stated on indykite.ai / Trust Center.'
+compliance_page: https://trust.indykite.com/

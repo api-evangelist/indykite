@@ -1,0 +1,20 @@
+generated: '2026-07-19'
+method: searched
+source:
+  - https://docs.indykite.com/changelog
+  - openapi/indykite-rest-openapi.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://openapi.indykite.com
+changelog:
+  url: https://docs.indykite.com/changelog
+sla:
+  url: https://www.indykite.ai/subscription-agreement
+  document: 'https://cdn.prod.website-files.com/60d1f26636b7f887aaeb951b/67a604e795713639a2be7570_SLA.%20v.5..docx.pdf'
+status_page: null
+deprecation:
+  policy_url: null
+  note: 'The REST spec tags the legacy AuthZEN evaluation operations as Deprecated; no separate published deprecation-policy page was found.'
+deprecated_operations:
+  - openapi/indykite-rest-openapi.yml (operations tagged "Deprecated" under the AuthZEN group)

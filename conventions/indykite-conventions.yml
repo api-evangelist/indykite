@@ -1,0 +1,46 @@
+generated: '2026-07-19'
+method: derived
+source:
+  - openapi/indykite-rest-openapi.yml
+  - openapi/indykite-config-openapi.yml
+  - https://docs.indykite.com/
+authentication:
+  styles:
+    - name: AppAgent credential
+      scheme: apiKey
+      location: header
+      parameter: X-IK-ClientKey
+      note: AppAgent credential token passed verbatim (no prefix); used on Capture / ContX IQ / REST data-plane calls.
+    - name: Bearer token
+      scheme: http bearer
+      format: JWT
+      note: User OAuth access token (Authorization Bearer) or Service Account bearer token; the MCP server uses the Bearer token as the AuthZEN subject.
+  cross_ref: authentication/indykite-authentication.yml
+concurrency_control:
+  style: optimistic
+  mechanism: ETag / If-Match
+  detail: Config API objects return an `etag`; conditional updates/deletes send `If-Match` and fail with 412 Precondition Failed on a stale etag.
+  applies_to: Config API (configs/v1) resource mutations
+idempotency:
+  supported: false
+  note: No Idempotency-Key header is documented; write safety on the Config API is provided by ETag/If-Match optimistic concurrency (412 on conflict), not idempotency keys.
+pagination:
+  documented: false
+  note: List endpoints (e.g. listProjects, listApplications) return collections directly; no cursor/page-token pagination parameters are declared in the OpenAPI. A `search` query parameter filters some Config collections.
+versioning:
+  scheme: uri-path
+  current: v1
+  detail: Data-plane paths are versioned (/capture/v1, /access/v1, /contx-iq/v1, /data-schema/v1); Config API is served under /configs/v1.
+error_envelope:
+  media_type: application/json
+  shapes:
+    - schema: restapi.ErrorResponse
+      fields: [message]
+    - schema: restapi.DetailedError
+      fields: [message, errors]
+  cross_ref: errors/indykite-problem-types.yml
+regions:
+  - eu.api.indykite.com
+  - us.api.indykite.com
+rate_limit_signal:
+  documented: false

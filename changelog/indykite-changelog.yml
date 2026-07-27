@@ -1,0 +1,10 @@
+generated: '2026-07-19'
+method: searched
+source: https://docs.indykite.com/changelog
+url: https://docs.indykite.com/changelog
+scheme: dated
+note: >-
+  IndyKite publishes a dated changelog in its Docusaurus documentation. The live page is
+  the source of truth; it is rendered client-side, so individual dated entries were not
+  captured verbatim in this pass. Pointer preserved so the changelog surface is discoverable.
+entries: []

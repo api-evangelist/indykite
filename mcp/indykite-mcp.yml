@@ -1,0 +1,44 @@
+generated: '2026-07-19'
+method: searched
+status: published
+source: https://github.com/indykite/skills/blob/HEAD/indykite-mcp-server/SKILL.md
+server:
+  name: indykite
+  transport: http
+  protocol: json-rpc
+  session_model: standard MCP (initialize -> Mcp-Session-Id -> subsequent calls)
+  auth: single Authorization Bearer (user OAuth access token); AppAgent resolved server-side from the MCP server config app_agent_id
+  endpoints:
+    - region: eu
+      url: https://eu.mcp.indykite.com
+    - region: us
+      url: https://us.mcp.indykite.com
+  url_template: '<MCP_REGIONAL_URL>/mcp/v1/<project_gid>'
+  prerequisites:
+    - IndyKite project with an Application and an AppAgent (Authorization API + ContX IQ API permissions)
+    - Token Introspect configuration on the project (validates inbound user Bearer tokens)
+    - MCP server configuration (POST /configs/v1/mcp-servers) binding endpoint to app_agent_id + token introspect + scopes_supported
+  well_known: /.well-known/oauth-protected-resource (returned on 401 to advertise the OAuth resource metadata)
+tools:
+  - name: authzen_evaluate
+    description: Make a single AuthZEN/KBAC authorization decision (can subject do action on resource).
+    source_operation: openapi/indykite-rest-openapi.yml#createAccessV1Evaluation
+  - name: authzen_evaluations
+    description: Make multiple AuthZEN/KBAC authorization decisions in one call.
+    source_operation: openapi/indykite-rest-openapi.yml#createAccessV1Evaluations
+  - name: authzen_search_resource
+    description: Search for resources a subject is authorized to act on.
+    source_operation: openapi/indykite-rest-openapi.yml#createAccessV1SearchResource
+  - name: authzen_search_action
+    description: Search for actions a subject may perform on a resource.
+    source_operation: openapi/indykite-rest-openapi.yml#createAccessV1SearchAction
+  - name: authzen_search_subject
+    description: Search for subjects authorized against a resource/action.
+    source_operation: openapi/indykite-rest-openapi.yml#createAccessV1SearchSubject
+  - name: ciq_execute
+    description: Run a ContX IQ graph query / execute against the Identity Knowledge Graph.
+    source_operation: openapi/indykite-rest-openapi.yml#createContxIqV1Execute
+note: >-
+  IndyKite ships a hosted, regional MCP server (EU/US). The Config API also exposes CRUD for
+  MCP server configurations (listMCPServer/createMCPServer/getMCPServer/updateMCPServer/deleteMCPServer)
+  so each project binds its own runtime MCP endpoint.

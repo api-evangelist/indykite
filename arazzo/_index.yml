@@ -1,0 +1,12 @@
+generated: '2026-07-19'
+method: derived
+source: arazzo/*.yml
+workflows:
+  - file: indykite-provision-project-appagent.yml
+    workflowId: provisionProjectAndAppAgent
+    title: Provision an IndyKite project and AppAgent credential
+    summary: Create a project, application and app agent, then mint an AppAgent credential for data-plane calls.
+  - file: indykite-capture-and-authorize.yml
+    workflowId: captureAndAuthorize
+    title: Capture graph data then make an authorization decision
+    summary: Upsert nodes and a relationship into the IKG, then evaluate an AuthZEN/KBAC decision.

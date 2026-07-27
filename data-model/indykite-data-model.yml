@@ -1,0 +1,108 @@
+generated: '2026-07-19'
+method: derived
+source:
+  - openapi/indykite-config-openapi.yml
+  - openapi/indykite-rest-openapi.yml
+note: >-
+  Two domains. The Config plane is a tenancy hierarchy (Organization > Project > ...).
+  The data plane is the Identity Knowledge Graph (IKG): Nodes connected by typed Relationships,
+  each carrying Properties, operated on via the Capture and ContX IQ APIs.
+entities:
+  - name: Organization
+    domain: config
+    operations: [listOrganizationsCurrent]
+  - name: Project
+    domain: config
+    operations: [listProjects, createProject, getProject, updateProject, deleteProject]
+  - name: Application
+    domain: config
+    operations: [listApplications, createApplication, getApplication, updateApplication, deleteApplication]
+  - name: ApplicationAgent
+    domain: config
+    operations: [listApplicationAgents, createApplicationAgent, getApplicationAgent, updateApplicationAgent, deleteApplicationAgent]
+  - name: ApplicationAgentCredential
+    domain: config
+    operations: [listApplicationAgentCredentials, createApplicationAgentCredential, getApplicationAgentCredential, deleteApplicationAgentCredential]
+  - name: ServiceAccount
+    domain: config
+    operations: [listServiceAccounts, createServiceAccount, getServiceAccount, updateServiceAccount, deleteServiceAccount]
+  - name: ServiceAccountCredential
+    domain: config
+    operations: [listServiceAccountCredentials, createServiceAccountCredential, getServiceAccountCredential, deleteServiceAccountCredential]
+  - name: AuthorizationPolicy
+    domain: config
+    operations: [listAuthorizationPolicies, createAuthorizationPolicy, getAuthorizationPolicy, updateAuthorizationPolicy, deleteAuthorizationPolicy]
+  - name: KnowledgeQuery
+    domain: config
+    operations: [listKnowledgeQueries, createKnowledgeQuery, getKnowledgeQuery, updateKnowledgeQuery, deleteKnowledgeQuery]
+  - name: EntityMatchingPipeline
+    domain: config
+    operations: [listEntityMatchingPipelines, createEntityMatchingPipeline, getEntityMatchingPipeline, updateEntityMatchingPipeline, deleteEntityMatchingPipeline]
+  - name: EventSink
+    domain: config
+    operations: [listEventSinks, createEventSink, getEventSink, updateEventSink, deleteEventSink]
+  - name: ExternalDataResolver
+    domain: config
+    operations: [listExternalDataResolvers, createExternalDataResolver, getExternalDataResolver, updateExternalDataResolver, deleteExternalDataResolver]
+  - name: MCPServer
+    domain: config
+    operations: [listMCPServer, createMCPServer, getMCPServer, updateMCPServer, deleteMCPServer]
+  - name: TokenIntrospect
+    domain: config
+    operations: [listTokenIntrospects, createTokenIntrospect, getTokenIntrospect, updateTokenIntrospect, deleteTokenIntrospect]
+  - name: TrustScoreProfile
+    domain: config
+    operations: [listTrustScoreProfiles, createTrustScoreProfile, getTrustScoreProfile, updateTrustScoreProfile, deleteTrustScoreProfile]
+  - name: Node
+    domain: ikg
+    description: A node in the Identity Knowledge Graph.
+    operations: [createCaptureV1Node, createCaptureV1NodesDelete, createContxIqV1Execute]
+  - name: Relationship
+    domain: ikg
+    description: A typed edge between two IKG nodes.
+    operations: [createCaptureV1Relationship, createCaptureV1RelationshipsDelete]
+  - name: Property
+    domain: ikg
+    description: A property attached to a node or relationship (with optional metadata).
+    operations: [createCaptureV1NodesPropertiesDelete, createCaptureV1NodesPropertiesMetadataDelete, createCaptureV1RelationshipsPropertiesDelete]
+  - name: DataSchema
+    domain: ikg
+    description: Customer-defined data model for the IKG.
+    operations: [listDataSchemaV1]
+relationships:
+  - from: Project
+    to: Organization
+    type: belongs_to
+    via: organization_id
+  - from: Application
+    to: Project
+    type: belongs_to
+    via: project_id
+  - from: ApplicationAgent
+    to: Application
+    type: belongs_to
+    via: application
+  - from: ApplicationAgentCredential
+    to: ApplicationAgent
+    type: belongs_to
+    via: application_agent_id
+  - from: ServiceAccountCredential
+    to: ServiceAccount
+    type: belongs_to
+    via: service_account_id
+  - from: Relationship
+    to: Node
+    type: belongs_to
+    via: source/target node references
+  - from: Property
+    to: Node
+    type: belongs_to
+    via: node reference
+  - from: MCPServer
+    to: ApplicationAgent
+    type: has_one
+    via: app_agent_id
+  - from: MCPServer
+    to: TokenIntrospect
+    type: has_one
+    via: token introspect binding

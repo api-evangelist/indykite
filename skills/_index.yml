@@ -1,0 +1,41 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/indykite/skills
+note: >-
+  IndyKite publishes an official Agent Skills bundle (22 skills, Apache-2.0) for coding agents,
+  distributed as a Claude Code / Gemini CLI extension. The marquee skills are saved here verbatim;
+  the full set lives at github.com/indykite/skills.
+upstream:
+  repository: https://github.com/indykite/skills
+  bundle: indykite-skills
+  version: 1.0.0
+  total_skills: 22
+skills:
+  - file: indykite-mcp-server.md
+    name: indykite-mcp-server
+    api: openapi/indykite-rest-openapi.yml
+    operations: [createAccessV1Evaluation, createAccessV1Evaluations, createAccessV1SearchResource, createAccessV1SearchAction, createContxIqV1Execute]
+  - file: indykite-authzen-evaluation.md
+    name: indykite-authzen-evaluation
+    api: openapi/indykite-rest-openapi.yml
+    operations: [createAccessV1Evaluation]
+  - file: indykite-authzen-kbac-policies.md
+    name: indykite-authzen-kbac-policies
+    api: openapi/indykite-config-openapi.yml
+    operations: [createAuthorizationPolicy, getAuthorizationPolicy, updateAuthorizationPolicy, deleteAuthorizationPolicy]
+  - file: indykite-authzen-search-resource.md
+    name: indykite-authzen-search-resource
+    api: openapi/indykite-rest-openapi.yml
+    operations: [createAccessV1SearchResource]
+  - file: indykite-capture-upsert-nodes.md
+    name: indykite-capture-upsert-nodes
+    api: openapi/indykite-rest-openapi.yml
+    operations: [createCaptureV1Node]
+  - file: indykite-capture-upsert-relationships.md
+    name: indykite-capture-upsert-relationships
+    api: openapi/indykite-rest-openapi.yml
+    operations: [createCaptureV1Relationship]
+  - file: indykite-ciq-read.md
+    name: indykite-ciq-read
+    api: openapi/indykite-rest-openapi.yml
+    operations: [createContxIqV1Execute]
