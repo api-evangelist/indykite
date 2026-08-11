@@ -306,6 +306,8 @@ apis:
   - type: ErrorCatalog
     url: errors/indykite-problem-types.yml
 common:
+- type: Overlay
+  url: overlays/indykite-config-overlay.yaml
 - type: DomainSecurity
   url: security/indykite-domain-security.yml
 - type: AgenticAccess
