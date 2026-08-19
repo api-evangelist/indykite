@@ -1,0 +1,302 @@
+{
+  "item": [
+    {
+      "id": "4b19f071-375f-47bd-a287-679484a69e24",
+      "name": "ContX IQ",
+      "description": {
+        "content": "ContX IQ API supports CRUD operations on IKG which cooperates with authorization engine.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b34903ba-93ba-40c5-8133-bec2345edad5",
+          "name": "ContX IQ specified query execution endpoint.",
+          "request": {
+            "name": "ContX IQ specified query execution endpoint.",
+            "description": {
+              "content": "Execute the ContX IQ query and return the results that requestor is authorized to access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "contx-iq",
+                "v1",
+                "execute"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<string>\",\n  \"input_params\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"page_size\": \"<integer>\",\n  \"page_token\": \"<integer>\",\n  \"preprocess_params\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "73180c3d-434f-4001-aa6b-436f0655f65d",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contx-iq",
+                    "v1",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"input_params\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"page_size\": \"<integer>\",\n  \"page_token\": \"<integer>\",\n  \"preprocess_params\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"aggregate_values\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"nodes\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"relationships\": {\n        \"key_0\": {}\n      }\n    },\n    {\n      \"aggregate_values\": {\n        \"key_0\": {},\n        \"key_1\": {}\n      },\n      \"nodes\": {\n        \"key_0\": {}\n      },\n      \"relationships\": {\n        \"key_0\": {}\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9356b6c-7017-4c2e-b4a4-00fc96e73f3f",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contx-iq",
+                    "v1",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"input_params\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"page_size\": \"<integer>\",\n  \"page_token\": \"<integer>\",\n  \"preprocess_params\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5016221a-e49d-4fd9-9e77-5a3c286cf380",
+              "name": "Unauthorized request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contx-iq",
+                    "v1",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"input_params\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"page_size\": \"<integer>\",\n  \"page_token\": \"<integer>\",\n  \"preprocess_params\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39736554-995d-401c-815c-b3752aeec313",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "contx-iq",
+                    "v1",
+                    "execute"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<string>\",\n  \"input_params\": {\n    \"key_0\": {},\n    \"key_1\": {}\n  },\n  \"page_size\": \"<integer>\",\n  \"page_token\": \"<integer>\",\n  \"preprocess_params\": {\n    \"key_0\": \"<string>\",\n    \"key_1\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://eu.api.indykite.com/configs/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "731e95d7-1dbb-420f-950e-8030bf259bb8",
+    "name": "Config REST Application Agent Credentials ContX IQ API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Config API supports CRUD operations on config objects.",
+      "type": "text/plain"
+    }
+  }
+}

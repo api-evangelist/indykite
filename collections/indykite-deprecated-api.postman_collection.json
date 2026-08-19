@@ -1,0 +1,563 @@
+{
+  "item": [
+    {
+      "id": "db28e156-8ad5-470a-8ff2-7dc7a75d93e1",
+      "name": "Deprecated",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc96510a-6bd8-4165-9e71-cd7719c1105b",
+          "name": "WhatAuthorized endpoint",
+          "request": {
+            "name": "WhatAuthorized endpoint",
+            "description": {
+              "content": "Search for the resources the subject is allowed to do the actions on.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access",
+                "v1",
+                "what-authorized"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"subject\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ffa24ccb-b685-4e34-a784-d60f56377a56",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "what-authorized"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"subject\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b3f2dfb-9866-4b29-9460-51cea5c1f86c",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "what-authorized"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"subject\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "736d5712-5951-4e36-b191-314e2c5898b8",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "what-authorized"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"subject\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "181f1f39-7a27-470d-871f-3752f556c46f",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "what-authorized"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"subject\": {\n    \"id\": \"<string>\",\n    \"type\": \"<string>\"\n  },\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f25d1b69-c9a4-44c5-b988-96f338f19f0a",
+          "name": "WhoAuthorized endpoint",
+          "request": {
+            "name": "WhoAuthorized endpoint",
+            "description": {
+              "content": "Search for the subjects allowed to do the actions on the resources.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "access",
+                "v1",
+                "who-authorized"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fefa28e8-4b2a-4712-b9be-cc8682c7b28f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "who-authorized"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"subjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"subjects\": [\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        {\n          \"id\": \"<string>\",\n          \"type\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc1ac4db-2c44-4b39-a2fa-5c372b875ed4",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "who-authorized"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9349bf2d-dd8c-48ba-ad27-a43846b3a930",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "who-authorized"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b7fa739-0f19-479e-be26-d690cafe9166",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "access",
+                    "v1",
+                    "who-authorized"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"evaluations\": [\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    },\n    {\n      \"action\": {\n        \"name\": \"<string>\"\n      },\n      \"resource\": {\n        \"id\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    }\n  ],\n  \"context\": {\n    \"input_params\": {\n      \"key_0\": {},\n      \"key_1\": {},\n      \"key_2\": {}\n    },\n    \"policy_tags\": [\n      \"<string>\"\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://eu.api.indykite.com/configs/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "42788f6e-e436-43ac-88a1-0f8ccbd4bfdb",
+    "name": "Config REST Application Agent Credentials Deprecated API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Config API supports CRUD operations on config objects.",
+      "type": "text/plain"
+    }
+  }
+}

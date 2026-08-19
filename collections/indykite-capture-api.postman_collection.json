@@ -1,0 +1,1920 @@
+{
+  "item": [
+    {
+      "id": "174ad997-1b79-4dad-a173-2d71ecd80e48",
+      "name": "Capture",
+      "description": {
+        "content": "Capture REST API represents the service interface for data capture.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4788259b-36b0-426e-9c64-2f0434e03e79",
+          "name": "Batch node upsert endpoint",
+          "request": {
+            "name": "Batch node upsert endpoint",
+            "description": {
+              "content": "Batch upsert nodes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capture",
+                "v1",
+                "nodes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"is_identity\": \"<boolean>\",\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"location\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_2\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_3\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f065674b-3a01-4436-a389-2ee98d3f2bd8",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"is_identity\": \"<boolean>\",\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"location\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f557f3ee-5119-48d0-8f48-549cb38fc38d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"is_identity\": \"<boolean>\",\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"location\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66c08eed-5ec2-4138-b0f8-441910af6154",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"is_identity\": \"<boolean>\",\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"location\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "083dcbc5-89b8-44e3-89e5-68a9e54bae3c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"is_identity\": \"<boolean>\",\n      \"labels\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"location\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"metadata\": {\n            \"assurance_level\": \"<integer>\",\n            \"custom_metadata\": {\n              \"key_0\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"key_1\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            \"source\": \"<string>\",\n            \"verified_time\": \"<string>\"\n          },\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1bba773-b91f-41a9-bb39-0a777c351ca1",
+          "name": "Batch node delete endpoint",
+          "request": {
+            "name": "Batch node delete endpoint",
+            "description": {
+              "content": "Batch delete nodes",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capture",
+                "v1",
+                "nodes",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e43fe745-4ceb-4281-947b-0b0dbe5be590",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c56b44b2-cba8-4f2b-af0d-2873a94fd212",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7147952-ff89-41a9-93f7-dc1e94d62693",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df8cb7a0-a505-4339-877b-1b50ae043412",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cc00ab28-ebeb-4e56-af54-3c7614c0d778",
+          "name": "Batch node properties delete endpoint",
+          "request": {
+            "name": "Batch node properties delete endpoint",
+            "description": {
+              "content": "Batch delete node properties",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capture",
+                "v1",
+                "nodes",
+                "properties",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cf9c28c4-1972-4571-bb30-b644ad445623",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "properties",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cef0e121-6f08-44af-a115-cefcd1f0a497",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "properties",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7cb34e9c-ddf1-4b58-95bb-bb3e5bf1b369",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "properties",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c650b237-669b-415d-92c6-b496e5c8eb0a",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "properties",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "afc081d9-b60d-424c-9552-269c97873b52",
+          "name": "Batch node properties metadata delete endpoint",
+          "request": {
+            "name": "Batch node properties metadata delete endpoint",
+            "description": {
+              "content": "Batch delete node properties metadata",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capture",
+                "v1",
+                "nodes",
+                "properties",
+                "metadata",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"metadata_fields\": [\n        \"<string>\"\n      ],\n      \"property_type\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "38aec607-70e3-498b-9bae-b4f5eefffa33",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "properties",
+                    "metadata",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"metadata_fields\": [\n        \"<string>\"\n      ],\n      \"property_type\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1a3dd9dc-4cf8-4a41-a08a-829f78d51f8d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "properties",
+                    "metadata",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"metadata_fields\": [\n        \"<string>\"\n      ],\n      \"property_type\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1654ac2-a102-4a2d-9112-737c61c3b771",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "properties",
+                    "metadata",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"metadata_fields\": [\n        \"<string>\"\n      ],\n      \"property_type\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0214b0b2-da1c-44f7-99b6-42b0d9190c76",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "nodes",
+                    "properties",
+                    "metadata",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"nodes\": [\n    {\n      \"external_id\": \"<string>\",\n      \"metadata_fields\": [\n        \"<string>\"\n      ],\n      \"property_type\": \"<string>\",\n      \"type\": \"<string>\",\n      \"location\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cc35637-2d7b-4da6-9918-40be6b7eae76",
+          "name": "Batch relationship upsert endpoint",
+          "request": {
+            "name": "Batch relationship upsert endpoint",
+            "description": {
+              "content": "Batch upsert relationship",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capture",
+                "v1",
+                "relationships"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0aa3b988-75e7-408b-a9c6-aec385047586",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6cb4438-7f2f-42d2-b285-90d2ba281e09",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "747e84d4-1bcb-4da1-8a4f-ed20c5c59df9",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e28e483-178f-4bd4-87e7-01672f92f0cd",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "67f11519-3c7f-4019-bd29-a94e30bc1fae",
+          "name": "Batch relationship delete endpoint",
+          "request": {
+            "name": "Batch relationship delete endpoint",
+            "description": {
+              "content": "Batch delete relationships",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capture",
+                "v1",
+                "relationships",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "23d64e4b-1084-44fe-ae84-3bc4ca5b71a3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a8b4305-0a0b-484d-8953-ab713aecb6aa",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "953d8f77-6191-47b9-b205-0241a1af5129",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5afddde7-cca0-48f7-ae0c-60c47da80cf2",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e5c8c78a-182d-4f67-b57d-54f6406b0192",
+          "name": "Batch relationship properties delete endpoint",
+          "request": {
+            "name": "Batch relationship properties delete endpoint",
+            "description": {
+              "content": "Batch delete relationship properties",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capture",
+                "v1",
+                "relationships",
+                "properties",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"relationships\": [\n    {\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8819fd13-377a-4ffd-b18b-ef6f7fd519af",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships",
+                    "properties",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"results\": [\n    {\n      \"id\": \"string\"\n    },\n    {\n      \"id\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "409f668e-2791-49e6-84ea-b9fa793fdb16",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships",
+                    "properties",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d0dad7e-2dbe-480d-abb6-007b84340b4d",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships",
+                    "properties",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca4dea77-c684-44ef-80fb-6a108c2023a1",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture",
+                    "v1",
+                    "relationships",
+                    "properties",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"relationships\": [\n    {\n      \"property_types\": [\n        \"<string>\"\n      ],\n      \"source\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"target\": {\n        \"external_id\": \"<string>\",\n        \"type\": \"<string>\",\n        \"location\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"properties\": [\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        },\n        {\n          \"type\": \"<string>\",\n          \"external_value\": \"<string>\",\n          \"value\": \"<string>\"\n        }\n      ]\n    }\n  ],\n  \"use_global_db\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://eu.api.indykite.com/configs/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b31dd319-0294-4632-ac83-37060caa110e",
+    "name": "Config REST Application Agent Credentials Capture API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Config API supports CRUD operations on config objects.",
+      "type": "text/plain"
+    }
+  }
+}

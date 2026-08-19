@@ -1,0 +1,2415 @@
+{
+  "item": [
+    {
+      "id": "b95eaa44-3674-4753-9e7f-e0f5d7ebcaf3",
+      "name": "Token Introspect",
+      "description": {
+        "content": "Token introspection configuration",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "eab6e259-78d3-4ea6-8e36-a899be7d5a4c",
+          "name": "List Token Introspections",
+          "request": {
+            "name": "List Token Introspections",
+            "description": {
+              "content": "List Token Introspections in provided Project with optional filtering.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token-introspects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "project_id",
+                  "value": "<string>",
+                  "description": "(Required) Project ID where to search for Token Introspections."
+                },
+                {
+                  "disabled": false,
+                  "key": "full_fetch",
+                  "value": "<boolean>",
+                  "description": "Full fetch of all data. If not provided, only metadata is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "search",
+                  "value": "<string>",
+                  "description": "List only objects, that contains given search query in name, display name or description"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b10d755d-d604-4ead-8068-c5cc55bd3aa6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "full_fetch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"claims_mapping\": {\n        \"key_0\": {\n          \"selector\": \"string\"\n        },\n        \"key_1\": {\n          \"selector\": \"string\"\n        }\n      },\n      \"create_time\": \"string\",\n      \"created_by\": \"string\",\n      \"description\": \"string\",\n      \"display_name\": \"string\",\n      \"id\": \"string\",\n      \"ikg_node_type\": \"string\",\n      \"jwt_matcher\": {\n        \"audience\": \"string\",\n        \"issuer\": \"string\"\n      },\n      \"name\": \"string\",\n      \"offline_validation\": {\n        \"public_jwks\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"online_validation\": {\n        \"cache_ttl\": 610,\n        \"userinfo_endpoint\": \"string\"\n      },\n      \"opaque_matcher\": {\n        \"hint\": \"string\"\n      },\n      \"organization_id\": \"string\",\n      \"perform_upsert\": true,\n      \"project_id\": \"string\",\n      \"sub_claim\": {\n        \"selector\": \"string\"\n      },\n      \"update_time\": \"string\",\n      \"updated_by\": \"string\"\n    },\n    {\n      \"claims_mapping\": {\n        \"key_0\": {\n          \"selector\": \"string\"\n        }\n      },\n      \"create_time\": \"string\",\n      \"created_by\": \"string\",\n      \"description\": \"string\",\n      \"display_name\": \"string\",\n      \"id\": \"string\",\n      \"ikg_node_type\": \"string\",\n      \"jwt_matcher\": {\n        \"audience\": \"string\",\n        \"issuer\": \"string\"\n      },\n      \"name\": \"string\",\n      \"offline_validation\": {\n        \"public_jwks\": [\n          \"string\",\n          \"string\"\n        ]\n      },\n      \"online_validation\": {\n        \"cache_ttl\": 278,\n        \"userinfo_endpoint\": \"string\"\n      },\n      \"opaque_matcher\": {\n        \"hint\": \"string\"\n      },\n      \"organization_id\": \"string\",\n      \"perform_upsert\": true,\n      \"project_id\": \"string\",\n      \"sub_claim\": {\n        \"selector\": \"string\"\n      },\n      \"update_time\": \"string\",\n      \"updated_by\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "481bf684-1585-4178-90c8-2d25716d1557",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "full_fetch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38fb9526-5d5a-4ccd-abf4-e522df144b3e",
+              "name": "Invalid ServiceAccount JWT in Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "full_fetch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca64e41c-bb0d-4bf0-a56e-c8138b23a8ec",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "full_fetch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7e416bf3-0b6d-475a-95b7-e3d8497e6b6a",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "full_fetch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8bdc3cfb-69a5-437e-adfc-0950d1aea9e2",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "full_fetch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91c82f6c-49ba-418d-ab11-83cc7a604a97",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "project_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "full_fetch",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "search",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9f29e3e7-aaa5-4bc8-b797-3309fd927b1f",
+          "name": "Create Token Introspection",
+          "request": {
+            "name": "Create Token Introspection",
+            "description": {
+              "content": "Create Token Introspection in provided Project.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token-introspects"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18d87281-ce52-441f-b292-ae84a481c1f1",
+              "name": "Created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Multiversion concurrency control version - etag",
+                  "key": "etag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"create_time\": \"string\",\n  \"created_by\": \"string\",\n  \"id\": \"string\",\n  \"update_time\": \"string\",\n  \"updated_by\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "595ecc50-947b-4fb7-b50e-68fd6a46d0da",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "14970d6b-36a7-4a0f-bdc9-6d29abd4c776",
+              "name": "Invalid ServiceAccount JWT in Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8081b9dd-5aa9-43ae-83fe-e155697d7849",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "882a4112-6c1d-4976-9ada-6977145de2fa",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7a98686f-ec87-4c9d-a704-d9dc45404881",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68cb5e47-6ad0-4517-8c62-5a712826b5db",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"name\": \"<string>\",\n  \"project_id\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5288f6e1-4a59-45e7-a5d7-698032970ef9",
+          "name": "Delete Token Introspection",
+          "request": {
+            "name": "Delete Token Introspection",
+            "description": {
+              "content": "Delete Token Introspection by provided ID. You can optionally can specify etag in If-Match header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token-introspects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Token Introspection ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Multiversion concurrency control version - etag",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "447213b7-a92a-4642-a602-d33da7c597e1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e02b4bcd-3971-4d00-8667-38ecb2fb299b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e3e7bb0-db39-4368-a330-607097c6d396",
+              "name": "Invalid ServiceAccount JWT in Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d90504b-52c6-4033-a766-7487c7faffdb",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb1ea218-7599-43f6-a19c-789c2a4faf00",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1527d618-64fb-40be-99cb-1eac2ab2ddbf",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce9818c3-1670-4618-97be-c42e64d40795",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72e53d16-3195-4196-a471-c99a1d23bfb7",
+          "name": "Read Token Introspection",
+          "request": {
+            "name": "Read Token Introspection",
+            "description": {
+              "content": "Read Token Introspection identified by provided ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token-introspects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "version",
+                  "value": "<integer>",
+                  "description": "Version of configuration to read. If not provided, latest version is returned."
+                },
+                {
+                  "disabled": false,
+                  "key": "location",
+                  "value": "<string>",
+                  "description": "Parent project ID. Required when querying by name"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Token Introspection ID or name"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "bf02ec10-9fdc-4f46-a9e8-a1dae14271e7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID or name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Multiversion concurrency control version - etag",
+                  "key": "etag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_2\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"create_time\": \"string\",\n  \"created_by\": \"string\",\n  \"description\": \"string\",\n  \"display_name\": \"string\",\n  \"id\": \"string\",\n  \"ikg_node_type\": \"string\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"name\": \"string\",\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"organization_id\": \"string\",\n  \"perform_upsert\": false,\n  \"project_id\": \"string\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  },\n  \"update_time\": \"string\",\n  \"updated_by\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e1b35d6c-75c0-47b6-ae50-641487c0ff7d",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID or name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37408553-46a7-40bc-86ff-64a3cd3fb2b6",
+              "name": "Invalid ServiceAccount JWT in Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID or name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "237ed954-bdae-459d-adda-1dc68f541399",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID or name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdfba3ae-06c6-42d0-b07e-553b228eb382",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID or name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6e1f3d66-6031-4838-adc4-eeaad62dc50c",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID or name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b7bb35b7-7ab2-4172-8481-386bb474debb",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "version",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "location",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID or name"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "70f88f23-cbf8-4ad5-b993-f7bacb016e4b",
+          "name": "Update Token Introspection",
+          "request": {
+            "name": "Update Token Introspection",
+            "description": {
+              "content": "Update Token Introspection identified by provided ID and optionally etag in If-Match header.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "token-introspects",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Token Introspection ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Multiversion concurrency control version - etag.",
+                "key": "If-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "cd45ca6b-1ded-4878-b38a-ed1ad5202d50",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_2\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Multiversion concurrency control version - etag",
+                  "key": "etag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"create_time\": \"string\",\n  \"created_by\": \"string\",\n  \"id\": \"string\",\n  \"update_time\": \"string\",\n  \"updated_by\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c65b59d0-ef02-4f7c-8ef1-54951f6b2a4b",
+              "name": "Bad Request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_2\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3384b90-b605-440f-aeed-d6793c620558",
+              "name": "Invalid ServiceAccount JWT in Authorization header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_2\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9a4f1de1-e937-455d-8620-58c6eeaf63f8",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_2\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "97d26b2a-4a30-461d-9f47-f39cc920261f",
+              "name": "Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_2\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36d6d700-2bed-4fd7-9e0b-307890b76b33",
+              "name": "Unprocessable Entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_2\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errors\": [\n    \"string\",\n    \"string\"\n  ],\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b18d008-7e5a-4f29-bf84-e85ccb41634c",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "token-introspects",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Token Introspection ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Multiversion concurrency control version - etag.",
+                    "key": "If-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"claims_mapping\": {\n    \"key_0\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_1\": {\n      \"selector\": \"<string>\"\n    },\n    \"key_2\": {\n      \"selector\": \"<string>\"\n    }\n  },\n  \"ikg_node_type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"display_name\": \"<string>\",\n  \"jwt_matcher\": {\n    \"audience\": \"<string>\",\n    \"issuer\": \"<string>\"\n  },\n  \"offline_validation\": {\n    \"public_jwks\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  },\n  \"online_validation\": {\n    \"cache_ttl\": \"<integer>\",\n    \"userinfo_endpoint\": \"<string>\"\n  },\n  \"opaque_matcher\": {\n    \"hint\": \"<string>\"\n  },\n  \"perform_upsert\": \"<boolean>\",\n  \"sub_claim\": {\n    \"selector\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Internal Server Error\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://eu.api.indykite.com/configs/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0ba54a4f-6059-4ad0-bb18-56da5a1529f9",
+    "name": "Config REST Application Agent Credentials Token Introspect API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Config API supports CRUD operations on config objects.",
+      "type": "text/plain"
+    }
+  }
+}

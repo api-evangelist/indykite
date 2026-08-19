@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials EntityMatching API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "EntityMatching",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "EntityMatching read suggested property mapping endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/pipelines/:id/property-mappings",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Entity Matching Pipeline ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a list of system-suggested property mappings to use when running the pipeline"
+        },
+        {
+          "info": {
+            "name": "EntityMatching run endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/pipelines/:id/runs",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Entity Matching Pipeline ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new entity matching pipeline execution and returns confirmation"
+        },
+        {
+          "info": {
+            "name": "EntityMatching read pipeline status endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/pipelines/:id/status",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Entity Matching Pipeline ID"
+              }
+            ]
+          },
+          "docs": "Retrieves the entity matching pipeline status (PENDING,IN_PROGRESS,SUCCESS or ERROR)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials Knowledge Queries API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Knowledge Queries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Knowledge Queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/knowledge-queries",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Project ID where to search for Knowledge Queries."
+              },
+              {
+                "name": "full_fetch",
+                "value": "",
+                "type": "query",
+                "description": "Full fetch of all data. If not provided, only metadata is returned."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "List only objects, that contains given search query in name, display name or description"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Knowledge Queries in provided Project with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create Knowledge Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/knowledge-queries",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Knowledge Query in provided Project."
+        },
+        {
+          "info": {
+            "name": "Read Knowledge Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/knowledge-queries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Knowledge Query ID or name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Version of configuration to read. If not provided, latest version is returned."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Parent project ID. Required when querying by name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read Knowledge Query identified by provided ID."
+        },
+        {
+          "info": {
+            "name": "Update Knowledge Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://eu.api.indykite.com/configs/v1/knowledge-queries/:id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Knowledge Query ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Knowledge Query identified by provided ID and optionally etag in If-Match header."
+        },
+        {
+          "info": {
+            "name": "Delete Knowledge Query",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://eu.api.indykite.com/configs/v1/knowledge-queries/:id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Knowledge Query ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Knowledge Query by provided ID. You can optionally can specify etag in If-Match header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

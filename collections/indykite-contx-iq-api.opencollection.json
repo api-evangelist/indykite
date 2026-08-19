@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials ContX IQ API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ContX IQ",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "ContX IQ specified query execution endpoint.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/contx-iq/v1/execute",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Execute the ContX IQ query and return the results that requestor is authorized to access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

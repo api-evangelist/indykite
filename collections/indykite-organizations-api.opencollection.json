@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials Organizations API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Organizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read current Organization",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/organizations/current",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read current Organization, formerly known as Customer, by current service account."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

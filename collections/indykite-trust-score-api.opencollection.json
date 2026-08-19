@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials Trust Score API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trust Score",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Trust Score Profiles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/trust-score-profiles",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Project ID where to search for Trust Score Profiles."
+              },
+              {
+                "name": "full_fetch",
+                "value": "",
+                "type": "query",
+                "description": "Full fetch of all data. If not provided, only metadata is returned."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "List only objects, that contains given search query in name, display name or description"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Trust Score Profiles in provided Project with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create Trust Score Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/trust-score-profiles",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Trust Score Profile in provided Project."
+        },
+        {
+          "info": {
+            "name": "Read Trust Score Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/trust-score-profiles/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Trust Score Profile ID or name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Version of configuration to read. If not provided, latest version is returned."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Parent project ID. Required when querying by name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read Trust Score Profile identified by provided ID."
+        },
+        {
+          "info": {
+            "name": "Update Trust Score Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://eu.api.indykite.com/configs/v1/trust-score-profiles/:id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Trust Score Profile ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Trust Score Profile identified by provided ID and optionally etag in If-Match header."
+        },
+        {
+          "info": {
+            "name": "Delete Trust Score Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://eu.api.indykite.com/configs/v1/trust-score-profiles/:id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Trust Score Profile ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Trust Score Profile by provided ID. You can optionally can specify etag in If-Match header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

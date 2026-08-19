@@ -1,0 +1,175 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials Event Sinks API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Event Sinks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Event Sinks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/event-sinks",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Project ID where to search for Event Sinks."
+              },
+              {
+                "name": "full_fetch",
+                "value": "",
+                "type": "query",
+                "description": "Full fetch of all data. If not provided, only metadata is returned."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "List only objects, that contains given search query in name, display name or description"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Event Sinks in provided Project with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create Event Sink",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/event-sinks",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Event Sink in provided Project."
+        },
+        {
+          "info": {
+            "name": "Read EventSink",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/event-sinks/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EventSink ID or name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Version of configuration to read. If not provided, latest version is returned."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Parent project ID. Required when querying by name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read EventSink identified by provided ID."
+        },
+        {
+          "info": {
+            "name": "Update EventSink",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://eu.api.indykite.com/configs/v1/event-sinks/:id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EventSink ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update EventSink identified by provided ID and optionally etag in If-Match header."
+        },
+        {
+          "info": {
+            "name": "Delete EventSink",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://eu.api.indykite.com/configs/v1/event-sinks/:id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "EventSink ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete EventSink by provided ID. You can optionally can specify etag in If-Match header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials DataSchema API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "DataSchema",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Read Data Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/data-schema/v1"
+          },
+          "docs": "Read the IKG data schema for the specified Project in JGFv2 format."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

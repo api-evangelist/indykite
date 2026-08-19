@@ -1,0 +1,181 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials Authorization Policies API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorization Policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Authorization Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/authorization-policies",
+            "params": [
+              {
+                "name": "project_id",
+                "value": "",
+                "type": "query",
+                "description": "Project ID where to search for Authorization Policies."
+              },
+              {
+                "name": "full_fetch",
+                "value": "",
+                "type": "query",
+                "description": "Full fetch of all data. If not provided, only metadata is returned."
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query",
+                "description": "List only objects, that contains given search query in name, display name or description"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Type of policy to filter by, can be 'kbac' or 'ciq'."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List Authorization Policies in provided Project with optional filtering."
+        },
+        {
+          "info": {
+            "name": "Create Authorization Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/authorization-policies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Authorization Policy in provided Project."
+        },
+        {
+          "info": {
+            "name": "Read Authorization Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://eu.api.indykite.com/configs/v1/authorization-policies/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Authorization Policy ID or name"
+              },
+              {
+                "name": "version",
+                "value": "",
+                "type": "query",
+                "description": "Version of configuration to read. If not provided, latest version is returned."
+              },
+              {
+                "name": "location",
+                "value": "",
+                "type": "query",
+                "description": "Parent project ID. Required when querying by name"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Read Authorization Policy identified by provided ID."
+        },
+        {
+          "info": {
+            "name": "Update Authorization Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://eu.api.indykite.com/configs/v1/authorization-policies/:id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Authorization Policy ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update Authorization Policy identified by provided ID and optionally etag in If-Match header."
+        },
+        {
+          "info": {
+            "name": "Delete Authorization Policy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://eu.api.indykite.com/configs/v1/authorization-policies/:id",
+            "headers": [
+              {
+                "name": "If-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Authorization Policy ID"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete Authorization Policy by provided ID. You can optionally can specify etag in If-Match header."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

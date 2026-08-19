@@ -1,0 +1,99 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Config REST Application Agent Credentials AuthZEN API",
+    "version": "1"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "AuthZEN",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "AuthZEN specified Evaluation endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/access/v1/evaluation",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluate the authorization request and return decision in response."
+        },
+        {
+          "info": {
+            "name": "AuthZEN specified Evaluations endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/access/v1/evaluations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Evaluate multiple authorization requests at once and return decisions in response."
+        },
+        {
+          "info": {
+            "name": "AuthZEN specified Action Search API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/access/v1/search/action",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for actions allowed to be done by the specified subject on the specified resource."
+        },
+        {
+          "info": {
+            "name": "AuthZEN specified Resource Search API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/access/v1/search/resource",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for resources that the specified subject is allowed to do the specified action on."
+        },
+        {
+          "info": {
+            "name": "AuthZEN specified Subject Search API",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://eu.api.indykite.com/configs/v1/access/v1/search/subject",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for subjects allowed to do the specified action on the specified resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
