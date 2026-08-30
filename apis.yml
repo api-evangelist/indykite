@@ -157,7 +157,7 @@ apis:
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
-  - Data Schema
+  - DataSchema
   tags_raw:
   - DataSchema
   properties:
@@ -195,7 +195,7 @@ apis:
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
-  - Entity Matching
+  - EntityMatching
   tags_raw:
   - EntityMatching
   properties:
