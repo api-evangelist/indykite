@@ -1,17 +1,15 @@
 aid: indykite
 name: Indykite
-description: >-
-  IndyKite is the runtime control layer for agentic AI. Its enterprise platform applies trust,
-  context, and runtime control across organizational data so autonomous AI agents can act securely,
-  continuously injecting live signals — identity, provenance, freshness, sensitivity, and compliance
-  status — into AI actions and access decisions at the moment they occur. The platform is built on an
-  Identity Knowledge Graph (IKG) and delivers Knowledge-Based Access Control (KBAC), AuthZEN-based
-  authorization, ContX IQ contextual queries, entity matching, and a hosted regional Model Context
-  Protocol (MCP) server. IndyKite exposes a REST API (Capture, DataSchema, ContX IQ, AuthZEN, Entity
-  Matching) and a Config API for managing organizations, projects, applications, app agents, service
-  accounts, authorization policies, knowledge queries, event sinks, and MCP servers, plus a Go SDK and
-  a Terraform provider. Added to the API Evangelist network via the speedinvest portfolio and enriched
-  from the provider's public OpenAPI and documentation.
+description: IndyKite is the runtime control layer for agentic AI. Its enterprise platform applies trust,
+  context, and runtime control across organizational data so autonomous AI agents can act securely, continuously
+  injecting live signals — identity, provenance, freshness, sensitivity, and compliance status — into
+  AI actions and access decisions at the moment they occur. The platform is built on an Identity Knowledge
+  Graph (IKG) and delivers Knowledge-Based Access Control (KBAC), AuthZEN-based authorization, ContX IQ
+  contextual queries, entity matching, and a hosted regional Model Context Protocol (MCP) server. IndyKite
+  exposes a REST API (Capture, DataSchema, ContX IQ, AuthZEN, Entity Matching) and a Config API for managing
+  organizations, projects, applications, app agents, service accounts, authorization policies, knowledge
+  queries, event sinks, and MCP servers, plus a Go SDK and a Terraform provider. Added to the API Evangelist
+  network via the speedinvest portfolio and enriched from the provider's public OpenAPI and documentation.
 url: https://raw.githubusercontent.com/api-evangelist/indykite/refs/heads/main/apis.yml
 deliveryModel:
   model: saas
@@ -47,7 +45,7 @@ x-tier: profiled
 x-tier-reason: pipeline-enriched
 specificationVersion: '0.23'
 created: '2026-07-17'
-modified: '2026-07-19'
+modified: '2026-09-16'
 tags:
 - Company
 - Identity
@@ -116,8 +114,7 @@ apis:
     url: errors/indykite-problem-types.yml
 - aid: indykite:indykite-authzen-api
   name: Indykite AuthZEN API
-  description: >-
-    Authorization API implemented according to [AuthZEN specification](https://openid.net/wg/authzen/specifications/).
+  description: Authorization API implemented according to [AuthZEN specification](https://openid.net/wg/authzen/specifications/).
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
@@ -153,8 +150,8 @@ apis:
     url: errors/indykite-problem-types.yml
 - aid: indykite:indykite-dataschema-api
   name: Indykite DataSchema API
-  description: >-
-    DataSchema enables customers to define their own data models within the Identity Knowledge Graph (IKG)
+  description: DataSchema enables customers to define their own data models within the Identity Knowledge
+    Graph (IKG)
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
@@ -329,6 +326,8 @@ apis:
   - type: ErrorCatalog
     url: errors/indykite-problem-types.yml
 common:
+- type: Website
+  url: https://indykite.com
 - type: Overlay
   url: overlays/indykite-config-overlay.yaml
 - type: DomainSecurity
