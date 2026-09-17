@@ -112,18 +112,6 @@ apis:
     url: openapi/indykite-authorization-policies-api-openapi.yml
   - type: ErrorCatalog
     url: errors/indykite-problem-types.yml
-- aid: indykite:indykite-authzen-api
-  name: Indykite AuthZEN API
-  description: Authorization API implemented according to [AuthZEN specification](https://openid.net/wg/authzen/specifications/).
-  humanURL: https://openapi.indykite.com
-  baseURL: https://us.api.indykite.com
-  tags:
-  - AuthZEN
-  properties:
-  - type: OpenAPI
-    url: openapi/indykite-authzen-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/indykite-problem-types.yml
 - aid: indykite:indykite-capture-api
   name: Indykite Capture API
   description: Capture REST API represents the service interface for data capture.
@@ -148,21 +136,6 @@ apis:
     url: openapi/indykite-contx-iq-api-openapi.yml
   - type: ErrorCatalog
     url: errors/indykite-problem-types.yml
-- aid: indykite:indykite-dataschema-api
-  name: Indykite DataSchema API
-  description: DataSchema enables customers to define their own data models within the Identity Knowledge
-    Graph (IKG)
-  humanURL: https://openapi.indykite.com
-  baseURL: https://us.api.indykite.com
-  tags:
-  - Data Schema
-  tags_raw:
-  - DataSchema
-  properties:
-  - type: OpenAPI
-    url: openapi/indykite-dataschema-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/indykite-problem-types.yml
 - aid: indykite:indykite-deprecated-api
   name: Indykite Deprecated API
   description: The Deprecated API from Indykite — 2 operation(s) for deprecated.
@@ -185,20 +158,6 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/indykite-entity-matching-api-openapi.yml
-  - type: ErrorCatalog
-    url: errors/indykite-problem-types.yml
-- aid: indykite:indykite-entitymatching-api
-  name: Indykite EntityMatching API
-  description: The EntityMatching API from Indykite — 3 operation(s) for entitymatching.
-  humanURL: https://openapi.indykite.com
-  baseURL: https://us.api.indykite.com
-  tags:
-  - Entity Matching
-  tags_raw:
-  - EntityMatching
-  properties:
-  - type: OpenAPI
-    url: openapi/indykite-entitymatching-api-openapi.yml
   - type: ErrorCatalog
     url: errors/indykite-problem-types.yml
 - aid: indykite:indykite-event-sinks-api
@@ -323,6 +282,31 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/indykite-trust-score-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-auth-zen-api
+  name: Indykite Auth ZEN API
+  description: Authorization API implemented according to AuthZEN specification.
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Auth ZEN
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-auth-zen-api-openapi.yml
+  - type: ErrorCatalog
+    url: errors/indykite-problem-types.yml
+- aid: indykite:indykite-data-schema-api
+  name: Indykite Data Schema API
+  description: >-
+    DataSchema enables customers to define their own data models within the Identity Knowledge Graph (IKG)
+  humanURL: https://openapi.indykite.com
+  baseURL: https://us.api.indykite.com
+  tags:
+  - Data Schema
+  properties:
+  - type: OpenAPI
+    url: openapi/indykite-data-schema-api-openapi.yml
   - type: ErrorCatalog
     url: errors/indykite-problem-types.yml
 common:
