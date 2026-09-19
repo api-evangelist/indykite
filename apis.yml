@@ -202,6 +202,8 @@ apis:
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
+  - MCP Server
+  tags_raw:
   - MCP Servers
   properties:
   - type: OpenAPI
@@ -290,6 +292,8 @@ apis:
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
+  - AuthZEN
+  tags_raw:
   - Auth ZEN
   properties:
   - type: OpenAPI
