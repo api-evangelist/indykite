@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   contact: {}
   description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials Entity Matching API
+  title: Config REST Entity Matching API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -395,24 +395,302 @@ paths:
       x-codegen-request-body-name: request
       security:
       - BearerToken: []
+  /pipelines/{id}/property-mappings:
+    get:
+      tags:
+      - Entity Matching
+      operationId: getPipelinesPropertyMapping
+      summary: EntityMatching read suggested property mapping endpoint
+      security:
+      - APIKey: []
+      description: Retrieves a list of system-suggested property mappings to use when running the pipeline
+      parameters:
+      - name: id
+        in: path
+        description: Entity Matching Pipeline ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ReadSuggestedPropertyMappingResponse'
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedMessageResponse'
+                - type: object
+                  properties:
+                    details:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.ErrorResponse'
+                - type: object
+                  properties:
+                    message:
+                      type: string
+  /pipelines/{id}/runs:
+    post:
+      tags:
+      - Entity Matching
+      operationId: createPipelinesRun
+      summary: EntityMatching run endpoint
+      security:
+      - APIKey: []
+      description: Creates a new entity matching pipeline execution and returns confirmation
+      parameters:
+      - name: id
+        in: path
+        description: Entity Matching Pipeline ID
+        required: true
+        schema:
+          type: string
+      requestBody:
+        description: Run Entity Matching Pipeline request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/api.RunEntityMatchingRequest'
+        required: true
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.RunEntityMatchingPipelineResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.ErrorResponse'
+                - type: object
+                  properties:
+                    message:
+                      type: string
+      x-codegen-request-body-name: request
+  /pipelines/{id}/status:
+    get:
+      operationId: getPipelinesByIdStatus
+      tags:
+      - Entity Matching
+      summary: EntityMatching read pipeline status endpoint
+      security:
+      - APIKey: []
+      description: Retrieves the entity matching pipeline status (PENDING,IN_PROGRESS,SUCCESS or ERROR)
+      parameters:
+      - name: id
+        in: path
+        description: Entity Matching Pipeline ID
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/api.ReadSuggestedPropertyMappingResponse'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '409':
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '422':
+          description: Unprocessable entity
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.DetailedError'
+                - type: object
+                  properties:
+                    errors:
+                      type: array
+                      items:
+                        type: string
+                    message:
+                      type: string
+        '500':
+          description: Internal error
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/restapi.ErrorResponse'
+                - type: object
+                  properties:
+                    message:
+                      type: string
 components:
   schemas:
-    httpproxy.updateConfigResponse:
+    httpproxy.deleteConfigResponse:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
         id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
+          description: ID of deleted configuration.
           type: string
       type: object
     httpproxy.createEntityMatchingPipelineRequest:
@@ -455,10 +733,32 @@ components:
       - project_id
       - similarity_score_cutoff
       type: object
-    httpproxy.deleteConfigResponse:
+    httpproxy.entityMatchingPipelineNodeFilter:
       properties:
-        id:
-          description: ID of deleted configuration.
+        source_node_types:
+          description: 'SourceNodeTypes is the list of node types that will be compared to nodes in the TargetNodeTypes list.
+
+            Currently, only the first node type will be taken into consideration.'
+          items:
+            type: string
+          minItems: 1
+          type: array
+        target_node_types:
+          description: 'TargetNodeTypes is the list of node types that will be compared to nodes in the SourceNodeTypes list.
+
+            Currently, only the first node type will be taken into consideration.'
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - source_node_types
+      - target_node_types
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
           type: string
       type: object
     httpproxy.updateEntityMatchingPipelineRequest:
@@ -493,6 +793,24 @@ components:
         message:
           type: string
       type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
     httpproxy.entityMatchingPipelinePropertyMapping:
       properties:
         similarity_score_cutoff:
@@ -518,33 +836,23 @@ components:
             $ref: '#/components/schemas/httpproxy.readEntityMatchingPipelineResponse'
           type: array
       type: object
-    restapi.ErrorResponse:
+    httpproxy.createConfigResponse:
       properties:
-        message:
-          example: Internal Server Error
+        create_time:
+          description: CreateTime specify when configuration was created.
           type: string
-      type: object
-    httpproxy.entityMatchingPipelineNodeFilter:
-      properties:
-        source_node_types:
-          description: 'SourceNodeTypes is the list of node types that will be compared to nodes in the TargetNodeTypes list.
-
-            Currently, only the first node type will be taken into consideration.'
-          items:
-            type: string
-          minItems: 1
-          type: array
-        target_node_types:
-          description: 'TargetNodeTypes is the list of node types that will be compared to nodes in the SourceNodeTypes list.
-
-            Currently, only the first node type will be taken into consideration.'
-          items:
-            type: string
-          minItems: 1
-          type: array
-      required:
-      - source_node_types
-      - target_node_types
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
       type: object
     httpproxy.readEntityMatchingPipelineResponse:
       properties:
@@ -624,28 +932,114 @@ components:
           description: MatchedEntities is the number of entities the pipeline has matched in its last run.
           type: integer
       type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
+    api.CustomPropertyMapping:
+      required:
+      - source_node_property
+      - target_node_property
       type: object
+      properties:
+        source_node_property:
+          type: string
+          description: SourceNodeProperty is a property of the source node that will be compared to TargetNodeProperty.
+        target_node_property:
+          type: string
+          description: TargetNodeProperty is a property of the target node that will be compared to SourceNodeProperty.
+    restapi.DetailedMessageResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            type: string
+        message:
+          type: string
+          examples:
+          - Accepted
+    api.SuggestedPropertyMapping:
+      type: object
+      properties:
+        similarity_score_cutoff:
+          type: number
+          description: 'SimilarityScoreCutoff defines the percentage (in range [0,1])
+
+            of how similar SourceNodeProperty and TargetNodeProperty are.
+
+            Meaning, any property that has a similarity score above this percentage will be automatically matched.
+
+            Therefore, this value can (and should) be taken into consideration when
+
+            setting a cutoff threshold for running a pipeline.'
+        source_node_property:
+          type: string
+          description: SourceNodeProperty is a property of the source node that has been compared to TargetNodeProperty.
+        source_node_type:
+          type: string
+          description: SourceNodeType is the type of the node that will be compared to nodes of TargetNodeType.
+        target_node_property:
+          type: string
+          description: TargetNodeProperty is a property of the target node that  has been compared to SourceNodeProperty.
+        target_node_type:
+          type: string
+          description: TargetNodeType is the type of the node that  has been compared to nodes of SourceNodeType.
+    api.ReadSuggestedPropertyMappingResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID is the Entity Matching Pipeline globally unique identifier.
+        suggested_property_mappings:
+          type: array
+          description: 'SuggestedPropertyMappings contains the rules the pipeline will use to match source nodes with target nodes
+
+            These values can be used when running a pipeline (after adjusting the payload).'
+          items:
+            $ref: '#/components/schemas/api.SuggestedPropertyMapping'
+    api.RunEntityMatchingRequest:
+      required:
+      - similarity_score_cutoff
+      type: object
+      properties:
+        custom_property_mappings:
+          type: array
+          description: 'CustomPropertyMappings contains the rules to match nodes properties.
+
+            If empty, the default rules will be used (stored as part of the pipeline configuration).
+
+            If present, it will overwrite the stored configuration.'
+          items:
+            $ref: '#/components/schemas/api.CustomPropertyMapping'
+        similarity_score_cutoff:
+          maximum: 1
+          minimum: 0
+          type: number
+          description: 'SimilarityScoreCutoff defines the required threshold (in range [0,1]),
+
+            above which entities will be automatically matched.'
+    api.RunEntityMatchingPipelineResponse:
+      type: object
+      properties:
+        etag:
+          type: string
+          description: Etag is the multiversion concurrency control version.
+        id:
+          type: string
+          description: ID is the Entity Matching Pipeline globally unique identifier.
+        last_run_time:
+          type: string
+          description: LastRunTime indicates the last time the pipeline was started.
   securitySchemes:
     BearerToken:
       type: http
       scheme: bearer
       bearerFormat: JWT
       description: Bearer token generated from Service Account credentials.
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer token - the value of the Authorization header (without Bearer), e.g. "superSecretToken".
+    APIKey:
+      type: apiKey
+      in: header
+      name: X-IK-ClientKey
+      description: The value of the App Agent credential header must be passed as is, without any prefix.
 x-original-swagger-version: '2.0'

@@ -1,26 +1,26 @@
 openapi: 3.2.0
 info:
-  contact: {}
-  description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials DataSchema API
+  title: IndyKite REST Data Schema API
+  description: OpenAPI specifications to test the IndyKite REST Endpoints
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  version: '1'
+  version: ''
 servers:
-- url: https://eu.api.indykite.com/configs/v1
-- url: https://us.api.indykite.com/configs/v1
+- url: https://eu.api.indykite.com
+- url: https://us.api.indykite.com
 security:
-- BearerToken: []
+- bearerAuth: []
+- APIKey: []
 tags:
 - description: DataSchema enables customers to define their own data models within the Identity Knowledge Graph (IKG)
-  name: DataSchema
+  name: Data Schema
   x-displayName: DataSchema
 paths:
   /data-schema/v1:
     get:
       tags:
-      - DataSchema
+      - Data Schema
       operationId: listDataSchemaV1
       summary: Read Data Schema
       description: Read the IKG data schema for the specified Project in JGFv2 format.
@@ -56,59 +56,11 @@ paths:
                       type: string
 components:
   schemas:
-    dataschema.JGFNodeProperty:
+    dataschema.JGFGraph:
       type: object
       properties:
-        count:
-          type: integer
-        metadata:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/dataschema.JGFPropertyMeta'
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataschema.JGFPropertyType'
-    dataschema.JGFGraphMetadata:
-      type: object
-      properties:
-        created_at:
-          type: string
-        updated_at:
-          type: string
-    dataschema.JGFGraphContent:
-      type: object
-      properties:
-        directed:
-          type: boolean
-        edges:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataschema.JGFEdge'
-        metadata:
-          $ref: '#/components/schemas/dataschema.JGFGraphMetadata'
-        nodes:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/dataschema.JGFNode'
-    dataschema.JGFEdge:
-      type: object
-      properties:
-        directed:
-          type: boolean
-        metadata:
-          $ref: '#/components/schemas/dataschema.JGFEdgeMetadata'
-        relation:
-          type: string
-        source:
-          type: string
-        target:
-          type: string
-    dataschema.JGFNode:
-      type: object
-      properties:
-        metadata:
-          $ref: '#/components/schemas/dataschema.JGFNodeMetadata'
+        graph:
+          $ref: '#/components/schemas/dataschema.JGFGraphContent'
     dataschema.JGFNodeMetadata:
       type: object
       properties:
@@ -126,6 +78,69 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/dataschema.JGFLabel'
+    dataschema.JGFLabel:
+      type: object
+      properties:
+        count:
+          type: integer
+        name:
+          type: string
+    dataschema.JGFNodeProperty:
+      type: object
+      properties:
+        count:
+          type: integer
+        metadata:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFPropertyMeta'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFEdge:
+      type: object
+      properties:
+        directed:
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFEdgeMetadata'
+        relation:
+          type: string
+        source:
+          type: string
+        target:
+          type: string
+    restapi.ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          examples:
+          - Internal Server Error
+    dataschema.JGFEdgeMetadata:
+      type: object
+      properties:
+        count:
+          type: integer
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFEdgeProperty'
+    dataschema.JGFPropertyType:
+      type: object
+      properties:
+        count:
+          type: integer
+        type:
+          type: string
+    dataschema.JGFGraphMetadata:
+      type: object
+      properties:
+        created_at:
+          type: string
+        updated_at:
+          type: string
     restapi.DetailedError:
       type: object
       properties:
@@ -141,31 +156,11 @@ components:
           description: Message describes the error.
           examples:
           - unauthorized request
-    dataschema.JGFLabel:
+    dataschema.JGFNode:
       type: object
       properties:
-        count:
-          type: integer
-        name:
-          type: string
-    dataschema.JGFPropertyMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataschema.JGFPropertyType'
-    dataschema.JGFEdgeMetadata:
-      type: object
-      properties:
-        count:
-          type: integer
-        properties:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/dataschema.JGFEdgeProperty'
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFNodeMetadata'
     dataschema.JGFEdgeProperty:
       type: object
       properties:
@@ -175,29 +170,54 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/dataschema.JGFPropertyType'
-    dataschema.JGFGraph:
-      type: object
-      properties:
-        graph:
-          $ref: '#/components/schemas/dataschema.JGFGraphContent'
-    restapi.ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          examples:
-          - Internal Server Error
-    dataschema.JGFPropertyType:
+    dataschema.JGFPropertyMeta:
       type: object
       properties:
         count:
           type: integer
-        type:
-          type: string
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFGraphContent:
+      type: object
+      properties:
+        directed:
+          type: boolean
+        edges:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFEdge'
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFGraphMetadata'
+        nodes:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFNode'
   securitySchemes:
-    BearerToken:
+    bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT
-      description: Bearer token generated from Service Account credentials.
-x-original-swagger-version: '2.0'
+      description: Bearer token - the value of the Authorization header (without Bearer), e.g. "superSecretToken".
+    APIKey:
+      type: apiKey
+      in: header
+      name: X-IK-ClientKey
+      description: The value of the App Agent credential header must be passed as is, without any prefix.
+x-tagGroups:
+- name: Capture REST API
+  tags:
+  - Capture
+- name: Data Schema REST API
+  tags:
+  - DataSchema
+- name: ContX IQ REST API
+  tags:
+  - ContX IQ
+- name: AuthZEN REST API
+  tags:
+  - AuthZEN
+  - Deprecated
+- name: Entity Matching Pipeline REST API
+  tags:
+  - EntityMatching

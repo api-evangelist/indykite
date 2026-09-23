@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   contact: {}
   description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials Projects API
+  title: Config REST Projects API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -381,6 +381,25 @@ paths:
       - BearerToken: []
 components:
   schemas:
+    httpproxy.updateProjectRequest:
+      properties:
+        db_connection:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.dbConnection'
+          description: Database connection information for self hosted database.
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+      type: object
     httpproxy.dbConnection:
       properties:
         name:
@@ -405,65 +424,6 @@ components:
       - password
       - url
       - username
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.updateProjectRequest:
-      properties:
-        db_connection:
-          allOf:
-          - $ref: '#/components/schemas/httpproxy.dbConnection'
-          description: Database connection information for self hosted database.
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
-          type: string
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
-          type: string
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readProjectResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readProjectResponse'
-          type: array
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
       type: object
     httpproxy.readProjectResponse:
       properties:
@@ -530,6 +490,40 @@ components:
       properties:
         message:
           example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readProjectResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readProjectResponse'
+          type: array
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
     httpproxy.createProjectRequest:
@@ -614,6 +608,12 @@ components:
           type: string
         updated_by:
           description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
           type: string
       type: object
   securitySchemes:

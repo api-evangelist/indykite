@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   contact: {}
   description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials Organizations API
+  title: Config REST Organizations API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -72,12 +72,6 @@ paths:
       - BearerToken: []
 components:
   schemas:
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
     httpproxy.readOrganizationResponse:
       properties:
         create_time:
@@ -112,6 +106,12 @@ components:
             type: string
           type: array
         message:
+          type: string
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
           type: string
       type: object
   securitySchemes:

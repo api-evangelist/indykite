@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   contact: {}
   description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials Authorization Policies API
+  title: Config REST Authorization Policies API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -448,6 +448,75 @@ components:
       - project_id
       - status
       type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.readAuthorizationPolicyResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        policy:
+          type: string
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        status:
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readAuthorizationPolicyResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readAuthorizationPolicyResponse'
+          type: array
+      type: object
     httpproxy.updateConfigResponse:
       properties:
         create_time:
@@ -499,34 +568,6 @@ components:
       - policy
       - status
       type: object
-    httpproxy.listConfigResponse-httpproxy_readAuthorizationPolicyResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readAuthorizationPolicyResponse'
-          type: array
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
     httpproxy.createConfigResponse:
       properties:
         create_time:
@@ -545,51 +586,10 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.readAuthorizationPolicyResponse:
+    httpproxy.deleteConfigResponse:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        description:
-          description: Description is optional description of configuration.
-          type: string
-        display_name:
-          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
-          type: string
         id:
-          description: ID is globally unique identifier of configuration.
-          type: string
-        name:
-          description: Name is URL friendly identifier of configuration.
-          type: string
-        organization_id:
-          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
-
-            under which configuration was created.'
-          type: string
-        policy:
-          type: string
-        project_id:
-          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
-
-            under which configuration was created.
-
-            Might be empty, if configuration is created directly under organization.'
-          type: string
-        status:
-          type: string
-        tags:
-          items:
-            type: string
-          type: array
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
+          description: ID of deleted configuration.
           type: string
       type: object
   securitySchemes:

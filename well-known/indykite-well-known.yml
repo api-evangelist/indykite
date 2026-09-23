@@ -1,15 +1,16 @@
 generated: '2026-07-19'
 method: searched
-note: >-
-  No /.well-known/ discovery documents are served on the website or API hosts. The MCP server
-  does advertise /.well-known/oauth-protected-resource on a 401 (per the MCP skill), but it is
-  not served on the plain API/website hosts probed below. Recorded for auditability; absence is valid.
+note: No /.well-known/ discovery documents are served on the website or API hosts. The MCP server does
+  advertise /.well-known/oauth-protected-resource on a 401 (per the MCP skill), but it is not served on
+  the plain API/website hosts probed below. Recorded for auditability; absence is valid.
 hosts_probed:
-  - https://www.indykite.ai
-  - https://openapi.indykite.com
-  - https://eu.api.indykite.com
-  - https://us.api.indykite.com
-documents:
+- https://www.indykite.ai
+- https://openapi.indykite.com
+- https://eu.api.indykite.com
+- https://us.api.indykite.com
+hosts:
+- host: ''
+  documents:
   - path: /.well-known/security.txt
     status: 404
   - path: /.well-known/openid-configuration
@@ -20,3 +21,8 @@ documents:
     status: 404
   - path: /.well-known/ai-plugin.json
     status: 404
+x-shape-fix:
+  converted: '2026-08-20'
+  from: documents
+  note: Rewritten into hosts[] -> documents[], the only shape well_known_docs() in score.rb reads. A served
+    .well-known surface recorded in any other shape scores as absent.

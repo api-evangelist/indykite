@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   contact: {}
   description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials External Data Resolver API
+  title: Config REST External Data Resolver API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -452,46 +452,6 @@ components:
         url:
           type: string
       type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readExternalDataResolverResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readExternalDataResolverResponse'
-          type: array
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
-      type: object
     httpproxy.updateExternalDataResolverRequest:
       properties:
         description:
@@ -559,13 +519,29 @@ components:
       - response_selector
       - url
       type: object
+    httpproxy.listConfigResponse-httpproxy_readExternalDataResolverResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readExternalDataResolverResponse'
+          type: array
+      type: object
     restapi.ErrorResponse:
       properties:
         message:
           example: Internal Server Error
           type: string
       type: object
-    httpproxy.createConfigResponse:
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
       properties:
         create_time:
           description: CreateTime specify when configuration was created.
@@ -574,7 +550,7 @@ components:
           description: CreatedBy specify who created configuration.
           type: string
         id:
-          description: ID is globally unique identifier of created configuration.
+          description: ID of configuration to update.
           type: string
         update_time:
           description: UpdateTime specify when configuration was last time updated.
@@ -657,6 +633,30 @@ components:
       - response_content_type
       - response_selector
       - url
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
       type: object
   securitySchemes:
     BearerToken:

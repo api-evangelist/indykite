@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  contact: {}
-  description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials ContX IQ API
+  title: IndyKite REST ContX IQ API
+  description: OpenAPI specifications to test the IndyKite REST Endpoints
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  version: '1'
+  version: ''
 servers:
-- url: https://eu.api.indykite.com/configs/v1
-- url: https://us.api.indykite.com/configs/v1
+- url: https://eu.api.indykite.com
+- url: https://us.api.indykite.com
 security:
-- BearerToken: []
+- bearerAuth: []
+- APIKey: []
 tags:
 - name: ContX IQ
   x-displayName: ContX IQ
@@ -22,7 +22,7 @@ paths:
       tags:
       - ContX IQ
       operationId: createContxIqV1Execute
-      summary: ContX IQ specified query execution endpoint.
+      summary: ContX IQ specified query execution endpoint
       security:
       - APIKey: []
       description: Execute the ContX IQ query and return the results that requestor is authorized to access.
@@ -83,21 +83,14 @@ paths:
       x-codegen-request-body-name: request
 components:
   schemas:
-    restapi.DetailedError:
+    restapi.ExecuteResponse:
       type: object
       properties:
-        errors:
+        data:
           type: array
-          description: Errors are optional and may contain additional details.
+          description: List of results, composed of nodes, relationships, and their properties, from executing the query.
           items:
-            type: string
-          examples:
-          - - missing bearer token
-        message:
-          type: string
-          description: Message describes the error.
-          examples:
-          - unauthorized request
+            $ref: '#/components/schemas/restapi.ExecuteResponseRecord'
     restapi.ExecuteRequest:
       type: object
       properties:
@@ -136,6 +129,21 @@ components:
           type: string
           examples:
           - Internal Server Error
+    restapi.DetailedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Errors are optional and may contain additional details.
+          items:
+            type: string
+          examples:
+          - - missing bearer token
+        message:
+          type: string
+          description: Message describes the error.
+          examples:
+          - unauthorized request
     restapi.ExecuteResponseRecord:
       type: object
       properties:
@@ -151,18 +159,30 @@ components:
           type: object
           additionalProperties: {}
           description: List of relationships and their properties as the result.
-    restapi.ExecuteResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of results, composed of nodes, relationships, and their properties, from executing the query.
-          items:
-            $ref: '#/components/schemas/restapi.ExecuteResponseRecord'
   securitySchemes:
-    BearerToken:
+    bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT
-      description: Bearer token generated from Service Account credentials.
-x-original-swagger-version: '2.0'
+      description: Bearer token - the value of the Authorization header (without Bearer), e.g. "superSecretToken".
+    APIKey:
+      type: apiKey
+      in: header
+      name: X-IK-ClientKey
+      description: The value of the App Agent credential header must be passed as is, without any prefix.
+x-tagGroups:
+- name: Capture REST API
+  tags:
+  - Capture
+- name: Data Schema REST API
+  tags:
+  - DataSchema
+- name: ContX IQ REST API
+  tags:
+  - ContX IQ
+- name: AuthZEN REST API
+  tags:
+  - AuthZEN
+  - Deprecated
+- name: Entity Matching Pipeline REST API
+  tags:
+  - EntityMatching

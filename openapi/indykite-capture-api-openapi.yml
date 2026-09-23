@@ -1,17 +1,17 @@
 openapi: 3.2.0
 info:
-  contact: {}
-  description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials Capture API
+  title: IndyKite REST Capture API
+  description: OpenAPI specifications to test the IndyKite REST Endpoints
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
-  version: '1'
+  version: ''
 servers:
-- url: https://eu.api.indykite.com/configs/v1
-- url: https://us.api.indykite.com/configs/v1
+- url: https://eu.api.indykite.com
+- url: https://us.api.indykite.com
 security:
-- BearerToken: []
+- bearerAuth: []
+- APIKey: []
 tags:
 - description: Capture REST API represents the service interface for data capture.
   name: Capture
@@ -397,52 +397,29 @@ paths:
       x-codegen-request-body-name: request
 components:
   schemas:
-    capture.DeleteNodePropertyMetadata:
+    capture.UpsertNodesRequest:
       required:
-      - external_id
-      - metadata_fields
-      - property_type
-      - type
+      - nodes
       type: object
       properties:
-        external_id:
-          maxLength: 256
-          minLength: 1
-          type: string
-        metadata_fields:
+        nodes:
           maxItems: 250
           minItems: 1
           type: array
           items:
-            type: string
-        property_type:
-          type: string
-        type:
-          maxLength: 64
-          minLength: 2
-          type: string
-        location:
-          maxLength: 32
-          minLength: 2
-          type: string
-    capture.DeleteNode:
-      type: object
-      required:
-      - external_id
-      - type
+            $ref: '#/components/schemas/capture.UpsertNode'
+    capture.BatchResults:
       properties:
-        external_id:
-          maxLength: 256
-          minLength: 1
+        results:
+          items:
+            $ref: '#/components/schemas/capture.Result'
+          type: array
+      type: object
+    capture.Result:
+      properties:
+        id:
           type: string
-        location:
-          maxLength: 32
-          minLength: 2
-          type: string
-        type:
-          maxLength: 64
-          minLength: 2
-          type: string
+      type: object
     capture.DeleteNodePropertiesRequest:
       required:
       - nodes
@@ -454,26 +431,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/capture.DeleteNodeProperties'
-    capture.Property:
-      required:
-      - type
-      type: object
-      properties:
-        external_value:
-          type: string
-        metadata:
-          $ref: '#/components/schemas/capture.Metadata'
-        type:
-          maxLength: 128
-          type: string
-        value:
-          $ref: '#/components/schemas/capture.PropertyValue'
-          description: Value can be either string, integer, float, boolean, or an array of any of those types
-    capture.Result:
-      properties:
-        id:
-          type: string
-      type: object
     capture.DeleteNodePropertyMetadataRequest:
       required:
       - nodes
@@ -485,31 +442,20 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/capture.DeleteNodePropertyMetadata'
-    capture.DeleteNodesRequest:
+    capture.DeleteRelationshipsRequest:
       required:
-      - nodes
+      - relationships
       type: object
       properties:
-        nodes:
+        relationships:
           maxItems: 250
           minItems: 1
           type: array
           items:
-            $ref: '#/components/schemas/capture.DeleteNode'
-    capture.PropertyValue:
-      oneOf:
-      - type: string
-      - type: integer
-      - type: number
-      - type: boolean
-      - type: array
-        items:
-          oneOf:
-          - type: string
-          - type: integer
-          - type: number
-          - type: boolean
-      description: Value can be either string, integer, float, boolean, or an array of any of those types
+            $ref: '#/components/schemas/capture.Relationship'
+        use_global_db:
+          description: UseGlobalDB deletes the relationships from the Global DB of a composite database deployment.
+          type: boolean
     capture.Metadata:
       type: object
       properties:
@@ -552,52 +498,34 @@ components:
           maxLength: 32
           minLength: 2
           type: string
-    capture.BatchResults:
-      properties:
-        results:
-          items:
-            $ref: '#/components/schemas/capture.Result'
-          type: array
-      type: object
-    capture.UpsertRelationshipsRequest:
-      required:
-      - relationships
+    restapi.DetailedError:
       type: object
       properties:
-        relationships:
-          maxItems: 250
-          minItems: 1
+        errors:
           type: array
+          description: Errors are optional and may contain additional details.
           items:
-            $ref: '#/components/schemas/capture.Relationship'
-        use_global_db:
-          description: UseGlobalDB routes the relationships to the Global DB of a composite database deployment.
-          type: boolean
-    capture.DeleteRelationshipProperties:
+            type: string
+          examples:
+          - - missing bearer token
+        message:
+          type: string
+          description: Message describes the error.
+          examples:
+          - unauthorized request
+    capture.BaseProperty:
       required:
-      - property_types
-      - source
-      - target
       - type
       type: object
       properties:
-        properties:
-          type: array
-          items:
-            $ref: '#/components/schemas/capture.BaseProperty'
-        property_types:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            type: string
-        source:
-          $ref: '#/components/schemas/capture.Node'
-        target:
-          $ref: '#/components/schemas/capture.Node'
+        external_value:
+          type: string
         type:
           maxLength: 128
           type: string
+        value:
+          $ref: '#/components/schemas/capture.PropertyValue'
+          description: Value can be either string, integer, float, boolean, or an array of any of those types
     capture.UpsertNode:
       required:
       - external_id
@@ -626,6 +554,92 @@ components:
           maxLength: 64
           minLength: 2
           type: string
+    capture.DeleteNodesRequest:
+      required:
+      - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteNode'
+    capture.DeleteNodePropertyMetadata:
+      required:
+      - external_id
+      - metadata_fields
+      - property_type
+      - type
+      type: object
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        metadata_fields:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            type: string
+        property_type:
+          type: string
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+    capture.Property:
+      required:
+      - type
+      type: object
+      properties:
+        external_value:
+          type: string
+        metadata:
+          $ref: '#/components/schemas/capture.Metadata'
+        type:
+          maxLength: 128
+          type: string
+        value:
+          $ref: '#/components/schemas/capture.PropertyValue'
+          description: Value can be either string, integer, float, boolean, or an array of any of those types
+    capture.DeleteNode:
+      type: object
+      required:
+      - external_id
+      - type
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+    capture.UpsertRelationshipsRequest:
+      required:
+      - relationships
+      type: object
+      properties:
+        relationships:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.Relationship'
+        use_global_db:
+          description: UseGlobalDB routes the relationships to the Global DB of a composite database deployment.
+          type: boolean
     capture.DeleteRelationshipPropertiesRequest:
       required:
       - relationships
@@ -640,66 +654,6 @@ components:
         use_global_db:
           description: UseGlobalDB routes the relationship property deletes to the Global DB of a composite database deployment.
           type: boolean
-    capture.DeleteRelationshipsRequest:
-      required:
-      - relationships
-      type: object
-      properties:
-        relationships:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/capture.Relationship'
-        use_global_db:
-          description: UseGlobalDB deletes the relationships from the Global DB of a composite database deployment.
-          type: boolean
-    capture.Relationship:
-      required:
-      - source
-      - target
-      - type
-      type: object
-      properties:
-        properties:
-          items:
-            $ref: '#/components/schemas/capture.BaseProperty'
-          type: array
-        source:
-          $ref: '#/components/schemas/capture.Node'
-        target:
-          $ref: '#/components/schemas/capture.Node'
-        type:
-          maxLength: 128
-          type: string
-    capture.BaseProperty:
-      required:
-      - type
-      type: object
-      properties:
-        external_value:
-          type: string
-        type:
-          maxLength: 128
-          type: string
-        value:
-          $ref: '#/components/schemas/capture.PropertyValue'
-          description: Value can be either string, integer, float, boolean, or an array of any of those types
-    restapi.DetailedError:
-      type: object
-      properties:
-        errors:
-          type: array
-          description: Errors are optional and may contain additional details.
-          items:
-            type: string
-          examples:
-          - - missing bearer token
-        message:
-          type: string
-          description: Message describes the error.
-          examples:
-          - unauthorized request
     restapi.ErrorResponse:
       type: object
       properties:
@@ -725,21 +679,87 @@ components:
           maxLength: 32
           minLength: 2
           type: string
-    capture.UpsertNodesRequest:
+    capture.DeleteRelationshipProperties:
       required:
-      - nodes
+      - property_types
+      - source
+      - target
+      - type
       type: object
       properties:
-        nodes:
+        properties:
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.BaseProperty'
+        property_types:
           maxItems: 250
           minItems: 1
           type: array
           items:
-            $ref: '#/components/schemas/capture.UpsertNode'
+            type: string
+        source:
+          $ref: '#/components/schemas/capture.Node'
+        target:
+          $ref: '#/components/schemas/capture.Node'
+        type:
+          maxLength: 128
+          type: string
+    capture.Relationship:
+      required:
+      - source
+      - target
+      - type
+      type: object
+      properties:
+        properties:
+          items:
+            $ref: '#/components/schemas/capture.BaseProperty'
+          type: array
+        source:
+          $ref: '#/components/schemas/capture.Node'
+        target:
+          $ref: '#/components/schemas/capture.Node'
+        type:
+          maxLength: 128
+          type: string
+    capture.PropertyValue:
+      oneOf:
+      - type: string
+      - type: integer
+      - type: number
+      - type: boolean
+      - type: array
+        items:
+          oneOf:
+          - type: string
+          - type: integer
+          - type: number
+          - type: boolean
+      description: Value can be either string, integer, float, boolean, or an array of any of those types
   securitySchemes:
-    BearerToken:
+    bearerAuth:
       type: http
       scheme: bearer
-      bearerFormat: JWT
-      description: Bearer token generated from Service Account credentials.
-x-original-swagger-version: '2.0'
+      description: Bearer token - the value of the Authorization header (without Bearer), e.g. "superSecretToken".
+    APIKey:
+      type: apiKey
+      in: header
+      name: X-IK-ClientKey
+      description: The value of the App Agent credential header must be passed as is, without any prefix.
+x-tagGroups:
+- name: Capture REST API
+  tags:
+  - Capture
+- name: Data Schema REST API
+  tags:
+  - DataSchema
+- name: ContX IQ REST API
+  tags:
+  - ContX IQ
+- name: AuthZEN REST API
+  tags:
+  - AuthZEN
+  - Deprecated
+- name: Entity Matching Pipeline REST API
+  tags:
+  - EntityMatching

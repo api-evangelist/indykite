@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   contact: {}
   description: Config API supports CRUD operations on config objects.
-  title: Config REST Application Agent Credentials Token Introspect API
+  title: Config REST Token Introspect API
   license:
     name: Apache 2.0
     url: https://www.apache.org/licenses/LICENSE-2.0
@@ -397,6 +397,165 @@ paths:
       - BearerToken: []
 components:
   schemas:
+    httpproxy.listConfigResponse-httpproxy_readTokenIntrospectResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readTokenIntrospectResponse'
+          type: array
+      type: object
+    httpproxy.claim:
+      properties:
+        selector:
+          description: 'Selector is JSON selector of property in token claims. Currently just name in top-level object is supported.
+
+            By default we support all standard claims from OpenID specification
+
+            https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims,
+
+            and mapping will fail if claim and data type will not match the standard.
+
+            For non-standard claims the type will be derived from the JSON.'
+          maxLength: 200
+          minLength: 1
+          type: string
+      required:
+      - selector
+      type: object
+      description: 'SubClaim is used to match DigitalTwin with external_id. If not specified, standard ''sub'' claim will be used.
+
+        Either ''sub'' or specified claim will then also be mapped to ''external_id'' claim.'
+    httpproxy.opaqueMatcher:
+      properties:
+        hint:
+          description: 'Hint is case sensitive plain text, that is expected to be provided in token introspect request,
+
+            if there are multiple opaque tokens configurations.
+
+            To differentiate between multiple opaque tokens configurations, hint must be provided.'
+          maxLength: 50
+          minLength: 1
+          type: string
+      required:
+      - hint
+      type: object
+    httpproxy.jwtMatcher:
+      properties:
+        audience:
+          description: Audience is used to exact match based on `aud` claim in JWT.
+          maxLength: 150
+          minLength: 1
+          type: string
+        issuer:
+          description: Issuer is used to exact match based on `iss` claim in JWT.
+          type: string
+      required:
+      - audience
+      - issuer
+      type: object
+    httpproxy.readTokenIntrospectResponse:
+      properties:
+        claims_mapping:
+          additionalProperties:
+            $ref: '#/components/schemas/httpproxy.claim'
+          type: object
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        ikg_node_type:
+          type: string
+        jwt_matcher:
+          $ref: '#/components/schemas/httpproxy.jwtMatcher'
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        offline_validation:
+          $ref: '#/components/schemas/httpproxy.offlineValidation'
+        online_validation:
+          $ref: '#/components/schemas/httpproxy.onlineValidation'
+        opaque_matcher:
+          $ref: '#/components/schemas/httpproxy.opaqueMatcher'
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        perform_upsert:
+          type: boolean
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        sub_claim:
+          $ref: '#/components/schemas/httpproxy.claim'
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.offlineValidation:
+      properties:
+        public_jwks:
+          description: 'PublicJWKs are public JWK to validate signature of JWT.
+
+            If there are no public keys specified, they will be fetched and cached from
+
+            jwks_uri at https://jwt-issuer.tld/.well-known/openid-configuration'
+          items:
+            type: string
+          maxItems: 10
+          type: array
+      type: object
     httpproxy.createTokenIntrospectRequest:
       properties:
         claims_mapping:
@@ -478,117 +637,6 @@ components:
       - name
       - project_id
       type: object
-    httpproxy.readTokenIntrospectResponse:
-      properties:
-        claims_mapping:
-          additionalProperties:
-            $ref: '#/components/schemas/httpproxy.claim'
-          type: object
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        description:
-          description: Description is optional description of configuration.
-          type: string
-        display_name:
-          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
-          type: string
-        id:
-          description: ID is globally unique identifier of configuration.
-          type: string
-        ikg_node_type:
-          type: string
-        jwt_matcher:
-          $ref: '#/components/schemas/httpproxy.jwtMatcher'
-        name:
-          description: Name is URL friendly identifier of configuration.
-          type: string
-        offline_validation:
-          $ref: '#/components/schemas/httpproxy.offlineValidation'
-        online_validation:
-          $ref: '#/components/schemas/httpproxy.onlineValidation'
-        opaque_matcher:
-          $ref: '#/components/schemas/httpproxy.opaqueMatcher'
-        organization_id:
-          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
-
-            under which configuration was created.'
-          type: string
-        perform_upsert:
-          type: boolean
-        project_id:
-          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
-
-            under which configuration was created.
-
-            Might be empty, if configuration is created directly under organization.'
-          type: string
-        sub_claim:
-          $ref: '#/components/schemas/httpproxy.claim'
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readTokenIntrospectResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readTokenIntrospectResponse'
-          type: array
-      type: object
-    httpproxy.jwtMatcher:
-      properties:
-        audience:
-          description: Audience is used to exact match based on `aud` claim in JWT.
-          maxLength: 150
-          minLength: 1
-          type: string
-        issuer:
-          description: Issuer is used to exact match based on `iss` claim in JWT.
-          type: string
-      required:
-      - audience
-      - issuer
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
-      type: object
     httpproxy.updateTokenIntrospectRequest:
       properties:
         claims_mapping:
@@ -660,25 +708,6 @@ components:
       - claims_mapping
       - ikg_node_type
       type: object
-    httpproxy.offlineValidation:
-      properties:
-        public_jwks:
-          description: 'PublicJWKs are public JWK to validate signature of JWT.
-
-            If there are no public keys specified, they will be fetched and cached from
-
-            jwks_uri at https://jwt-issuer.tld/.well-known/openid-configuration'
-          items:
-            type: string
-          maxItems: 10
-          type: array
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
     httpproxy.createConfigResponse:
       properties:
         create_time:
@@ -697,41 +726,12 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.opaqueMatcher:
+    httpproxy.deleteConfigResponse:
       properties:
-        hint:
-          description: 'Hint is case sensitive plain text, that is expected to be provided in token introspect request,
-
-            if there are multiple opaque tokens configurations.
-
-            To differentiate between multiple opaque tokens configurations, hint must be provided.'
-          maxLength: 50
-          minLength: 1
+        id:
+          description: ID of deleted configuration.
           type: string
-      required:
-      - hint
       type: object
-    httpproxy.claim:
-      properties:
-        selector:
-          description: 'Selector is JSON selector of property in token claims. Currently just name in top-level object is supported.
-
-            By default we support all standard claims from OpenID specification
-
-            https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims,
-
-            and mapping will fail if claim and data type will not match the standard.
-
-            For non-standard claims the type will be derived from the JSON.'
-          maxLength: 200
-          minLength: 1
-          type: string
-      required:
-      - selector
-      type: object
-      description: 'SubClaim is used to match DigitalTwin with external_id. If not specified, standard ''sub'' claim will be used.
-
-        Either ''sub'' or specified claim will then also be mapped to ''external_id'' claim.'
     httpproxy.onlineValidation:
       properties:
         cache_ttl:

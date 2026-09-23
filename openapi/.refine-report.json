@@ -1,40 +1,15 @@
 {
   "provider": "indykite",
   "sources": [
-    "indykite-application-agent-credentials-api-openapi.yml",
-    "indykite-application-agents-api-openapi.yml",
-    "indykite-applications-api-openapi.yml",
-    "indykite-authorization-policies-api-openapi.yml",
-    "indykite-authzen-api-openapi.yml",
-    "indykite-capture-api-openapi.yml",
-    "indykite-contx-iq-api-openapi.yml",
-    "indykite-dataschema-api-openapi.yml",
-    "indykite-deprecated-api-openapi.yml",
-    "indykite-entity-matching-api-openapi.yml",
-    "indykite-entitymatching-api-openapi.yml",
-    "indykite-event-sinks-api-openapi.yml",
-    "indykite-external-data-resolver-api-openapi.yml",
-    "indykite-knowledge-queries-api-openapi.yml",
-    "indykite-mcp-servers-api-openapi.yml",
-    "indykite-organizations-api-openapi.yml",
-    "indykite-projects-api-openapi.yml",
-    "indykite-service-account-credentials-api-openapi.yml",
-    "indykite-service-accounts-api-openapi.yml",
-    "indykite-token-introspect-api-openapi.yml",
-    "indykite-trust-score-api-openapi.yml"
+    "_original/indykite-config-openapi.yml",
+    "_original/indykite-rest-openapi.yml"
   ],
   "outputs": [
     "indykite-application-agent-credentials-api-openapi.yml",
     "indykite-application-agents-api-openapi.yml",
     "indykite-applications-api-openapi.yml",
     "indykite-authorization-policies-api-openapi.yml",
-    "indykite-authzen-api-openapi.yml",
-    "indykite-capture-api-openapi.yml",
-    "indykite-contx-iq-api-openapi.yml",
-    "indykite-dataschema-api-openapi.yml",
-    "indykite-deprecated-api-openapi.yml",
     "indykite-entity-matching-api-openapi.yml",
-    "indykite-entitymatching-api-openapi.yml",
     "indykite-event-sinks-api-openapi.yml",
     "indykite-external-data-resolver-api-openapi.yml",
     "indykite-knowledge-queries-api-openapi.yml",
@@ -44,11 +19,48 @@
     "indykite-service-account-credentials-api-openapi.yml",
     "indykite-service-accounts-api-openapi.yml",
     "indykite-token-introspect-api-openapi.yml",
-    "indykite-trust-score-api-openapi.yml"
+    "indykite-trust-score-api-openapi.yml",
+    "indykite-authzen-api-openapi.yml",
+    "indykite-capture-api-openapi.yml",
+    "indykite-contx-iq-api-openapi.yml",
+    "indykite-dataschema-api-openapi.yml",
+    "indykite-deprecated-api-openapi.yml",
+    "indykite-entitymatching-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 2 superseded output(s) from the previous generation"
+  ],
   "errors": [],
-  "warnings": [],
-  "notes": [],
-  "skipped": []
+  "warnings": [
+    "indykite-rest-openapi.yml: info.version missing"
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "indykite-rest-openapi.yml: declared missing tag: Deprecated",
+    "indykite-rest-openapi.yml: declared missing tag: EntityMatching",
+    "superseded outputs removed: indykite-auth-zen-api-openapi.yml, indykite-data-schema-api-openapi.yml",
+    "apis.yml register: written (+3 apis, 21 total)"
+  ],
+  "skipped": [
+    "indykite-application-agent-credentials-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-application-agents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-auth-zen-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-authorization-policies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-capture-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-contx-iq-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-data-schema-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-deprecated-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-entity-matching-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-event-sinks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-external-data-resolver-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-knowledge-queries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-mcp-servers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-organizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-service-account-credentials-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-service-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-token-introspect-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "indykite-trust-score-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
