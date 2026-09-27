@@ -56,11 +56,33 @@ paths:
                       type: string
 components:
   schemas:
-    dataschema.JGFGraph:
+    dataschema.JGFEdge:
       type: object
       properties:
-        graph:
-          $ref: '#/components/schemas/dataschema.JGFGraphContent'
+        directed:
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFEdgeMetadata'
+        relation:
+          type: string
+        source:
+          type: string
+        target:
+          type: string
+    dataschema.JGFPropertyMeta:
+      type: object
+      properties:
+        count:
+          type: integer
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFNode:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/dataschema.JGFNodeMetadata'
     dataschema.JGFNodeMetadata:
       type: object
       properties:
@@ -78,39 +100,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/dataschema.JGFLabel'
-    dataschema.JGFLabel:
-      type: object
-      properties:
-        count:
-          type: integer
-        name:
-          type: string
-    dataschema.JGFNodeProperty:
-      type: object
-      properties:
-        count:
-          type: integer
-        metadata:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/dataschema.JGFPropertyMeta'
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataschema.JGFPropertyType'
-    dataschema.JGFEdge:
-      type: object
-      properties:
-        directed:
-          type: boolean
-        metadata:
-          $ref: '#/components/schemas/dataschema.JGFEdgeMetadata'
-        relation:
-          type: string
-        source:
-          type: string
-        target:
-          type: string
     restapi.ErrorResponse:
       type: object
       properties:
@@ -118,29 +107,6 @@ components:
           type: string
           examples:
           - Internal Server Error
-    dataschema.JGFEdgeMetadata:
-      type: object
-      properties:
-        count:
-          type: integer
-        properties:
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/dataschema.JGFEdgeProperty'
-    dataschema.JGFPropertyType:
-      type: object
-      properties:
-        count:
-          type: integer
-        type:
-          type: string
-    dataschema.JGFGraphMetadata:
-      type: object
-      properties:
-        created_at:
-          type: string
-        updated_at:
-          type: string
     restapi.DetailedError:
       type: object
       properties:
@@ -156,29 +122,13 @@ components:
           description: Message describes the error.
           examples:
           - unauthorized request
-    dataschema.JGFNode:
+    dataschema.JGFGraphMetadata:
       type: object
       properties:
-        metadata:
-          $ref: '#/components/schemas/dataschema.JGFNodeMetadata'
-    dataschema.JGFEdgeProperty:
-      type: object
-      properties:
-        count:
-          type: integer
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataschema.JGFPropertyType'
-    dataschema.JGFPropertyMeta:
-      type: object
-      properties:
-        count:
-          type: integer
-        types:
-          type: array
-          items:
-            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+        created_at:
+          type: string
+        updated_at:
+          type: string
     dataschema.JGFGraphContent:
       type: object
       properties:
@@ -194,6 +144,56 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/dataschema.JGFNode'
+    dataschema.JGFGraph:
+      type: object
+      properties:
+        graph:
+          $ref: '#/components/schemas/dataschema.JGFGraphContent'
+    dataschema.JGFNodeProperty:
+      type: object
+      properties:
+        count:
+          type: integer
+        metadata:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFPropertyMeta'
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
+    dataschema.JGFPropertyType:
+      type: object
+      properties:
+        count:
+          type: integer
+        type:
+          type: string
+    dataschema.JGFEdgeMetadata:
+      type: object
+      properties:
+        count:
+          type: integer
+        properties:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/dataschema.JGFEdgeProperty'
+    dataschema.JGFLabel:
+      type: object
+      properties:
+        count:
+          type: integer
+        name:
+          type: string
+    dataschema.JGFEdgeProperty:
+      type: object
+      properties:
+        count:
+          type: integer
+        types:
+          type: array
+          items:
+            $ref: '#/components/schemas/dataschema.JGFPropertyType'
   securitySchemes:
     bearerAuth:
       type: http

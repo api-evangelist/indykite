@@ -389,38 +389,56 @@ paths:
       - BearerToken: []
 components:
   schemas:
-    httpproxy.createApplicationRequest:
+    httpproxy.updateApplicationRequest:
       properties:
         description:
-          description: Description is optional description of configuration.
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
           maxLength: 65000
-          minLength: 2
           type: string
         display_name:
-          description: DisplayName is optional human readable name of configuration.
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
           maxLength: 254
-          minLength: 2
           type: string
-        name:
-          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
-
-            Also is immutable and cannot be changed later.'
-          type: string
-        project_id:
-          description: 'ProjectID is identifier of Project, formerly known as Application space,
-
-            where to place this new configuration object. Must be in GID format.'
-          type: string
-      required:
-      - name
-      - project_id
       type: object
-    httpproxy.listConfigResponse-httpproxy_readApplicationResponse:
+    httpproxy.createConfigResponse:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readApplicationResponse'
-          type: array
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
       type: object
     httpproxy.readApplicationResponse:
       properties:
@@ -461,26 +479,50 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
     restapi.ErrorResponse:
       properties:
         message:
           example: Internal Server Error
           type: string
       type: object
-    httpproxy.updateApplicationRequest:
+    httpproxy.listConfigResponse-httpproxy_readApplicationResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readApplicationResponse'
+          type: array
+      type: object
+    httpproxy.createApplicationRequest:
       properties:
         description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
+          description: Description is optional description of configuration.
           maxLength: 65000
+          minLength: 2
           type: string
         display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
+          description: DisplayName is optional human readable name of configuration.
           maxLength: 254
+          minLength: 2
           type: string
+        name:
+          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
+
+            Also is immutable and cannot be changed later.'
+          type: string
+        project_id:
+          description: 'ProjectID is identifier of Project, formerly known as Application space,
+
+            where to place this new configuration object. Must be in GID format.'
+          type: string
+      required:
+      - name
+      - project_id
       type: object
     restapi.DetailedError:
       properties:
@@ -489,48 +531,6 @@ components:
             type: string
           type: array
         message:
-          type: string
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
           type: string
       type: object
   securitySchemes:

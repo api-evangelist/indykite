@@ -279,13 +279,77 @@ paths:
       x-codegen-request-body-name: request
 components:
   schemas:
-    restapi.SearchActionResponse:
+    restapi.Action:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name specifies the action.
+          examples:
+          - CAN_READ
+      examples:
+      - name: CAN_READ
+    restapi.EvaluationsRequest:
+      type: object
+      required:
+      - evaluations
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.OptionalFields'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.SearchSubjectResponse:
       type: object
       properties:
         results:
           type: array
           items:
-            $ref: '#/components/schemas/restapi.Action'
+            $ref: '#/components/schemas/restapi.Node'
+    restapi.SearchResourceResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Node'
+    restapi.SearchActionRequest:
+      type: object
+      required:
+      - resource
+      - subject
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.EvaluationResponse:
+      type: object
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.respContext'
+        decision:
+          type: boolean
+          examples:
+          - true
+      examples:
+      - context:
+          advice:
+          - error: insufficient_user_authentication
+            error_description: A different authentication level is required
+            acr_values: whatever
+        decision: true
     restapi.EvaluationRequest:
       type: object
       required:
@@ -317,6 +381,13 @@ components:
         subject:
           id: IdSpecifyingTheNode
           type: NodeType
+    restapi.ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          examples:
+          - Internal Server Error
     restapi.OptionalFields:
       type: object
       properties:
@@ -328,57 +399,6 @@ components:
           $ref: '#/components/schemas/restapi.Node'
         subject:
           $ref: '#/components/schemas/restapi.Node'
-    restapi.respContext:
-      type: object
-      properties:
-        advice:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: string
-        reason:
-          type: string
-      examples:
-      - advice:
-        - error: insufficient_user_authentication
-          error_description: A different authentication level is required
-          acr_values: whatever
-    restapi.EvaluationsResponse:
-      type: object
-      properties:
-        evaluations:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.EvaluationResponse'
-    restapi.Action:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name specifies the action.
-          examples:
-          - CAN_READ
-      examples:
-      - name: CAN_READ
-    restapi.NodeType:
-      type: object
-      required:
-      - type
-      properties:
-        type:
-          type: string
-          examples:
-          - NodeType
-    restapi.SearchResourceResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.Node'
     restapi.Node:
       type: object
       required:
@@ -398,41 +418,6 @@ components:
       examples:
       - id: IdSpecifyingTheNode
         type: NodeType
-    restapi.ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          examples:
-          - Internal Server Error
-    restapi.SearchActionRequest:
-      type: object
-      required:
-      - resource
-      - subject
-      properties:
-        context:
-          $ref: '#/components/schemas/restapi.Context'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
-        subject:
-          $ref: '#/components/schemas/restapi.Node'
-    restapi.EvaluationResponse:
-      type: object
-      properties:
-        context:
-          $ref: '#/components/schemas/restapi.respContext'
-        decision:
-          type: boolean
-          examples:
-          - true
-      examples:
-      - context:
-          advice:
-          - error: insufficient_user_authentication
-            error_description: A different authentication level is required
-            acr_values: whatever
-        decision: true
     restapi.Context:
       type: object
       properties:
@@ -463,45 +448,6 @@ components:
         policy_tags:
         - Tag1
         - Tag2
-    restapi.SearchSubjectResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.Node'
-    restapi.SearchResourceRequest:
-      type: object
-      required:
-      - action
-      - resource
-      - subject
-      properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        context:
-          $ref: '#/components/schemas/restapi.Context'
-        resource:
-          $ref: '#/components/schemas/restapi.NodeType'
-        subject:
-          $ref: '#/components/schemas/restapi.Node'
-    restapi.EvaluationsRequest:
-      type: object
-      required:
-      - evaluations
-      properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        context:
-          $ref: '#/components/schemas/restapi.Context'
-        evaluations:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.OptionalFields'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
-        subject:
-          $ref: '#/components/schemas/restapi.Node'
     restapi.SearchSubjectRequest:
       type: object
       required:
@@ -517,6 +463,60 @@ components:
           $ref: '#/components/schemas/restapi.Node'
         subject:
           $ref: '#/components/schemas/restapi.NodeType'
+    restapi.NodeType:
+      type: object
+      required:
+      - type
+      properties:
+        type:
+          type: string
+          examples:
+          - NodeType
+    restapi.respContext:
+      type: object
+      properties:
+        advice:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+        reason:
+          type: string
+      examples:
+      - advice:
+        - error: insufficient_user_authentication
+          error_description: A different authentication level is required
+          acr_values: whatever
+    restapi.EvaluationsResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.EvaluationResponse'
+    restapi.SearchActionResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Action'
+    restapi.SearchResourceRequest:
+      type: object
+      required:
+      - action
+      - resource
+      - subject
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.NodeType'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
     restapi.DetailedError:
       type: object
       properties:

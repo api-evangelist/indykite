@@ -52,6 +52,16 @@ tags:
 - Authorization
 - Access Control
 - Knowledge Graph
+- AI Agents
+- MCP
+- Security
+- AuthZEN
+tags_raw:
+- Company
+- Identity
+- Authorization
+- Access Control
+- Knowledge Graph
 - Agentic AI
 - MCP
 - Security
@@ -292,8 +302,6 @@ apis:
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
-  - AuthZEN
-  tags_raw:
   - Auth ZEN
   properties:
   - type: OpenAPI

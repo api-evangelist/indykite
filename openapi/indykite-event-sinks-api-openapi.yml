@@ -395,6 +395,84 @@ paths:
       - BearerToken: []
 components:
   schemas:
+    httpproxy.kafkaSinkConfig:
+      properties:
+        brokers:
+          items:
+            type: string
+          minItems: 1
+          type: array
+        disable_tls:
+          description: 'Brokers specify Kafka destinations to connect to.
+
+            DisableTLS can force using non-secure connection.'
+          type: boolean
+        display_name:
+          type: string
+        last_error:
+          type: string
+        password:
+          type: string
+          examples:
+          - password123
+        tls_skip_verify:
+          description: TLSSkipVerify defines whenever not to verify TLS certificate. Ignored if TLS is disabled.
+          type: boolean
+        topic:
+          example: my-topic
+          maxLength: 249
+          minLength: 1
+          type: string
+          examples:
+          - my-topic
+        username:
+          examples:
+          - user1
+          type: string
+      required:
+      - brokers
+      - topic
+      type: object
+    httpproxy.azureEventGridSinkConfig:
+      properties:
+        access_key:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          examples:
+          - key123
+        display_name:
+          type: string
+        last_error:
+          type: string
+        topic_endpoint:
+          maxLength: 1024
+          minLength: 1
+          type: string
+          examples:
+          - https://example.azure.com
+      required:
+      - access_key
+      - topic_endpoint
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
     httpproxy.eventSinkFilterKeyValue:
       properties:
         key:
@@ -411,34 +489,72 @@ components:
       - key
       - value
       type: object
-    httpproxy.pubSubSinkConfig:
+    httpproxy.updateEventSinkRequest:
       properties:
-        credentials_json:
-          examples:
-          - '{"type":"service_account",...}'
-          maxLength: 10240
-          minLength: 1
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
           type: string
         display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
           type: string
-        last_error:
-          type: string
-        project_id:
-          examples:
-          - my-gcp-project
-          maxLength: 30
-          minLength: 6
-          type: string
-        topic_name:
-          examples:
-          - my-pubsub-topic
-          maxLength: 255
-          minLength: 3
-          type: string
+        include_cdc_events:
+          description: IncludeCDCEvents when true, CDC events will be emitted to this event sink.
+          type: boolean
+        providers:
+          additionalProperties:
+            $ref: '#/components/schemas/httpproxy.eventSinkProvider'
+          description: Providers contains the list of supported providers, that are referenced by the Routes.
+          type: object
+        routes:
+          description: Routes contains the list of routes to properly route the events to the providers by sequential evaluation model.
+          items:
+            $ref: '#/components/schemas/httpproxy.eventSinkRoute'
+          minItems: 1
+          type: array
       required:
-      - credentials_json
-      - project_id
-      - topic_name
+      - providers
+      - routes
+      type: object
+    httpproxy.eventSinkProvider:
+      properties:
+        azure_event_grid:
+          $ref: '#/components/schemas/httpproxy.azureEventGridSinkConfig'
+        azure_service_bus:
+          $ref: '#/components/schemas/httpproxy.azureServiceBusSinkConfig'
+        kafka:
+          $ref: '#/components/schemas/httpproxy.kafkaSinkConfig'
+        pubsub:
+          $ref: '#/components/schemas/httpproxy.pubSubSinkConfig'
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
       type: object
     httpproxy.listConfigResponse-httpproxy_readEventSinkResponse:
       properties:
@@ -447,19 +563,28 @@ components:
             $ref: '#/components/schemas/httpproxy.readEventSinkResponse'
           type: array
       type: object
-    httpproxy.eventSinkRouteEventKeyValuesFilter:
+    restapi.DetailedError:
       properties:
-        context_key_value:
+        errors:
           items:
-            $ref: '#/components/schemas/httpproxy.eventSinkFilterKeyValue'
+            type: string
           type: array
-        event_type:
-          examples:
-          - indykite.audit.config.create
-          minLength: 1
+        message:
           type: string
+      type: object
+    httpproxy.eventSinkRoute:
+      properties:
+        display_name:
+          type: string
+        event_type_key_values_filter:
+          $ref: '#/components/schemas/httpproxy.eventSinkRouteEventKeyValuesFilter'
+        provider_id:
+          type: string
+        stop_processing:
+          type: boolean
       required:
-      - event_type
+      - event_type_key_values_filter
+      - provider_id
       type: object
     httpproxy.readEventSinkResponse:
       properties:
@@ -510,37 +635,25 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.updateEventSinkRequest:
+    restapi.ErrorResponse:
       properties:
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
+        message:
+          example: Internal Server Error
           type: string
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
-          type: string
-        include_cdc_events:
-          description: IncludeCDCEvents when true, CDC events will be emitted to this event sink.
-          type: boolean
-        providers:
-          additionalProperties:
-            $ref: '#/components/schemas/httpproxy.eventSinkProvider'
-          description: Providers contains the list of supported providers, that are referenced by the Routes.
-          type: object
-        routes:
-          description: Routes contains the list of routes to properly route the events to the providers by sequential evaluation model.
+      type: object
+    httpproxy.eventSinkRouteEventKeyValuesFilter:
+      properties:
+        context_key_value:
           items:
-            $ref: '#/components/schemas/httpproxy.eventSinkRoute'
-          minItems: 1
+            $ref: '#/components/schemas/httpproxy.eventSinkFilterKeyValue'
           type: array
+        event_type:
+          examples:
+          - indykite.audit.config.create
+          minLength: 1
+          type: string
       required:
-      - providers
-      - routes
+      - event_type
       type: object
     httpproxy.azureServiceBusSinkConfig:
       properties:
@@ -563,26 +676,6 @@ components:
       required:
       - connection_string
       - queue_or_topic_name
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
-    httpproxy.eventSinkRoute:
-      properties:
-        display_name:
-          type: string
-        event_type_key_values_filter:
-          $ref: '#/components/schemas/httpproxy.eventSinkRouteEventKeyValuesFilter'
-        provider_id:
-          type: string
-        stop_processing:
-          type: boolean
-      required:
-      - event_type_key_values_filter
-      - provider_id
       type: object
     httpproxy.createEventSinkRequest:
       properties:
@@ -626,127 +719,34 @@ components:
       - providers
       - routes
       type: object
-    restapi.DetailedError:
+    httpproxy.pubSubSinkConfig:
       properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.eventSinkProvider:
-      properties:
-        azure_event_grid:
-          $ref: '#/components/schemas/httpproxy.azureEventGridSinkConfig'
-        azure_service_bus:
-          $ref: '#/components/schemas/httpproxy.azureServiceBusSinkConfig'
-        kafka:
-          $ref: '#/components/schemas/httpproxy.kafkaSinkConfig'
-        pubsub:
-          $ref: '#/components/schemas/httpproxy.pubSubSinkConfig'
-      type: object
-    httpproxy.azureEventGridSinkConfig:
-      properties:
-        access_key:
-          maxLength: 1024
+        credentials_json:
+          examples:
+          - '{"type":"service_account",...}'
+          maxLength: 10240
           minLength: 1
           type: string
-          examples:
-          - key123
         display_name:
           type: string
         last_error:
           type: string
-        topic_endpoint:
-          maxLength: 1024
-          minLength: 1
-          type: string
+        project_id:
           examples:
-          - https://example.azure.com
-      required:
-      - access_key
-      - topic_endpoint
-      type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
+          - my-gcp-project
+          maxLength: 30
+          minLength: 6
           type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.kafkaSinkConfig:
-      properties:
-        brokers:
-          items:
-            type: string
-          minItems: 1
-          type: array
-        disable_tls:
-          description: 'Brokers specify Kafka destinations to connect to.
-
-            DisableTLS can force using non-secure connection.'
-          type: boolean
-        display_name:
-          type: string
-        last_error:
-          type: string
-        password:
-          type: string
+        topic_name:
           examples:
-          - password123
-        tls_skip_verify:
-          description: TLSSkipVerify defines whenever not to verify TLS certificate. Ignored if TLS is disabled.
-          type: boolean
-        topic:
-          example: my-topic
-          maxLength: 249
-          minLength: 1
-          type: string
-          examples:
-          - my-topic
-        username:
-          examples:
-          - user1
+          - my-pubsub-topic
+          maxLength: 255
+          minLength: 3
           type: string
       required:
-      - brokers
-      - topic
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
+      - credentials_json
+      - project_id
+      - topic_name
       type: object
   securitySchemes:
     BearerToken:

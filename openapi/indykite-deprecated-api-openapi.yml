@@ -121,18 +121,56 @@ paths:
       deprecated: true
 components:
   schemas:
-    restapi.Action:
+    restapi.WhatAuthorizedEvaluation:
       type: object
       required:
-      - name
+      - action
+      - resource
       properties:
-        name:
-          type: string
-          description: Name specifies the action.
-          examples:
-          - CAN_READ
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.NodeType'
+    restapi.WhatAuthorizedResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.WhatAuthorizedEvaluationResponse'
       examples:
-      - name: CAN_READ
+      - evaluations:
+        - resource:
+            type: Asset
+            id: asset_id
+          action:
+            name: SUBSCRIBES_TO
+        - resource:
+            type: Asset
+            id: asset_id2
+          action:
+            name: SUBSCRIBES_TO
+    restapi.WhoAuthorizedEvaluation:
+      type: object
+      required:
+      - action
+      - resource
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.WhoAuthorizedEvaluationResponse:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Node'
     restapi.WhatAuthorizedRequest:
       type: object
       required:
@@ -156,34 +194,20 @@ components:
         subject:
           id: subject_id
           type: subject_type
-    restapi.WhoAuthorizedResponse:
+    restapi.ErrorResponse:
       type: object
       properties:
-        evaluations:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.WhoAuthorizedEvaluationResponse'
-      examples:
-      - evaluations:
-        - resource:
-            type: Asset
-            id: asset_id
-          action:
-            name: SUBSCRIBES_TO
-          subjects:
-          - type: subject_type
-            id: subject_id
-          - type: subject_type
-            id: subject_id2
-    restapi.NodeType:
-      type: object
-      required:
-      - type
-      properties:
-        type:
+        message:
           type: string
           examples:
-          - NodeType
+          - Internal Server Error
+    restapi.WhatAuthorizedEvaluationResponse:
+      type: object
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
     restapi.Node:
       type: object
       required:
@@ -203,34 +227,6 @@ components:
       examples:
       - id: IdSpecifyingTheNode
         type: NodeType
-    restapi.ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          examples:
-          - Internal Server Error
-    restapi.WhatAuthorizedEvaluation:
-      type: object
-      required:
-      - action
-      - resource
-      properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        resource:
-          $ref: '#/components/schemas/restapi.NodeType'
-    restapi.WhoAuthorizedEvaluationResponse:
-      type: object
-      properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
-        subjects:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.Node'
     restapi.Context:
       type: object
       properties:
@@ -261,13 +257,13 @@ components:
         policy_tags:
         - Tag1
         - Tag2
-    restapi.WhatAuthorizedResponse:
+    restapi.WhoAuthorizedResponse:
       type: object
       properties:
         evaluations:
           type: array
           items:
-            $ref: '#/components/schemas/restapi.WhatAuthorizedEvaluationResponse'
+            $ref: '#/components/schemas/restapi.WhoAuthorizedEvaluationResponse'
       examples:
       - evaluations:
         - resource:
@@ -275,43 +271,20 @@ components:
             id: asset_id
           action:
             name: SUBSCRIBES_TO
-        - resource:
-            type: Asset
-            id: asset_id2
-          action:
-            name: SUBSCRIBES_TO
-    restapi.DetailedError:
-      type: object
-      properties:
-        errors:
-          type: array
-          description: Errors are optional and may contain additional details.
-          items:
-            type: string
-          examples:
-          - - missing bearer token
-        message:
-          type: string
-          description: Message describes the error.
-          examples:
-          - unauthorized request
-    restapi.WhoAuthorizedEvaluation:
+          subjects:
+          - type: subject_type
+            id: subject_id
+          - type: subject_type
+            id: subject_id2
+    restapi.NodeType:
       type: object
       required:
-      - action
-      - resource
+      - type
       properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
-    restapi.WhatAuthorizedEvaluationResponse:
-      type: object
-      properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
+        type:
+          type: string
+          examples:
+          - NodeType
     restapi.WhoAuthorizedRequest:
       type: object
       required:
@@ -330,6 +303,33 @@ components:
           resource:
             id: resource_id
             type: resource_type
+    restapi.Action:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name specifies the action.
+          examples:
+          - CAN_READ
+      examples:
+      - name: CAN_READ
+    restapi.DetailedError:
+      type: object
+      properties:
+        errors:
+          type: array
+          description: Errors are optional and may contain additional details.
+          items:
+            type: string
+          examples:
+          - - missing bearer token
+        message:
+          type: string
+          description: Message describes the error.
+          examples:
+          - unauthorized request
   securitySchemes:
     bearerAuth:
       type: http

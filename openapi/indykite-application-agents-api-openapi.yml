@@ -389,11 +389,80 @@ paths:
       - BearerToken: []
 components:
   schemas:
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
     httpproxy.deleteConfigResponse:
       properties:
         id:
           description: ID of deleted configuration.
           type: string
+      type: object
+    httpproxy.createAppAgentRequest:
+      properties:
+        api_permissions:
+          description: 'APIPermissions is a list of API permissions for the agent.
+
+            The agent will only be able to access the APIs specified in this list.'
+          items:
+            type: string
+          minItems: 1
+          type: array
+        application_id:
+          description: ApplicationID is identifier of Application, for which agent should be created. Must be in GID format.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          maxLength: 65000
+          minLength: 2
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration.
+          maxLength: 254
+          minLength: 2
+          type: string
+        name:
+          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
+
+            Also is immutable and cannot be changed later.'
+          type: string
+      required:
+      - api_permissions
+      - application_id
+      - name
       type: object
     httpproxy.updateAppAgentRequest:
       properties:
@@ -416,6 +485,28 @@ components:
 
             But when set to empty string, it will be removed.'
           maxLength: 254
+          type: string
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readAppAgentResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readAppAgentResponse'
+          type: array
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
           type: string
       type: object
     httpproxy.readAppAgentResponse:
@@ -466,97 +557,6 @@ components:
         updated_by:
           description: UpdatedBy specify who last time updated configuration.
           type: string
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.createAppAgentRequest:
-      properties:
-        api_permissions:
-          description: 'APIPermissions is a list of API permissions for the agent.
-
-            The agent will only be able to access the APIs specified in this list.'
-          items:
-            type: string
-          minItems: 1
-          type: array
-        application_id:
-          description: ApplicationID is identifier of Application, for which agent should be created. Must be in GID format.
-          type: string
-        description:
-          description: Description is optional description of configuration.
-          maxLength: 65000
-          minLength: 2
-          type: string
-        display_name:
-          description: DisplayName is optional human readable name of configuration.
-          maxLength: 254
-          minLength: 2
-          type: string
-        name:
-          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
-
-            Also is immutable and cannot be changed later.'
-          type: string
-      required:
-      - api_permissions
-      - application_id
-      - name
-      type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readAppAgentResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readAppAgentResponse'
-          type: array
       type: object
   securitySchemes:
     BearerToken:

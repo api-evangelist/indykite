@@ -397,13 +397,6 @@ paths:
       - BearerToken: []
 components:
   schemas:
-    httpproxy.listConfigResponse-httpproxy_readTokenIntrospectResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readTokenIntrospectResponse'
-          type: array
-      type: object
     httpproxy.claim:
       properties:
         selector:
@@ -425,33 +418,67 @@ components:
       description: 'SubClaim is used to match DigitalTwin with external_id. If not specified, standard ''sub'' claim will be used.
 
         Either ''sub'' or specified claim will then also be mapped to ''external_id'' claim.'
-    httpproxy.opaqueMatcher:
+    httpproxy.createConfigResponse:
       properties:
-        hint:
-          description: 'Hint is case sensitive plain text, that is expected to be provided in token introspect request,
-
-            if there are multiple opaque tokens configurations.
-
-            To differentiate between multiple opaque tokens configurations, hint must be provided.'
-          maxLength: 50
-          minLength: 1
+        create_time:
+          description: CreateTime specify when configuration was created.
           type: string
-      required:
-      - hint
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
       type: object
-    httpproxy.jwtMatcher:
+    httpproxy.listConfigResponse-httpproxy_readTokenIntrospectResponse:
       properties:
-        audience:
-          description: Audience is used to exact match based on `aud` claim in JWT.
-          maxLength: 150
-          minLength: 1
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readTokenIntrospectResponse'
+          type: array
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
           type: string
-        issuer:
-          description: Issuer is used to exact match based on `iss` claim in JWT.
+        created_by:
+          description: CreatedBy specify who created configuration.
           type: string
-      required:
-      - audience
-      - issuer
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.offlineValidation:
+      properties:
+        public_jwks:
+          description: 'PublicJWKs are public JWK to validate signature of JWT.
+
+            If there are no public keys specified, they will be fetched and cached from
+
+            jwks_uri at https://jwt-issuer.tld/.well-known/openid-configuration'
+          items:
+            type: string
+          maxItems: 10
+          type: array
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
       type: object
     httpproxy.readTokenIntrospectResponse:
       properties:
@@ -510,12 +537,6 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
     restapi.DetailedError:
       properties:
         errors:
@@ -525,36 +546,35 @@ components:
         message:
           type: string
       type: object
-    httpproxy.updateConfigResponse:
+    restapi.ErrorResponse:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
+        message:
+          example: Internal Server Error
           type: string
       type: object
-    httpproxy.offlineValidation:
+    httpproxy.onlineValidation:
       properties:
-        public_jwks:
-          description: 'PublicJWKs are public JWK to validate signature of JWT.
+        cache_ttl:
+          description: 'CacheTTL of token validity can be used to minimize calls to userinfo endpoint. Value is in seconds.
 
-            If there are no public keys specified, they will be fetched and cached from
+            The final cache TTL will be set to lower limit of this value and exp claim of JWT token.
 
-            jwks_uri at https://jwt-issuer.tld/.well-known/openid-configuration'
-          items:
-            type: string
-          maxItems: 10
-          type: array
+            If not set, token will not be cached and call to userinfo endpoint will be made on every request.
+
+            However, token validity will be checked first if possible (JWT tokens).
+
+            If token is expired, userinfo endpoint will not be called, nor cache checked.'
+          maximum: 3600
+          type: integer
+        userinfo_endpoint:
+          description: 'UserinfoEndpoint is URI of userinfo endpoint which will be used to validate access token.
+
+            And also fetch user claims when opaque token is received.
+
+            It can remain empty, if JWT token matcher is used.
+
+            Then the URI under "userinfo_endpoint" in .well-known/openid-configuration endpoint is used.'
+          type: string
       type: object
     httpproxy.createTokenIntrospectRequest:
       properties:
@@ -637,6 +657,20 @@ components:
       - name
       - project_id
       type: object
+    httpproxy.opaqueMatcher:
+      properties:
+        hint:
+          description: 'Hint is case sensitive plain text, that is expected to be provided in token introspect request,
+
+            if there are multiple opaque tokens configurations.
+
+            To differentiate between multiple opaque tokens configurations, hint must be provided.'
+          maxLength: 50
+          minLength: 1
+          type: string
+      required:
+      - hint
+      type: object
     httpproxy.updateTokenIntrospectRequest:
       properties:
         claims_mapping:
@@ -708,53 +742,19 @@ components:
       - claims_mapping
       - ikg_node_type
       type: object
-    httpproxy.createConfigResponse:
+    httpproxy.jwtMatcher:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
+        audience:
+          description: Audience is used to exact match based on `aud` claim in JWT.
+          maxLength: 150
+          minLength: 1
           type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
+        issuer:
+          description: Issuer is used to exact match based on `iss` claim in JWT.
           type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
-      type: object
-    httpproxy.onlineValidation:
-      properties:
-        cache_ttl:
-          description: 'CacheTTL of token validity can be used to minimize calls to userinfo endpoint. Value is in seconds.
-
-            The final cache TTL will be set to lower limit of this value and exp claim of JWT token.
-
-            If not set, token will not be cached and call to userinfo endpoint will be made on every request.
-
-            However, token validity will be checked first if possible (JWT tokens).
-
-            If token is expired, userinfo endpoint will not be called, nor cache checked.'
-          maximum: 3600
-          type: integer
-        userinfo_endpoint:
-          description: 'UserinfoEndpoint is URI of userinfo endpoint which will be used to validate access token.
-
-            And also fetch user claims when opaque token is received.
-
-            It can remain empty, if JWT token matcher is used.
-
-            Then the URI under "userinfo_endpoint" in .well-known/openid-configuration endpoint is used.'
-          type: string
+      required:
+      - audience
+      - issuer
       type: object
   securitySchemes:
     BearerToken:

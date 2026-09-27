@@ -347,51 +347,69 @@ paths:
       - MCP Servers
 components:
   schemas:
-    httpproxy.readMCPServerResponse:
+    httpproxy.updateMCPServerRequest:
       properties:
         app_agent_id:
           description: AppAgentID is the ID of the app agent in GID format
           type: string
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+        enabled:
+          description: Enabled indicates if the MCP server is enabled
+          type: boolean
+        scopes_supported:
+          description: ScopesSupported is the list of OAuth scopes supported by the MCP server
+          items:
+            type: string
+          minItems: 1
+          type: array
+        token_introspect_id:
+          description: TokenIntrospectID is the ID of the token introspect in GID format
+          type: string
+      required:
+      - app_agent_id
+      - enabled
+      - scopes_supported
+      - token_introspect_id
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
         create_time:
           description: CreateTime specify when configuration was created.
           type: string
         created_by:
           description: CreatedBy specify who created configuration.
           type: string
-        description:
-          description: Description is optional description of configuration.
-          type: string
-        display_name:
-          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
-          type: string
-        enabled:
-          description: Enabled indicates if the MCP server is enabled
-          type: boolean
         id:
-          description: ID is globally unique identifier of configuration.
+          description: ID is globally unique identifier of created configuration.
           type: string
-        name:
-          description: Name is URL friendly identifier of configuration.
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
           type: string
-        organization_id:
-          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
-
-            under which configuration was created.'
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
           type: string
-        project_id:
-          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
-
-            under which configuration was created.
-
-            Might be empty, if configuration is created directly under organization.'
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
           type: string
-        scopes_supported:
-          description: ScopesSupported is the list of OAuth scopes supported by the MCP server
-          items:
-            type: string
-          type: array
-        token_introspect_id:
-          description: TokenIntrospectID is the ID of the token introspect in GID format
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
           type: string
         update_time:
           description: UpdateTime specify when configuration was last time updated.
@@ -451,6 +469,66 @@ components:
       - scopes_supported
       - token_introspect_id
       type: object
+    httpproxy.listConfigResponse-httpproxy_readMCPServerResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readMCPServerResponse'
+          type: array
+      type: object
+    httpproxy.readMCPServerResponse:
+      properties:
+        app_agent_id:
+          description: AppAgentID is the ID of the app agent in GID format
+          type: string
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        enabled:
+          description: Enabled indicates if the MCP server is enabled
+          type: boolean
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        scopes_supported:
+          description: ScopesSupported is the list of OAuth scopes supported by the MCP server
+          items:
+            type: string
+          type: array
+        token_introspect_id:
+          description: TokenIntrospectID is the ID of the token introspect in GID format
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
     restapi.DetailedError:
       properties:
         errors:
@@ -459,84 +537,6 @@ components:
           type: array
         message:
           type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readMCPServerResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readMCPServerResponse'
-          type: array
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.updateMCPServerRequest:
-      properties:
-        app_agent_id:
-          description: AppAgentID is the ID of the app agent in GID format
-          type: string
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
-          type: string
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
-          type: string
-        enabled:
-          description: Enabled indicates if the MCP server is enabled
-          type: boolean
-        scopes_supported:
-          description: ScopesSupported is the list of OAuth scopes supported by the MCP server
-          items:
-            type: string
-          minItems: 1
-          type: array
-        token_introspect_id:
-          description: TokenIntrospectID is the ID of the token introspect in GID format
-          type: string
-      required:
-      - app_agent_id
-      - enabled
-      - scopes_supported
-      - token_introspect_id
       type: object
   securitySchemes:
     BearerToken:

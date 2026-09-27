@@ -396,6 +396,75 @@ paths:
       - BearerToken: []
 components:
   schemas:
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.updateKnowledgeQueryRequest:
+      properties:
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+        policy_id:
+          description: PolicyID is gid formatted ID of the authorization policy that is used to authorize access to queried data.
+          type: string
+        query:
+          description: Query is required to be valid JSON format of query, unless status is DRAFT.
+          maxLength: 512000
+          type: string
+        status:
+          description: Status of query specify whenever it is active or not. If status is DRAFT, it is possible to save invalid query.
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DRAFT
+          type: string
+      required:
+      - policy_id
+      - query
+      - status
+      type: object
     httpproxy.readKnowledgeQueryResponse:
       properties:
         create_time:
@@ -448,38 +517,11 @@ components:
             $ref: '#/components/schemas/httpproxy.readKnowledgeQueryResponse'
           type: array
       type: object
-    httpproxy.updateKnowledgeQueryRequest:
+    httpproxy.deleteConfigResponse:
       properties:
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
+        id:
+          description: ID of deleted configuration.
           type: string
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
-          type: string
-        policy_id:
-          description: PolicyID is gid formatted ID of the authorization policy that is used to authorize access to queried data.
-          type: string
-        query:
-          description: Query is required to be valid JSON format of query, unless status is DRAFT.
-          maxLength: 512000
-          type: string
-        status:
-          description: Status of query specify whenever it is active or not. If status is DRAFT, it is possible to save invalid query.
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - DRAFT
-          type: string
-      required:
-      - policy_id
-      - query
-      - status
       type: object
     restapi.ErrorResponse:
       properties:
@@ -537,48 +579,6 @@ components:
             type: string
           type: array
         message:
-          type: string
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
           type: string
       type: object
   securitySchemes:
