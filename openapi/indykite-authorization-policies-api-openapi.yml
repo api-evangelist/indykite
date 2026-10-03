@@ -405,22 +405,52 @@ paths:
       - BearerToken: []
 components:
   schemas:
-    httpproxy.createConfigResponse:
+    restapi.ErrorResponse:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
+        message:
+          example: Internal Server Error
           type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
+      type: object
+    httpproxy.updateAuthorizationPolicyRequest:
+      properties:
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
           type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
           type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
+        policy:
+          description: Policy is required to be valid JSON format of policy. Format differs based on policy type.
+          maxLength: 512000
           type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
+        status:
+          description: Status of policy specify whenever it is active or not. If status is DRAFT, it is possible to save invalid policy.
+          enum:
+          - ACTIVE
+          - INACTIVE
+          - DRAFT
+          type: string
+        tags:
+          items:
+            type: string
+          type: array
+      required:
+      - policy
+      - status
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
           type: string
       type: object
     httpproxy.updateConfigResponse:
@@ -439,27 +469,6 @@ components:
           type: string
         updated_by:
           description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
           type: string
       type: object
     httpproxy.createAuthorizationPolicyRequest:
@@ -504,6 +513,37 @@ components:
       - policy
       - project_id
       - status
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readAuthorizationPolicyResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readAuthorizationPolicyResponse'
+          type: array
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
       type: object
     httpproxy.readAuthorizationPolicyResponse:
       properties:
@@ -551,46 +591,6 @@ components:
         updated_by:
           description: UpdatedBy specify who last time updated configuration.
           type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readAuthorizationPolicyResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readAuthorizationPolicyResponse'
-          type: array
-      type: object
-    httpproxy.updateAuthorizationPolicyRequest:
-      properties:
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
-          type: string
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
-          type: string
-        policy:
-          description: Policy is required to be valid JSON format of policy. Format differs based on policy type.
-          maxLength: 512000
-          type: string
-        status:
-          description: Status of policy specify whenever it is active or not. If status is DRAFT, it is possible to save invalid policy.
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - DRAFT
-          type: string
-        tags:
-          items:
-            type: string
-          type: array
-      required:
-      - policy
-      - status
       type: object
   securitySchemes:
     BearerToken:

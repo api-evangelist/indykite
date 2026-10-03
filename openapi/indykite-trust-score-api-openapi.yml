@@ -395,43 +395,60 @@ paths:
       - BearerToken: []
 components:
   schemas:
-    httpproxy.updateTrustScoreProfileRequest:
+    restapi.ErrorResponse:
       properties:
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
+        message:
+          example: Internal Server Error
           type: string
-        dimensions:
-          description: 'Dimensions that will be used to calculate the trust score.
-
-            If this field is empty, it will be ignored. Otherwise, it will overwrite the current values.'
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
           items:
-            $ref: '#/components/schemas/httpproxy.trustScoreProfileDimension'
-          minItems: 1
+            type: string
           type: array
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
+        message:
           type: string
-        node_classification:
-          description: 'NodeClassification is a node label in PascalCase, cannot be modified once set.
-
-            Must be specified during creation and can be omitted when updating.'
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
           type: string
-          examples:
-          - NodeType
-        schedule:
-          description: Schedule sets the time between re-calculations, must be one of the predefined intervals.
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.trustScoreProfileDimension:
+      properties:
+        name:
+          description: Name of the trust score dimension, must be one of the predefined names, cannot be modified once set.
           enum:
-          - THREE_HOURS
-          - SIX_HOURS
-          - TWELVE_HOURS
-          - DAILY
+          - FRESHNESS
+          - COMPLETENESS
+          - VALIDITY
+          - ORIGIN
+          - VERIFICATION
           type: string
+        weight:
+          description: 'Weight represents how relevant the dimension is in the trust score calculation.
+
+            Setting it to zero, means the dimension is disabled.'
+          maximum: 1
+          minimum: 0
+          type: number
+      required:
+      - name
+      - weight
       type: object
     httpproxy.createConfigResponse:
       properties:
@@ -508,72 +525,6 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.trustScoreProfileDimension:
-      properties:
-        name:
-          description: Name of the trust score dimension, must be one of the predefined names, cannot be modified once set.
-          enum:
-          - FRESHNESS
-          - COMPLETENESS
-          - VALIDITY
-          - ORIGIN
-          - VERIFICATION
-          type: string
-        weight:
-          description: 'Weight represents how relevant the dimension is in the trust score calculation.
-
-            Setting it to zero, means the dimension is disabled.'
-          maximum: 1
-          minimum: 0
-          type: number
-      required:
-      - name
-      - weight
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readTrustScoreProfileResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readTrustScoreProfileResponse'
-          type: array
-      type: object
-    httpproxy.trustScoreExecutionWindow:
-      properties:
-        execution_end_time:
-          type: string
-        execution_start_time:
-          type: string
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
     httpproxy.createTrustScoreProfileRequest:
       properties:
         description:
@@ -626,13 +577,62 @@ components:
       - project_id
       - schedule
       type: object
-    restapi.DetailedError:
+    httpproxy.trustScoreExecutionWindow:
       properties:
-        errors:
+        execution_end_time:
+          type: string
+        execution_start_time:
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readTrustScoreProfileResponse:
+      properties:
+        data:
           items:
-            type: string
+            $ref: '#/components/schemas/httpproxy.readTrustScoreProfileResponse'
           type: array
-        message:
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
+    httpproxy.updateTrustScoreProfileRequest:
+      properties:
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        dimensions:
+          description: 'Dimensions that will be used to calculate the trust score.
+
+            If this field is empty, it will be ignored. Otherwise, it will overwrite the current values.'
+          items:
+            $ref: '#/components/schemas/httpproxy.trustScoreProfileDimension'
+          minItems: 1
+          type: array
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+        node_classification:
+          description: 'NodeClassification is a node label in PascalCase, cannot be modified once set.
+
+            Must be specified during creation and can be omitted when updating.'
+          type: string
+          examples:
+          - NodeType
+        schedule:
+          description: Schedule sets the time between re-calculations, must be one of the predefined intervals.
+          enum:
+          - THREE_HOURS
+          - SIX_HOURS
+          - TWELVE_HOURS
+          - DAILY
           type: string
       type: object
   securitySchemes:

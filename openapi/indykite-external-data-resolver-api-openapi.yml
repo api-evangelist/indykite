@@ -395,6 +395,143 @@ paths:
       - BearerToken: []
 components:
   schemas:
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
+    httpproxy.readExternalDataResolverResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        description:
+          description: Description is optional description of configuration.
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
+          type: string
+        headers:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          type: object
+        id:
+          description: ID is globally unique identifier of configuration.
+          type: string
+        method:
+          type: string
+        name:
+          description: Name is URL friendly identifier of configuration.
+          type: string
+        organization_id:
+          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
+
+            under which configuration was created.'
+          type: string
+        project_id:
+          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
+
+            under which configuration was created.
+
+            Might be empty, if configuration is created directly under organization.'
+          type: string
+        request_content_type:
+          type: string
+        request_payload:
+          type: string
+        response_content_type:
+          type: string
+        response_selector:
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+        url:
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readExternalDataResolverResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readExternalDataResolverResponse'
+          type: array
+      type: object
+    httpproxy.updateExternalDataResolverRequest:
+      properties:
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+        headers:
+          additionalProperties:
+            items:
+              type: string
+            type: array
+          description: 'Headers to be sent with the request, including authorization if needed.
+
+            Be aware that Content-Type is overridden based on request_content_type and Accept by response_content_type.'
+          type: object
+        method:
+          description: Method specify HTTP method to be used for the request.
+          enum:
+          - GET
+          - POST
+          - PUT
+          - PATCH
+          type: string
+        request_content_type:
+          description: 'RequestContentType specify format of request body payload and how to set Content-Type header.
+
+            If content-type header is set by Headers, that header will be overridden.'
+          enum:
+          - JSON
+          type: string
+        request_payload:
+          description: 'RequestPayload to be sent to the endpoint. It should be in proper format based on request type.
+
+            It is going through the template builder to be properly formatted and filled with data.'
+          type: string
+        response_content_type:
+          description: 'ResponseContentType specify expected Content-Type header of response. If mismatch with real response, it will fail.
+
+            This also sets Accept header in request. If Accept header is set by Headers, that header will be overridden.'
+          enum:
+          - JSON
+          type: string
+        response_selector:
+          description: 'ResponseSelector specify selector to extract data from response.
+
+            Should be in requested format based on Response Type.'
+          maxLength: 255
+          minLength: 1
+          type: string
+        url:
+          description: URL specify full path to endpoint that will be called.
+          type: string
+      required:
+      - method
+      - request_content_type
+      - response_content_type
+      - response_selector
+      - url
+      type: object
     httpproxy.createExternalDataResolverRequest:
       properties:
         description:
@@ -470,79 +607,13 @@ components:
       - response_selector
       - url
       type: object
-    httpproxy.readExternalDataResolverResponse:
+    restapi.DetailedError:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        description:
-          description: Description is optional description of configuration.
-          type: string
-        display_name:
-          description: DisplayName is optional human readable name of configuration. Is equal to Name if not set.
-          type: string
-        headers:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          type: object
-        id:
-          description: ID is globally unique identifier of configuration.
-          type: string
-        method:
-          type: string
-        name:
-          description: Name is URL friendly identifier of configuration.
-          type: string
-        organization_id:
-          description: 'OrganizationID is globally unique identifier of organization, formerly known as customer,
-
-            under which configuration was created.'
-          type: string
-        project_id:
-          description: 'ProjectID is globally unique identifier of project, formerly known as application space,
-
-            under which configuration was created.
-
-            Might be empty, if configuration is created directly under organization.'
-          type: string
-        request_content_type:
-          type: string
-        request_payload:
-          type: string
-        response_content_type:
-          type: string
-        response_selector:
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-        url:
-          type: string
-      type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
+        errors:
+          items:
+            type: string
+          type: array
+        message:
           type: string
       type: object
     httpproxy.updateConfigResponse:
@@ -563,99 +634,28 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
     httpproxy.deleteConfigResponse:
       properties:
         id:
           description: ID of deleted configuration.
-          type: string
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
-    httpproxy.updateExternalDataResolverRequest:
-      properties:
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
-          type: string
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
-          type: string
-        headers:
-          additionalProperties:
-            items:
-              type: string
-            type: array
-          description: 'Headers to be sent with the request, including authorization if needed.
-
-            Be aware that Content-Type is overridden based on request_content_type and Accept by response_content_type.'
-          type: object
-        method:
-          description: Method specify HTTP method to be used for the request.
-          enum:
-          - GET
-          - POST
-          - PUT
-          - PATCH
-          type: string
-        request_content_type:
-          description: 'RequestContentType specify format of request body payload and how to set Content-Type header.
-
-            If content-type header is set by Headers, that header will be overridden.'
-          enum:
-          - JSON
-          type: string
-        request_payload:
-          description: 'RequestPayload to be sent to the endpoint. It should be in proper format based on request type.
-
-            It is going through the template builder to be properly formatted and filled with data.'
-          type: string
-        response_content_type:
-          description: 'ResponseContentType specify expected Content-Type header of response. If mismatch with real response, it will fail.
-
-            This also sets Accept header in request. If Accept header is set by Headers, that header will be overridden.'
-          enum:
-          - JSON
-          type: string
-        response_selector:
-          description: 'ResponseSelector specify selector to extract data from response.
-
-            Should be in requested format based on Response Type.'
-          maxLength: 255
-          minLength: 1
-          type: string
-        url:
-          description: URL specify full path to endpoint that will be called.
-          type: string
-      required:
-      - method
-      - request_content_type
-      - response_content_type
-      - response_selector
-      - url
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readExternalDataResolverResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readExternalDataResolverResponse'
-          type: array
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
           type: string
       type: object
   securitySchemes:

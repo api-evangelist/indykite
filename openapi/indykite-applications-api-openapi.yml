@@ -404,22 +404,19 @@ components:
           maxLength: 254
           type: string
       type: object
-    httpproxy.createConfigResponse:
+    restapi.ErrorResponse:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
+        message:
+          example: Internal Server Error
           type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
           type: string
       type: object
     httpproxy.updateConfigResponse:
@@ -432,6 +429,24 @@ components:
           type: string
         id:
           description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
           type: string
         update_time:
           description: UpdateTime specify when configuration was last time updated.
@@ -479,25 +494,6 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
-          type: string
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readApplicationResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readApplicationResponse'
-          type: array
-      type: object
     httpproxy.createApplicationRequest:
       properties:
         description:
@@ -524,13 +520,17 @@ components:
       - name
       - project_id
       type: object
-    restapi.DetailedError:
+    httpproxy.listConfigResponse-httpproxy_readApplicationResponse:
       properties:
-        errors:
+        data:
           items:
-            type: string
+            $ref: '#/components/schemas/httpproxy.readApplicationResponse'
           type: array
-        message:
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
           type: string
       type: object
   securitySchemes:

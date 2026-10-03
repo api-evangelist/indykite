@@ -72,15 +72,6 @@ paths:
       - BearerToken: []
 components:
   schemas:
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
-      type: object
     httpproxy.readOrganizationResponse:
       properties:
         create_time:
@@ -112,6 +103,15 @@ components:
       properties:
         message:
           example: Internal Server Error
+          type: string
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
           type: string
       type: object
   securitySchemes:
