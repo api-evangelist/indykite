@@ -381,11 +381,30 @@ paths:
       - BearerToken: []
 components:
   schemas:
-    restapi.ErrorResponse:
+    httpproxy.createConfigResponse:
       properties:
-        message:
-          example: Internal Server Error
+        create_time:
+          description: CreateTime specify when configuration was created.
           type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readProjectResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readProjectResponse'
+          type: array
       type: object
     httpproxy.readProjectResponse:
       properties:
@@ -448,48 +467,19 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.dbConnection:
+    restapi.DetailedError:
       properties:
-        name:
-          description: Optional name of the database.
+        errors:
+          items:
+            type: string
+          type: array
+        message:
           type: string
-        password:
-          description: Password for database authentication - write only.
-          type: string
-        url:
-          description: Connection URL for the database.
-          type: string
-        username:
-          description: Username for database authentication.
-          type: string
-        alias_mapping:
-          description: Optional alias mapping for the database.
-          type: string
-        composite_db_name:
-          description: Optional composite database name.
-          type: string
-      required:
-      - password
-      - url
-      - username
       type: object
-    httpproxy.updateProjectRequest:
+    restapi.ErrorResponse:
       properties:
-        db_connection:
-          allOf:
-          - $ref: '#/components/schemas/httpproxy.dbConnection'
-          description: Database connection information for self hosted database.
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
-          type: string
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
+        message:
+          example: Internal Server Error
           type: string
       type: object
     httpproxy.createProjectRequest:
@@ -558,14 +548,36 @@ components:
       - organization_id
       - region
       type: object
-    restapi.DetailedError:
+    httpproxy.deleteConfigResponse:
       properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
+        id:
+          description: ID of deleted configuration.
           type: string
+      type: object
+    httpproxy.dbConnection:
+      properties:
+        name:
+          description: Optional name of the database.
+          type: string
+        password:
+          description: Password for database authentication - write only.
+          type: string
+        url:
+          description: Connection URL for the database.
+          type: string
+        username:
+          description: Username for database authentication.
+          type: string
+        alias_mapping:
+          description: Optional alias mapping for the database.
+          type: string
+        composite_db_name:
+          description: Optional composite database name.
+          type: string
+      required:
+      - password
+      - url
+      - username
       type: object
     httpproxy.updateConfigResponse:
       properties:
@@ -585,35 +597,23 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.createConfigResponse:
+    httpproxy.updateProjectRequest:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
+        db_connection:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.dbConnection'
+          description: Database connection information for self hosted database.
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
           type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readProjectResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readProjectResponse'
-          type: array
-      type: object
-    httpproxy.deleteConfigResponse:
-      properties:
-        id:
-          description: ID of deleted configuration.
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
           type: string
       type: object
   securitySchemes:

@@ -279,17 +279,6 @@ paths:
       x-codegen-request-body-name: request
 components:
   schemas:
-    restapi.OptionalFields:
-      type: object
-      properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        context:
-          $ref: '#/components/schemas/restapi.Context'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
-        subject:
-          $ref: '#/components/schemas/restapi.Node'
     restapi.Node:
       type: object
       required:
@@ -309,36 +298,50 @@ components:
       examples:
       - id: IdSpecifyingTheNode
         type: NodeType
-    restapi.Context:
+    restapi.Action:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name specifies the action.
+          examples:
+          - CAN_READ
+      examples:
+      - name: CAN_READ
+    restapi.EvaluationsRequest:
+      type: object
+      required:
+      - evaluations
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.OptionalFields'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.DetailedError:
       type: object
       properties:
-        input_params:
-          type: object
-          additionalProperties: {}
-          description: 'InputParams map specifies the values of input parameters used within the policies.
-
-            If a policy uses input parameters and is used for making the decision,
-
-            they must be sent with the request, otherwise an error is returned.'
-          examples:
-          - additionalProp1: {}
-            additionalProp2: {}
-        policy_tags:
+        errors:
           type: array
-          description: PolicyTags array limits the policies used to only the policies with the specified tags.
+          description: Errors are optional and may contain additional details.
           items:
             type: string
-          uniqueItems: true
           examples:
-          - - tag1
-            - tag2
-      examples:
-      - input_params:
-          additionalProp1: {}
-          additionalProp2: {}
-        policy_tags:
-        - Tag1
-        - Tag2
+          - - missing bearer token
+        message:
+          type: string
+          description: Message describes the error.
+          examples:
+          - unauthorized request
     restapi.SearchResourceRequest:
       type: object
       required:
@@ -354,45 +357,20 @@ components:
           $ref: '#/components/schemas/restapi.NodeType'
         subject:
           $ref: '#/components/schemas/restapi.Node'
-    restapi.Action:
+    restapi.SearchActionResponse:
       type: object
-      required:
-      - name
       properties:
-        name:
-          type: string
-          description: Name specifies the action.
-          examples:
-          - CAN_READ
-      examples:
-      - name: CAN_READ
-    restapi.SearchSubjectRequest:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Action'
+    restapi.SearchResourceResponse:
       type: object
-      required:
-      - action
-      - resource
-      - subject
       properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        context:
-          $ref: '#/components/schemas/restapi.Context'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
-        subject:
-          $ref: '#/components/schemas/restapi.NodeType'
-    restapi.SearchActionRequest:
-      type: object
-      required:
-      - resource
-      - subject
-      properties:
-        context:
-          $ref: '#/components/schemas/restapi.Context'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
-        subject:
-          $ref: '#/components/schemas/restapi.Node'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.Node'
     restapi.respContext:
       type: object
       properties:
@@ -409,50 +387,6 @@ components:
         - error: insufficient_user_authentication
           error_description: A different authentication level is required
           acr_values: whatever
-    restapi.ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          examples:
-          - Internal Server Error
-    restapi.SearchResourceResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.Node'
-    restapi.EvaluationsResponse:
-      type: object
-      properties:
-        evaluations:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.EvaluationResponse'
-    restapi.EvaluationResponse:
-      type: object
-      properties:
-        context:
-          $ref: '#/components/schemas/restapi.respContext'
-        decision:
-          type: boolean
-          examples:
-          - true
-      examples:
-      - context:
-          advice:
-          - error: insufficient_user_authentication
-            error_description: A different authentication level is required
-            acr_values: whatever
-        decision: true
-    restapi.SearchActionResponse:
-      type: object
-      properties:
-        results:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.Action'
     restapi.EvaluationRequest:
       type: object
       required:
@@ -484,21 +418,46 @@ components:
         subject:
           id: IdSpecifyingTheNode
           type: NodeType
-    restapi.DetailedError:
+    restapi.OptionalFields:
       type: object
       properties:
-        errors:
-          type: array
-          description: Errors are optional and may contain additional details.
-          items:
-            type: string
-          examples:
-          - - missing bearer token
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.ErrorResponse:
+      type: object
+      properties:
         message:
           type: string
-          description: Message describes the error.
           examples:
-          - unauthorized request
+          - Internal Server Error
+    restapi.SearchSubjectRequest:
+      type: object
+      required:
+      - action
+      - resource
+      - subject
+      properties:
+        action:
+          $ref: '#/components/schemas/restapi.Action'
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.NodeType'
+    restapi.EvaluationsResponse:
+      type: object
+      properties:
+        evaluations:
+          type: array
+          items:
+            $ref: '#/components/schemas/restapi.EvaluationResponse'
     restapi.NodeType:
       type: object
       required:
@@ -508,23 +467,6 @@ components:
           type: string
           examples:
           - NodeType
-    restapi.EvaluationsRequest:
-      type: object
-      required:
-      - evaluations
-      properties:
-        action:
-          $ref: '#/components/schemas/restapi.Action'
-        context:
-          $ref: '#/components/schemas/restapi.Context'
-        evaluations:
-          type: array
-          items:
-            $ref: '#/components/schemas/restapi.OptionalFields'
-        resource:
-          $ref: '#/components/schemas/restapi.Node'
-        subject:
-          $ref: '#/components/schemas/restapi.Node'
     restapi.SearchSubjectResponse:
       type: object
       properties:
@@ -532,6 +474,64 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/restapi.Node'
+    restapi.EvaluationResponse:
+      type: object
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.respContext'
+        decision:
+          type: boolean
+          examples:
+          - true
+      examples:
+      - context:
+          advice:
+          - error: insufficient_user_authentication
+            error_description: A different authentication level is required
+            acr_values: whatever
+        decision: true
+    restapi.SearchActionRequest:
+      type: object
+      required:
+      - resource
+      - subject
+      properties:
+        context:
+          $ref: '#/components/schemas/restapi.Context'
+        resource:
+          $ref: '#/components/schemas/restapi.Node'
+        subject:
+          $ref: '#/components/schemas/restapi.Node'
+    restapi.Context:
+      type: object
+      properties:
+        input_params:
+          type: object
+          additionalProperties: {}
+          description: 'InputParams map specifies the values of input parameters used within the policies.
+
+            If a policy uses input parameters and is used for making the decision,
+
+            they must be sent with the request, otherwise an error is returned.'
+          examples:
+          - additionalProp1: {}
+            additionalProp2: {}
+        policy_tags:
+          type: array
+          description: PolicyTags array limits the policies used to only the policies with the specified tags.
+          items:
+            type: string
+          uniqueItems: true
+          examples:
+          - - tag1
+            - tag2
+      examples:
+      - input_params:
+          additionalProp1: {}
+          additionalProp2: {}
+        policy_tags:
+        - Tag1
+        - Tag2
   securitySchemes:
     bearerAuth:
       type: http

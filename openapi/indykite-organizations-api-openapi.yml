@@ -72,6 +72,12 @@ paths:
       - BearerToken: []
 components:
   schemas:
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
+          type: string
+      type: object
     httpproxy.readOrganizationResponse:
       properties:
         create_time:
@@ -97,12 +103,6 @@ components:
           type: string
         updated_by:
           description: UpdatedBy specify who last time updated organization.
-          type: string
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
           type: string
       type: object
     restapi.DetailedError:

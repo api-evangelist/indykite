@@ -347,6 +347,40 @@ paths:
       - MCP Servers
 components:
   schemas:
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    restapi.DetailedError:
+      properties:
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readMCPServerResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readMCPServerResponse'
+          type: array
+      type: object
     httpproxy.updateMCPServerRequest:
       properties:
         app_agent_id:
@@ -381,28 +415,6 @@ components:
       - enabled
       - scopes_supported
       - token_introspect_id
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readMCPServerResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readMCPServerResponse'
-          type: array
-      type: object
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
       type: object
     httpproxy.readMCPServerResponse:
       properties:
@@ -457,40 +469,10 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.updateConfigResponse:
+    restapi.ErrorResponse:
       properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
+        message:
+          example: Internal Server Error
           type: string
       type: object
     httpproxy.createMCPServerRequest:
@@ -537,6 +519,24 @@ components:
       - project_id
       - scopes_supported
       - token_introspect_id
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
       type: object
   securitySchemes:
     BearerToken:

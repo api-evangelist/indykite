@@ -687,109 +687,6 @@ paths:
                       type: string
 components:
   schemas:
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
-    httpproxy.updateEntityMatchingPipelineRequest:
-      properties:
-        description:
-          description: 'Description is optional description of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 65000
-          type: string
-        display_name:
-          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
-
-            But when set to empty string, it will be removed.'
-          maxLength: 254
-          type: string
-        rerun_interval:
-          description: RerunInterval is the time between scheduled re-runs (currently not supported).
-          type: string
-        similarity_score_cutoff:
-          description: SimilarityScoreCutoff defines the threshold (in range [0,1]), above which entities will be automatically matched.
-          maximum: 1
-          minimum: 0
-          type: number
-      type: object
-    httpproxy.createEntityMatchingPipelineRequest:
-      properties:
-        description:
-          description: Description is optional description of configuration.
-          maxLength: 65000
-          minLength: 2
-          type: string
-        display_name:
-          description: DisplayName is optional human readable name of configuration.
-          maxLength: 254
-          minLength: 2
-          type: string
-        name:
-          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
-
-            Also is immutable and cannot be changed later.'
-          type: string
-        node_filter:
-          allOf:
-          - $ref: '#/components/schemas/httpproxy.entityMatchingPipelineNodeFilter'
-          description: NodeFilter contain a list of source types and a list target node types that will be evaluated.
-        project_id:
-          description: 'ProjectID is identifier of Project, formerly known as Application space,
-
-            where to place this new configuration object. Must be in GID format.'
-          type: string
-        rerun_interval:
-          description: RerunInterval is the time between scheduled re-runs (currently not supported).
-          type: string
-        similarity_score_cutoff:
-          description: SimilarityScoreCutoff defines the threshold (in range [0,1]), above which entities will be automatically matched.
-          maximum: 1
-          minimum: 0
-          type: number
-      required:
-      - name
-      - node_filter
-      - project_id
-      - similarity_score_cutoff
-      type: object
-    restapi.DetailedError:
-      properties:
-        errors:
-          items:
-            type: string
-          type: array
-        message:
-          type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readEntityMatchingPipelineResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readEntityMatchingPipelineResponse'
-          type: array
-      type: object
-    httpproxy.updateConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
     httpproxy.createConfigResponse:
       properties:
         create_time:
@@ -807,28 +704,6 @@ components:
         updated_by:
           description: UpdatedBy specify who last time updated configuration.
           type: string
-      type: object
-    httpproxy.entityMatchingPipelineNodeFilter:
-      properties:
-        source_node_types:
-          description: 'SourceNodeTypes is the list of node types that will be compared to nodes in the TargetNodeTypes list.
-
-            Currently, only the first node type will be taken into consideration.'
-          items:
-            type: string
-          minItems: 1
-          type: array
-        target_node_types:
-          description: 'TargetNodeTypes is the list of node types that will be compared to nodes in the SourceNodeTypes list.
-
-            Currently, only the first node type will be taken into consideration.'
-          items:
-            type: string
-          minItems: 1
-          type: array
-      required:
-      - source_node_types
-      - target_node_types
       type: object
     httpproxy.entityMatchingPipelinePropertyMapping:
       properties:
@@ -848,10 +723,26 @@ components:
           description: SourceNodeProperty is a source node's property that will be compared to TargetNodeProperty.
           type: string
       type: object
-    httpproxy.deleteConfigResponse:
+    restapi.DetailedError:
       properties:
-        id:
-          description: ID of deleted configuration.
+        errors:
+          items:
+            type: string
+          type: array
+        message:
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readEntityMatchingPipelineResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readEntityMatchingPipelineResponse'
+          type: array
+      type: object
+    restapi.ErrorResponse:
+      properties:
+        message:
+          example: Internal Server Error
           type: string
       type: object
     httpproxy.readEntityMatchingPipelineResponse:
@@ -932,6 +823,136 @@ components:
           description: MatchedEntities is the number of entities the pipeline has matched in its last run.
           type: integer
       type: object
+    httpproxy.entityMatchingPipelineNodeFilter:
+      properties:
+        source_node_types:
+          description: 'SourceNodeTypes is the list of node types that will be compared to nodes in the TargetNodeTypes list.
+
+            Currently, only the first node type will be taken into consideration.'
+          items:
+            type: string
+          minItems: 1
+          type: array
+        target_node_types:
+          description: 'TargetNodeTypes is the list of node types that will be compared to nodes in the SourceNodeTypes list.
+
+            Currently, only the first node type will be taken into consideration.'
+          items:
+            type: string
+          minItems: 1
+          type: array
+      required:
+      - source_node_types
+      - target_node_types
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
+    httpproxy.createEntityMatchingPipelineRequest:
+      properties:
+        description:
+          description: Description is optional description of configuration.
+          maxLength: 65000
+          minLength: 2
+          type: string
+        display_name:
+          description: DisplayName is optional human readable name of configuration.
+          maxLength: 254
+          minLength: 2
+          type: string
+        name:
+          description: 'Name is URL friendly identifier of configuration, must be unique in scope of parent entity.
+
+            Also is immutable and cannot be changed later.'
+          type: string
+        node_filter:
+          allOf:
+          - $ref: '#/components/schemas/httpproxy.entityMatchingPipelineNodeFilter'
+          description: NodeFilter contain a list of source types and a list target node types that will be evaluated.
+        project_id:
+          description: 'ProjectID is identifier of Project, formerly known as Application space,
+
+            where to place this new configuration object. Must be in GID format.'
+          type: string
+        rerun_interval:
+          description: RerunInterval is the time between scheduled re-runs (currently not supported).
+          type: string
+        similarity_score_cutoff:
+          description: SimilarityScoreCutoff defines the threshold (in range [0,1]), above which entities will be automatically matched.
+          maximum: 1
+          minimum: 0
+          type: number
+      required:
+      - name
+      - node_filter
+      - project_id
+      - similarity_score_cutoff
+      type: object
+    httpproxy.updateEntityMatchingPipelineRequest:
+      properties:
+        description:
+          description: 'Description is optional description of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 65000
+          type: string
+        display_name:
+          description: 'DisplayName is optional human readable name of configuration. When kept null, it is not changed.
+
+            But when set to empty string, it will be removed.'
+          maxLength: 254
+          type: string
+        rerun_interval:
+          description: RerunInterval is the time between scheduled re-runs (currently not supported).
+          type: string
+        similarity_score_cutoff:
+          description: SimilarityScoreCutoff defines the threshold (in range [0,1]), above which entities will be automatically matched.
+          maximum: 1
+          minimum: 0
+          type: number
+      type: object
+    httpproxy.updateConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID of configuration to update.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
+    api.RunEntityMatchingRequest:
+      required:
+      - similarity_score_cutoff
+      type: object
+      properties:
+        custom_property_mappings:
+          type: array
+          description: 'CustomPropertyMappings contains the rules to match nodes properties.
+
+            If empty, the default rules will be used (stored as part of the pipeline configuration).
+
+            If present, it will overwrite the stored configuration.'
+          items:
+            $ref: '#/components/schemas/api.CustomPropertyMapping'
+        similarity_score_cutoff:
+          maximum: 1
+          minimum: 0
+          type: number
+          description: 'SimilarityScoreCutoff defines the required threshold (in range [0,1]),
+
+            above which entities will be automatically matched.'
     api.SuggestedPropertyMapping:
       type: object
       properties:
@@ -970,6 +991,17 @@ components:
         target_node_property:
           type: string
           description: TargetNodeProperty is a property of the target node that will be compared to SourceNodeProperty.
+    restapi.DetailedMessageResponse:
+      type: object
+      properties:
+        details:
+          type: array
+          items:
+            type: string
+        message:
+          type: string
+          examples:
+          - Accepted
     api.ReadSuggestedPropertyMappingResponse:
       type: object
       properties:
@@ -995,38 +1027,6 @@ components:
         last_run_time:
           type: string
           description: LastRunTime indicates the last time the pipeline was started.
-    api.RunEntityMatchingRequest:
-      required:
-      - similarity_score_cutoff
-      type: object
-      properties:
-        custom_property_mappings:
-          type: array
-          description: 'CustomPropertyMappings contains the rules to match nodes properties.
-
-            If empty, the default rules will be used (stored as part of the pipeline configuration).
-
-            If present, it will overwrite the stored configuration.'
-          items:
-            $ref: '#/components/schemas/api.CustomPropertyMapping'
-        similarity_score_cutoff:
-          maximum: 1
-          minimum: 0
-          type: number
-          description: 'SimilarityScoreCutoff defines the required threshold (in range [0,1]),
-
-            above which entities will be automatically matched.'
-    restapi.DetailedMessageResponse:
-      type: object
-      properties:
-        details:
-          type: array
-          items:
-            type: string
-        message:
-          type: string
-          examples:
-          - Accepted
   securitySchemes:
     BearerToken:
       type: http

@@ -389,12 +389,6 @@ paths:
       - BearerToken: []
 components:
   schemas:
-    restapi.ErrorResponse:
-      properties:
-        message:
-          example: Internal Server Error
-          type: string
-      type: object
     httpproxy.createAppAgentRequest:
       properties:
         api_permissions:
@@ -428,6 +422,24 @@ components:
       - application_id
       - name
       type: object
+    httpproxy.createConfigResponse:
+      properties:
+        create_time:
+          description: CreateTime specify when configuration was created.
+          type: string
+        created_by:
+          description: CreatedBy specify who created configuration.
+          type: string
+        id:
+          description: ID is globally unique identifier of created configuration.
+          type: string
+        update_time:
+          description: UpdateTime specify when configuration was last time updated.
+          type: string
+        updated_by:
+          description: UpdatedBy specify who last time updated configuration.
+          type: string
+      type: object
     restapi.DetailedError:
       properties:
         errors:
@@ -447,24 +459,6 @@ components:
           type: string
         id:
           description: ID of configuration to update.
-          type: string
-        update_time:
-          description: UpdateTime specify when configuration was last time updated.
-          type: string
-        updated_by:
-          description: UpdatedBy specify who last time updated configuration.
-          type: string
-      type: object
-    httpproxy.createConfigResponse:
-      properties:
-        create_time:
-          description: CreateTime specify when configuration was created.
-          type: string
-        created_by:
-          description: CreatedBy specify who created configuration.
-          type: string
-        id:
-          description: ID is globally unique identifier of created configuration.
           type: string
         update_time:
           description: UpdateTime specify when configuration was last time updated.
@@ -522,18 +516,11 @@ components:
           description: UpdatedBy specify who last time updated configuration.
           type: string
       type: object
-    httpproxy.deleteConfigResponse:
+    restapi.ErrorResponse:
       properties:
-        id:
-          description: ID of deleted configuration.
+        message:
+          example: Internal Server Error
           type: string
-      type: object
-    httpproxy.listConfigResponse-httpproxy_readAppAgentResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/httpproxy.readAppAgentResponse'
-          type: array
       type: object
     httpproxy.updateAppAgentRequest:
       properties:
@@ -557,6 +544,19 @@ components:
             But when set to empty string, it will be removed.'
           maxLength: 254
           type: string
+      type: object
+    httpproxy.deleteConfigResponse:
+      properties:
+        id:
+          description: ID of deleted configuration.
+          type: string
+      type: object
+    httpproxy.listConfigResponse-httpproxy_readAppAgentResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/httpproxy.readAppAgentResponse'
+          type: array
       type: object
   securitySchemes:
     BearerToken:

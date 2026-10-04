@@ -397,178 +397,6 @@ paths:
       x-codegen-request-body-name: request
 components:
   schemas:
-    capture.DeleteNodeProperties:
-      required:
-      - external_id
-      - property_types
-      - type
-      type: object
-      properties:
-        external_id:
-          maxLength: 256
-          minLength: 1
-          type: string
-        property_types:
-          items:
-            type: string
-          maxItems: 250
-          minItems: 1
-          type: array
-        type:
-          maxLength: 64
-          minLength: 2
-          type: string
-        location:
-          maxLength: 32
-          minLength: 2
-          type: string
-    capture.DeleteNode:
-      type: object
-      required:
-      - external_id
-      - type
-      properties:
-        external_id:
-          maxLength: 256
-          minLength: 1
-          type: string
-        location:
-          maxLength: 32
-          minLength: 2
-          type: string
-        type:
-          maxLength: 64
-          minLength: 2
-          type: string
-    capture.UpsertNodesRequest:
-      required:
-      - nodes
-      type: object
-      properties:
-        nodes:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/capture.UpsertNode'
-    capture.DeleteNodePropertyMetadataRequest:
-      required:
-      - nodes
-      type: object
-      properties:
-        nodes:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/capture.DeleteNodePropertyMetadata'
-    capture.UpsertRelationshipsRequest:
-      required:
-      - relationships
-      type: object
-      properties:
-        relationships:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/capture.Relationship'
-        use_global_db:
-          description: UseGlobalDB routes the relationships to the Global DB of a composite database deployment.
-          type: boolean
-    capture.DeleteNodePropertyMetadata:
-      required:
-      - external_id
-      - metadata_fields
-      - property_type
-      - type
-      type: object
-      properties:
-        external_id:
-          maxLength: 256
-          minLength: 1
-          type: string
-        metadata_fields:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            type: string
-        property_type:
-          type: string
-        type:
-          maxLength: 64
-          minLength: 2
-          type: string
-        location:
-          maxLength: 32
-          minLength: 2
-          type: string
-    capture.Metadata:
-      type: object
-      properties:
-        assurance_level:
-          type: integer
-          enum:
-          - 1
-          - 2
-          - 3
-        custom_metadata:
-          type: object
-          additionalProperties:
-            type: object
-        source:
-          type: string
-        verified_time:
-          type: string
-    capture.Relationship:
-      required:
-      - source
-      - target
-      - type
-      type: object
-      properties:
-        properties:
-          items:
-            $ref: '#/components/schemas/capture.BaseProperty'
-          type: array
-        source:
-          $ref: '#/components/schemas/capture.Node'
-        target:
-          $ref: '#/components/schemas/capture.Node'
-        type:
-          maxLength: 128
-          type: string
-    capture.Result:
-      properties:
-        id:
-          type: string
-      type: object
-    capture.Node:
-      required:
-      - external_id
-      - type
-      type: object
-      properties:
-        external_id:
-          maxLength: 256
-          minLength: 1
-          type: string
-        type:
-          maxLength: 64
-          minLength: 2
-          type: string
-        location:
-          maxLength: 32
-          minLength: 2
-          type: string
-    capture.BatchResults:
-      properties:
-        results:
-          items:
-            $ref: '#/components/schemas/capture.Result'
-          type: array
-      type: object
     capture.UpsertNode:
       required:
       - external_id
@@ -597,49 +425,19 @@ components:
           maxLength: 64
           minLength: 2
           type: string
-    restapi.ErrorResponse:
+    capture.BaseProperty:
+      required:
+      - type
       type: object
       properties:
-        message:
+        external_value:
           type: string
-          examples:
-          - Internal Server Error
-    capture.DeleteNodePropertiesRequest:
-      required:
-      - nodes
-      type: object
-      properties:
-        nodes:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/capture.DeleteNodeProperties'
-    capture.DeleteNodesRequest:
-      required:
-      - nodes
-      type: object
-      properties:
-        nodes:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/capture.DeleteNode'
-    capture.DeleteRelationshipPropertiesRequest:
-      required:
-      - relationships
-      type: object
-      properties:
-        relationships:
-          maxItems: 250
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/capture.DeleteRelationshipProperties'
-        use_global_db:
-          description: UseGlobalDB routes the relationship property deletes to the Global DB of a composite database deployment.
-          type: boolean
+        type:
+          maxLength: 128
+          type: string
+        value:
+          $ref: '#/components/schemas/capture.PropertyValue'
+          description: Value can be either string, integer, float, boolean, or an array of any of those types
     restapi.DetailedError:
       type: object
       properties:
@@ -655,19 +453,20 @@ components:
           description: Message describes the error.
           examples:
           - unauthorized request
-    capture.BaseProperty:
+    capture.UpsertRelationshipsRequest:
       required:
-      - type
+      - relationships
       type: object
       properties:
-        external_value:
-          type: string
-        type:
-          maxLength: 128
-          type: string
-        value:
-          $ref: '#/components/schemas/capture.PropertyValue'
-          description: Value can be either string, integer, float, boolean, or an array of any of those types
+        relationships:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.Relationship'
+        use_global_db:
+          description: UseGlobalDB routes the relationships to the Global DB of a composite database deployment.
+          type: boolean
     capture.PropertyValue:
       oneOf:
       - type: string
@@ -682,6 +481,17 @@ components:
           - type: number
           - type: boolean
       description: Value can be either string, integer, float, boolean, or an array of any of those types
+    capture.DeleteNodePropertiesRequest:
+      required:
+      - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteNodeProperties'
     capture.DeleteRelationshipProperties:
       required:
       - property_types
@@ -707,6 +517,35 @@ components:
         type:
           maxLength: 128
           type: string
+    capture.Node:
+      required:
+      - external_id
+      - type
+      type: object
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+    capture.UpsertNodesRequest:
+      required:
+      - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.UpsertNode'
     capture.Property:
       required:
       - type
@@ -722,6 +561,94 @@ components:
         value:
           $ref: '#/components/schemas/capture.PropertyValue'
           description: Value can be either string, integer, float, boolean, or an array of any of those types
+    capture.DeleteNodeProperties:
+      required:
+      - external_id
+      - property_types
+      - type
+      type: object
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        property_types:
+          items:
+            type: string
+          maxItems: 250
+          minItems: 1
+          type: array
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+    capture.DeleteNodePropertyMetadata:
+      required:
+      - external_id
+      - metadata_fields
+      - property_type
+      - type
+      type: object
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        metadata_fields:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            type: string
+        property_type:
+          type: string
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+    capture.Relationship:
+      required:
+      - source
+      - target
+      - type
+      type: object
+      properties:
+        properties:
+          items:
+            $ref: '#/components/schemas/capture.BaseProperty'
+          type: array
+        source:
+          $ref: '#/components/schemas/capture.Node'
+        target:
+          $ref: '#/components/schemas/capture.Node'
+        type:
+          maxLength: 128
+          type: string
+    capture.Metadata:
+      type: object
+      properties:
+        assurance_level:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+        custom_metadata:
+          type: object
+          additionalProperties:
+            type: object
+        source:
+          type: string
+        verified_time:
+          type: string
     capture.DeleteRelationshipsRequest:
       required:
       - relationships
@@ -736,6 +663,79 @@ components:
         use_global_db:
           description: UseGlobalDB deletes the relationships from the Global DB of a composite database deployment.
           type: boolean
+    capture.BatchResults:
+      properties:
+        results:
+          items:
+            $ref: '#/components/schemas/capture.Result'
+          type: array
+      type: object
+    capture.DeleteRelationshipPropertiesRequest:
+      required:
+      - relationships
+      type: object
+      properties:
+        relationships:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteRelationshipProperties'
+        use_global_db:
+          description: UseGlobalDB routes the relationship property deletes to the Global DB of a composite database deployment.
+          type: boolean
+    capture.Result:
+      properties:
+        id:
+          type: string
+      type: object
+    capture.DeleteNodePropertyMetadataRequest:
+      required:
+      - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteNodePropertyMetadata'
+    restapi.ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          examples:
+          - Internal Server Error
+    capture.DeleteNode:
+      type: object
+      required:
+      - external_id
+      - type
+      properties:
+        external_id:
+          maxLength: 256
+          minLength: 1
+          type: string
+        location:
+          maxLength: 32
+          minLength: 2
+          type: string
+        type:
+          maxLength: 64
+          minLength: 2
+          type: string
+    capture.DeleteNodesRequest:
+      required:
+      - nodes
+      type: object
+      properties:
+        nodes:
+          maxItems: 250
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/capture.DeleteNode'
   securitySchemes:
     bearerAuth:
       type: http

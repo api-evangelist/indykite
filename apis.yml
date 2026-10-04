@@ -302,8 +302,6 @@ apis:
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
-  - AuthZEN
-  tags_raw:
   - Auth ZEN
   properties:
   - type: OpenAPI

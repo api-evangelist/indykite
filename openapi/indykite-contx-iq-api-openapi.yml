@@ -83,21 +83,6 @@ paths:
       x-codegen-request-body-name: request
 components:
   schemas:
-    restapi.ExecuteResponse:
-      type: object
-      properties:
-        data:
-          type: array
-          description: List of results, composed of nodes, relationships, and their properties, from executing the query.
-          items:
-            $ref: '#/components/schemas/restapi.ExecuteResponseRecord'
-    restapi.ErrorResponse:
-      type: object
-      properties:
-        message:
-          type: string
-          examples:
-          - Internal Server Error
     restapi.DetailedError:
       type: object
       properties:
@@ -113,21 +98,6 @@ components:
           description: Message describes the error.
           examples:
           - unauthorized request
-    restapi.ExecuteResponseRecord:
-      type: object
-      properties:
-        aggregate_values:
-          type: object
-          additionalProperties: {}
-          description: List of aggregate values as the result.
-        nodes:
-          type: object
-          additionalProperties: {}
-          description: List of nodes and their properties as the result.
-        relationships:
-          type: object
-          additionalProperties: {}
-          description: List of relationships and their properties as the result.
     restapi.ExecuteRequest:
       type: object
       properties:
@@ -159,6 +129,36 @@ components:
 
             This value is optional and only used for CIQ v2.0.'
           type: object
+    restapi.ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          examples:
+          - Internal Server Error
+    restapi.ExecuteResponseRecord:
+      type: object
+      properties:
+        aggregate_values:
+          type: object
+          additionalProperties: {}
+          description: List of aggregate values as the result.
+        nodes:
+          type: object
+          additionalProperties: {}
+          description: List of nodes and their properties as the result.
+        relationships:
+          type: object
+          additionalProperties: {}
+          description: List of relationships and their properties as the result.
+    restapi.ExecuteResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          description: List of results, composed of nodes, relationships, and their properties, from executing the query.
+          items:
+            $ref: '#/components/schemas/restapi.ExecuteResponseRecord'
   securitySchemes:
     bearerAuth:
       type: http
