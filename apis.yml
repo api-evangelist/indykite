@@ -302,6 +302,8 @@ apis:
   humanURL: https://openapi.indykite.com
   baseURL: https://us.api.indykite.com
   tags:
+  - AuthZEN
+  tags_raw:
   - Auth ZEN
   properties:
   - type: OpenAPI
@@ -322,6 +324,9 @@ apis:
   - type: ErrorCatalog
     url: errors/indykite-problem-types.yml
 common:
+- type: CapabilityMap
+  url: capabilities/indykite-capability-edges.yml
+  name: Indykite Business Capability Map
 - type: Website
   url: https://indykite.com
 - type: Overlay
